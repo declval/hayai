@@ -1,0 +1,1 @@
+Hayai is a web application that allows you to develop your touch typing skills.
