@@ -3,10 +3,11 @@
     <head>
         <title>Hayai</title>
         <link href="stylesheet.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <script src="main.js"></script>
     </head>
     <body>
-        <div id="text"></div>
+        <div class="text"></div>
         <div class="keyboard">
             <div class="keyboard-row">
                 <div class="keyboard-key" data-value="`">`</div>
@@ -77,6 +78,18 @@
                 <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Alt">Alt</div>
                 <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Control">Ctrl</div>
             </div>
+        </div>
+        <div class="material-symbols-outlined settings-button">settings</div>
+        <div class="settings">
+            <div class="settings-titlebar">
+                <div>Settings</div>
+                <div class="material-symbols-outlined settings-close">close</div>
+            </div>
+            <form class="settings-form">
+                <label class="settings-label" for="settings-usertext">Custom text</label>
+                <textarea class="settings-usertext" id="settings-usertext" placeholder="Enter your text here"></textarea>
+                <button class="settings-save" type="submit">Save</button>
+            </form>
         </div>
     </body>
 </html>
