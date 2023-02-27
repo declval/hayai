@@ -153,6 +153,7 @@ body {
 .settings-usertext {
     border: none;
     border-radius: 2px;
+    font-family: "Roboto Mono", monospace;
     height: 300px;
     margin-bottom: 5px;
     outline: none;
