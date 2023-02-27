@@ -66,8 +66,16 @@ function text_cursor_move(key) {
                 if (chunk) {
                     text_init(chunk);
                 } else {
-                    chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
-                    text_init(chunks.next().value);
+                    const text = document.getElementsByClassName("text")[0];
+
+                    text.classList.add("text-rotate");
+
+                    setTimeout(function () {
+                        text.classList.remove("text-rotate");
+
+                        chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
+                        text_init(chunks.next().value);
+                    }, 800);
                 }
             }
             break;
