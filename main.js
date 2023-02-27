@@ -30,7 +30,7 @@ function keydown(event, keys) {
     event.preventDefault();
 
     for (const key of keys) {
-        if (key.dataset.value.toLowerCase() === event.key.toLowerCase()) {
+        if (key.dataset.value === event.key || key.dataset.valueAlt === event.key) {
             key.classList.add("keyboard-key-keydown");
 
             setTimeout(function () {
