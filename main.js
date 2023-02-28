@@ -1,6 +1,10 @@
 DEFAULT_TEXT = "Touch typing (also called blind typing, or touch keyboarding) is a style of typing.";
 CHUNK_SIZE = 32
 
+let moving = false;
+let offsetX = 0;
+let offsetY = 0;
+
 let chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
 
 document.addEventListener("DOMContentLoaded", main);
@@ -126,6 +130,25 @@ function main(event) {
 
     const settings = document.getElementsByClassName("settings")[0];
 
+    const settings_titlebar = document.getElementsByClassName("settings-titlebar")[0];
+
+    settings_titlebar.addEventListener("mousedown", function (event) {
+        offsetX = event.clientX - settings.offsetLeft;
+        offsetY = event.clientY - settings.offsetTop;
+        moving = true;
+    });
+
+    document.addEventListener("mousemove", function (event) {
+        if (moving) {
+            settings.style.left = `${event.clientX - offsetX}px`;
+            settings.style.top = `${event.clientY - offsetY}px`;
+        }
+    });
+
+    settings_titlebar.addEventListener("mouseup", function (event) {
+        moving = false;
+    });
+
     const settings_button = document.getElementsByClassName("settings-button")[0];
 
     settings_button.addEventListener("click", function (event) {
@@ -152,6 +175,11 @@ function main(event) {
 
     settings_close.addEventListener("click", function (event) {
         settings.classList.remove("settings-show");
+    });
+
+    // Do not move settings window if move started with mouse over close button
+    settings_close.addEventListener("mousedown", function (event) {
+        event.stopPropagation();
     });
 
     const settings_form = document.getElementsByClassName("settings-form")[0];
