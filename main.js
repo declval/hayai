@@ -31,8 +31,6 @@ function keydown(event, keys) {
         return;
     }
 
-    event.preventDefault();
-
     const caps = document.getElementsByClassName("keyboard-key-caps-indicator")[0];
 
     if (event.getModifierState("CapsLock")) {
