@@ -19,21 +19,30 @@ body {
 }
 
 .text-character {
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
+    display: flex;
+    height: 1rem;
+    justify-content: center;
     margin: 1px;
     padding: 4px;
+    width: 1rem;
 }
 
-.text-character-space {
-    border-bottom: 2px solid rgb(207, 207, 207);
+.text-character-space::after {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    content: "";
+    height: 100%;
+    width: 100%;
 }
 
 .text-character-correct {
-    background-color: rgb(205, 255, 191);
+    background-color: rgb(237, 255, 223);
 }
 
 .text-character-incorrect {
-    background-color: rgb(255, 177, 177);
+    background-color: rgb(255, 210, 210);
 }
 
 .keyboard {
