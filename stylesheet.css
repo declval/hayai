@@ -98,6 +98,23 @@ body {
     width: 100%;
 }
 
+.keyboard-key-caps-indicator {
+    background-color: rgb(181, 181, 181);
+    border-radius: 2px;
+    content: "";
+    height: 4px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+}
+
+.keyboard-key-caps-indicator-active {
+    background-color: rgb(150, 255, 70);
+    box-shadow: 0 0 4px 0 rgb(150, 255, 70);
+}
+
 .keyboard-key-ctrl-win-alt {
     min-width: 40px;
 }
