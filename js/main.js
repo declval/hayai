@@ -80,10 +80,27 @@ function main(event) {
     settingsForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        let initialText;
+        let chunkSize;
+
         if (document.getElementsByClassName("settings-usertext")[0].value.length) {
-            text = new Text(document.getElementsByClassName("settings-usertext")[0].value);
+            initialText = document.getElementsByClassName("settings-usertext")[0].value;
         }
+
+        if (document.getElementsByClassName("settings-chunk-size")[0].value.length) {
+            const int = parseInt(document.getElementsByClassName("settings-chunk-size")[0].value, 10);
+
+            if (!isNaN(int) && int >= Text.chunkSizeMin && int <= Text.chunkSizeMax) {
+                chunkSize = int;
+            }
+        }
+
+        text = new Text(initialText, chunkSize);
 
         settings.classList.remove("settings-show");
     });
+
+    const settingsChunkSize = settingsForm.getElementsByClassName("settings-chunk-size")[0];
+
+    settingsChunkSize.setAttribute("placeholder", settingsChunkSize.getAttribute("placeholder") + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
 }

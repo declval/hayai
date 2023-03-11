@@ -240,6 +240,15 @@ body {
     resize: none;
 }
 
+.settings-chunk-size {
+    border: none;
+    border-radius: 2px;
+    font-family: "Roboto Mono", monospace;
+    margin-bottom: 5px;
+    outline: none;
+    padding: 10px;
+}
+
 .settings-save {
     background-color: rgb(255, 255, 255);
     border: none;
