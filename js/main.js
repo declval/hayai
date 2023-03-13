@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", main);
 function main(event) {
     let text = new Text();
 
+    text.render();
+
     document.addEventListener("keydown", function (event) {
         const settings = document.getElementsByClassName("settings")[0];
 

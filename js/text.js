@@ -8,9 +8,7 @@ class Text {
         this.characters = null;
         this.chunks = this.chunked();
         this.chunk = this.chunks.next().value;
-        this.textElement = document.getElementsByClassName("text")[0];
-
-        this.render();
+        this.textElement = null;
     }
 
     clear() {
@@ -71,6 +69,8 @@ class Text {
     }
 
     render() {
+        this.textElement = document.getElementsByClassName("text")[0];
+
         this.clear();
 
         for (const character of this.chunk) {
@@ -87,7 +87,7 @@ class Text {
             this.textElement.appendChild(div);
         }
 
-        this.characters = document.getElementsByClassName("text-character");
+        this.characters = this.textElement.getElementsByClassName("text-character");
         this.textElement.firstChild.classList.add("text-character-cursor");
     }
 
