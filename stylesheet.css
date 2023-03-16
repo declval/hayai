@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    display: flex;
+    font-family: 'Roboto';
+    font-size: 14px;
+    justify-content: center;
+}
+
+.keyboard {
+    background-color: rgb(236, 236, 236);
+    border-radius: 2px;
+    padding: 2px;
+    user-select: none;
+    width: fit-content;
+}
+
+.keyboard-row {
+    display: flex;
+}
+
+.keyboard-key {
+    align-items: center;
+    background-color: rgb(218, 218, 218);
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    margin: 2px;
+    min-height: 30px;
+    min-width: 30px;
+    padding: 10px;
+}
+
+.keyboard-key-caps {
+    width: 100%;
+}
+
+.keyboard-key-ctrl-win-alt {
+    min-width: 40px;
+}
+
+.keyboard-key-enter {
+    min-width: 60px;
+}
+
+.keyboard-key-shift {
+    width: 100%;
+}
+
+.keyboard-key-space {
+    width: 100%;
+}
+
+.keyboard-key-tab {
+    width: 100%;
+}
