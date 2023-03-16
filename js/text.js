@@ -1,16 +1,23 @@
 export { Text };
 
 class Text {
-    constructor(text = Text.initialText, chunkSize = Text.chunkSize) {
+    constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
         this.text = text.replace(/[^ -~]+/g, "");
         this.chunkSize = chunkSize;
 
-        this.characters = null;
+        if (this.text.length === 0) {
+            throw new Error("Invalid text length");
+        }
+
+        if (this.chunkSize < Text.chunkSizeMin ||
+            this.chunkSize > Text.chunkSizeMax ||
+            this.chunkSize > this.text.length) {
+            throw new Error("Invalid chunk size");
+        }
+
         this.chunks = this.chunked();
         this.chunk = this.chunks.next().value;
         this.textElement = document.getElementsByClassName("text")[0];
-
-        this.render();
     }
 
     clear() {
@@ -87,8 +94,9 @@ class Text {
             this.textElement.appendChild(div);
         }
 
-        this.characters = document.getElementsByClassName("text-character");
         this.textElement.firstChild.classList.add("text-character-cursor");
+
+        this.characters = this.textElement.getElementsByClassName("text-character");
     }
 
     *chunked() {
@@ -106,8 +114,8 @@ class Text {
         }
     }
 
-    static chunkSize = 32;
     static chunkSizeMax = 128;
     static chunkSizeMin = 1;
+    static initialChunkSize = 32;
     static initialText = "Touch typing (also called blind typing, or touch keyboarding) is a style of typing.";
 }

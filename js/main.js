@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", main);
 function main(event) {
     let text = new Text();
 
+    text.render();
+
     document.addEventListener("keydown", function (event) {
         const settings = document.getElementsByClassName("settings")[0];
 
@@ -80,22 +82,25 @@ function main(event) {
     settingsForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        let initialText;
-        let chunkSize;
+        let newText = null;
 
         if (document.getElementsByClassName("settings-usertext")[0].value.length) {
-            initialText = document.getElementsByClassName("settings-usertext")[0].value;
+            newText = document.getElementsByClassName("settings-usertext")[0].value;
         }
+
+        let newChunkSize = null;
 
         if (document.getElementsByClassName("settings-chunk-size")[0].value.length) {
             const int = parseInt(document.getElementsByClassName("settings-chunk-size")[0].value, 10);
 
-            if (!isNaN(int) && int >= Text.chunkSizeMin && int <= Text.chunkSizeMax) {
-                chunkSize = int;
+            if (!isNaN(int)) {
+                newChunkSize = int;
             }
         }
 
-        text = new Text(initialText, chunkSize);
+        text = new Text(newText, newChunkSize);
+
+        text.render();
 
         settings.classList.remove("settings-show");
     });
