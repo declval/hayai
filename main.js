@@ -1,6 +1,24 @@
 DEFAULT_TEXT = "Touch typing (also called blind typing, or touch keyboarding) is a style of typing.";
+CHUNK_SIZE = 32
+
+let chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
 
 document.addEventListener("DOMContentLoaded", main);
+
+function* chunked(string, length) {
+    let start = 0;
+    let end = length;
+
+    while (end <= string.length) {
+        yield string.substring(start, end);
+        start += length;
+        end += length;
+    }
+
+    if (start < string.length) {
+        yield string.substring(start, string.length);
+    }
+}
 
 function keydown(event, keys) {
     event.preventDefault();
@@ -37,7 +55,14 @@ function text_cursor_move(key) {
             try {
                 character.nextSibling.classList.add("text-character-cursor");
             } catch (e) {
-                text_reset();
+                const chunk = chunks.next().value;
+
+                if (chunk) {
+                    text_init(chunk);
+                } else {
+                    chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
+                    text_init(chunks.next().value);
+                }
             }
             break;
         }
@@ -75,7 +100,7 @@ function text_remove() {
 }
 
 function main(event) {
-    text_init(DEFAULT_TEXT);
+    text_init(chunks.next().value);
 
     const keys = document.getElementsByClassName("keyboard-key");
 
