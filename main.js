@@ -54,10 +54,10 @@ function keydown(event, keys) {
         return;
     }
 
-    text_cursor_move(event.key);
+    textCursorMove(event.key);
 }
 
-function text_cursor_move(key) {
+function textCursorMove(key) {
     const characters = document.getElementsByClassName("text-character");
 
     for (const character of characters) {
@@ -74,7 +74,7 @@ function text_cursor_move(key) {
                 const chunk = chunks.next().value;
 
                 if (chunk) {
-                    text_init(chunk);
+                    textInit(chunk);
                 } else {
                     const text = document.getElementsByClassName("text")[0];
 
@@ -84,7 +84,7 @@ function text_cursor_move(key) {
                         text.classList.remove("text-rotate");
 
                         chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
-                        text_init(chunks.next().value);
+                        textInit(chunks.next().value);
                     }, 800);
                 }
             }
@@ -93,10 +93,10 @@ function text_cursor_move(key) {
     }
 }
 
-function text_init(string) {
+function textInit(string) {
     string = string.replace(/[^ -~]+/g, "");
 
-    text_remove();
+    textRemove();
 
     const text = document.getElementsByClassName("text")[0];
 
@@ -117,7 +117,7 @@ function text_init(string) {
     text.firstChild.classList.add("text-character-cursor");
 }
 
-function text_remove() {
+function textRemove() {
     const text = document.getElementsByClassName("text")[0];
 
     while (text.firstChild) {
@@ -126,7 +126,7 @@ function text_remove() {
 }
 
 function main(event) {
-    text_init(chunks.next().value);
+    textInit(chunks.next().value);
 
     const keys = document.getElementsByClassName("keyboard-key");
 
@@ -136,9 +136,9 @@ function main(event) {
 
     const settings = document.getElementsByClassName("settings")[0];
 
-    const settings_titlebar = document.getElementsByClassName("settings-titlebar")[0];
+    const settingsTitlebar = document.getElementsByClassName("settings-titlebar")[0];
 
-    settings_titlebar.addEventListener("mousedown", function (event) {
+    settingsTitlebar.addEventListener("mousedown", function (event) {
         offsetX = event.clientX - settings.offsetLeft;
         offsetY = event.clientY - settings.offsetTop;
         moving = true;
@@ -151,17 +151,17 @@ function main(event) {
         }
     });
 
-    settings_titlebar.addEventListener("mouseup", function (event) {
+    settingsTitlebar.addEventListener("mouseup", function (event) {
         moving = false;
     });
 
-    const settings_button = document.getElementsByClassName("settings-button")[0];
+    const settingsButton = document.getElementsByClassName("settings-button")[0];
 
-    settings_button.addEventListener("click", function (event) {
+    settingsButton.addEventListener("click", function (event) {
         settings.classList.toggle("settings-show");
     });
 
-    settings_button.addEventListener("mouseenter", function (event) {
+    settingsButton.addEventListener("mouseenter", function (event) {
         event.target.classList.add("settings-button-rotate-right");
 
         setTimeout(function () {
@@ -169,7 +169,7 @@ function main(event) {
         }, 500);
     });
 
-    settings_button.addEventListener("mouseleave", function (event) {
+    settingsButton.addEventListener("mouseleave", function (event) {
         event.target.classList.add("settings-button-rotate-left");
 
         setTimeout(function () {
@@ -177,27 +177,27 @@ function main(event) {
         }, 500);
     });
 
-    const settings_close = document.getElementsByClassName("settings-close")[0];
+    const settingsClose = document.getElementsByClassName("settings-close")[0];
 
-    settings_close.addEventListener("click", function (event) {
+    settingsClose.addEventListener("click", function (event) {
         settings.classList.remove("settings-show");
     });
 
     // Do not move settings window if move started with mouse over close button
-    settings_close.addEventListener("mousedown", function (event) {
+    settingsClose.addEventListener("mousedown", function (event) {
         event.stopPropagation();
     });
 
-    const settings_form = document.getElementsByClassName("settings-form")[0];
+    const settingsForm = document.getElementsByClassName("settings-form")[0];
 
-    settings_form.addEventListener("submit", function (event) {
+    settingsForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
         if (document.getElementsByClassName("settings-usertext")[0].value.length) {
             DEFAULT_TEXT = document.getElementsByClassName("settings-usertext")[0].value;
         }
         chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
-        text_init(chunks.next().value);
+        textInit(chunks.next().value);
 
         settings.classList.remove("settings-show");
     });
