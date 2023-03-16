@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap");
 
 body {
+    align-items: center;
+    color: rgb(22, 22, 22);
     display: flex;
-    font-family: 'Roboto';
-    font-size: 14px;
-    justify-content: center;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
 }
 
 .keyboard {
     background-color: rgb(236, 236, 236);
     border-radius: 2px;
+    font-size: 12px;
+    margin-top: 50px;
     padding: 2px;
     user-select: none;
     width: fit-content;
@@ -21,7 +24,7 @@ body {
 
 .keyboard-key {
     align-items: center;
-    background-color: rgb(218, 218, 218);
+    background-color: rgb(255, 255, 255);
     border-radius: 2px;
     display: flex;
     justify-content: center;
@@ -43,6 +46,10 @@ body {
     min-width: 60px;
 }
 
+.keyboard-key-keydown {
+    background-color: rgb(190, 200, 255);
+}
+
 .keyboard-key-shift {
     width: 100%;
 }
@@ -53,4 +60,31 @@ body {
 
 .keyboard-key-tab {
     width: 100%;
+}
+
+#text {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Roboto Mono", monospace;
+    margin-top: 50px;
+    user-select: none;
+    width: 700px;
+}
+
+.text-character {
+    border-radius: 2px;
+    margin: 1px;
+    padding: 4px;
+}
+
+.text-character-space {
+    border-bottom: 2px solid rgb(207, 207, 207);
+}
+
+.text-character-correct {
+    background-color: rgb(205, 255, 191);
+}
+
+.text-character-incorrect {
+    background-color: rgb(255, 177, 177);
 }
