@@ -6,6 +6,34 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    user-select: none;
+}
+
+.text {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Roboto Mono", monospace;
+    justify-content: center;
+    margin-top: 100px;
+    width: 700px;
+}
+
+.text-character {
+    border-radius: 2px;
+    margin: 1px;
+    padding: 4px;
+}
+
+.text-character-space {
+    border-bottom: 2px solid rgb(207, 207, 207);
+}
+
+.text-character-correct {
+    background-color: rgb(205, 255, 191);
+}
+
+.text-character-incorrect {
+    background-color: rgb(255, 177, 177);
 }
 
 .keyboard {
@@ -14,7 +42,6 @@ body {
     font-size: 12px;
     margin-top: 50px;
     padding: 2px;
-    user-select: none;
     width: fit-content;
 }
 
@@ -46,10 +73,6 @@ body {
     min-width: 60px;
 }
 
-.keyboard-key-keydown {
-    background-color: rgb(190, 200, 255);
-}
-
 .keyboard-key-shift {
     width: 100%;
 }
@@ -62,30 +85,72 @@ body {
     width: 100%;
 }
 
-#text {
-    display: flex;
-    flex-wrap: wrap;
-    font-family: "Roboto Mono", monospace;
-    justify-content: center;
-    margin-top: 50px;
-    user-select: none;
-    width: 700px;
+.keyboard-key-keydown {
+    background-color: rgb(190, 200, 255);
 }
 
-.text-character {
+.settings-button {
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.settings {
+    background-color: rgb(236, 236, 236);
     border-radius: 2px;
-    margin: 1px;
-    padding: 4px;
+    display: none;
+    left: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
 }
 
-.text-character-space {
-    border-bottom: 2px solid rgb(207, 207, 207);
+.settings-show {
+    display: block;
 }
 
-.text-character-correct {
-    background-color: rgb(205, 255, 191);
+.settings-titlebar {
+    align-items: center;
+    background-color: rgb(64, 64, 64);
+    color: rgb(255, 255, 255);
+    display: flex;
+    padding: 10px;
 }
 
-.text-character-incorrect {
-    background-color: rgb(255, 177, 177);
+.settings-close {
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.settings-label {
+    margin-bottom: 5px;
+}
+
+.settings-usertext {
+    border: none;
+    border-radius: 2px;
+    height: 300px;
+    margin-bottom: 5px;
+    outline: none;
+    padding: 10px;
+    resize: none;
+}
+
+.settings-save {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 10px;
 }

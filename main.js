@@ -21,6 +21,12 @@ function* chunked(string, length) {
 }
 
 function keydown(event, keys) {
+    const settings = document.getElementsByClassName("settings")[0];
+
+    if (settings.classList.contains("settings-show")) {
+        return;
+    }
+
     event.preventDefault();
 
     for (const key of keys) {
@@ -70,11 +76,11 @@ function text_cursor_move(key) {
 }
 
 function text_init(string) {
+    string = string.replace(/[^ -~]+/g, "");
+
     text_remove();
 
-    const text = document.getElementById("text");
-
-    string = string.replace(/[^ -~]+/g, "");
+    const text = document.getElementsByClassName("text")[0];
 
     for (const character of string) {
         const div = document.createElement("div");
@@ -94,7 +100,7 @@ function text_init(string) {
 }
 
 function text_remove() {
-    const text = document.getElementById("text");
+    const text = document.getElementsByClassName("text")[0];
 
     while (text.firstChild) {
         text.firstChild.remove();
@@ -108,5 +114,33 @@ function main(event) {
 
     document.addEventListener("keydown", function (event) {
         keydown(event, keys);
+    });
+
+    const settings = document.getElementsByClassName("settings")[0];
+
+    const settings_button = document.getElementsByClassName("settings-button")[0];
+
+    settings_button.addEventListener("click", function (event) {
+        settings.classList.toggle("settings-show");
+    });
+
+    const settings_close = document.getElementsByClassName("settings-close")[0];
+
+    settings_close.addEventListener("click", function (event) {
+        settings.classList.remove("settings-show");
+    });
+
+    const settings_form = document.getElementsByClassName("settings-form")[0];
+
+    settings_form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (document.getElementsByClassName("settings-usertext")[0].value.length) {
+            DEFAULT_TEXT = document.getElementsByClassName("settings-usertext")[0].value;
+        }
+        chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
+        text_init(chunks.next().value);
+
+        settings.classList.remove("settings-show");
     });
 }
