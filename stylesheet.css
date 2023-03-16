@@ -18,6 +18,17 @@ body {
     width: 700px;
 }
 
+.text-rotate {
+    animation: text-rotate 800ms linear;
+}
+
+@keyframes text-rotate {
+    100% {
+        opacity: 0;
+        transform: perspective(300px) rotateY(180deg);
+    }
+}
+
 .text-character {
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 0.1);
