@@ -33,6 +33,14 @@ function keydown(event, keys) {
 
     event.preventDefault();
 
+    const caps = document.getElementsByClassName("keyboard-key-caps-indicator")[0];
+
+    if (event.getModifierState("CapsLock")) {
+        caps.classList.add("keyboard-key-caps-indicator-active");
+    } else {
+        caps.classList.remove("keyboard-key-caps-indicator-active");
+    }
+
     for (const key of keys) {
         if (key.dataset.value === event.key || key.dataset.valueAlt === event.key) {
             key.classList.add("keyboard-key-keydown");
