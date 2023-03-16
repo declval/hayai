@@ -1,36 +1,36 @@
-import { Text } from "./text.js";
-import { draggable } from "./draggable.js";
+import { Text } from './text.js';
+import { draggable } from './draggable.js';
 
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener('DOMContentLoaded', main);
 
 function main(event) {
     let text = new Text();
 
     text.render();
 
-    document.addEventListener("keydown", function (event) {
-        const settings = document.getElementsByClassName("settings")[0];
+    document.addEventListener('keydown', function (event) {
+        const settings = document.getElementsByClassName('settings')[0];
 
-        if (settings.classList.contains("settings-show")) {
+        if (settings.classList.contains('settings-show')) {
             return;
         }
 
-        const caps = document.getElementsByClassName("keyboard-key-caps-indicator")[0];
+        const caps = document.getElementsByClassName('keyboard-key-caps-indicator')[0];
 
-        if (event.getModifierState("CapsLock")) {
-            caps.classList.add("keyboard-key-caps-indicator-active");
+        if (event.getModifierState('CapsLock')) {
+            caps.classList.add('keyboard-key-caps-indicator-active');
         } else {
-            caps.classList.remove("keyboard-key-caps-indicator-active");
+            caps.classList.remove('keyboard-key-caps-indicator-active');
         }
 
-        const keys = document.getElementsByClassName("keyboard-key");
+        const keys = document.getElementsByClassName('keyboard-key');
 
         for (const key of keys) {
             if (key.dataset.value === event.key || key.dataset.valueAlt === event.key) {
-                key.classList.add("keyboard-key-keydown");
+                key.classList.add('keyboard-key-keydown');
 
                 setTimeout(function () {
-                    key.classList.remove("keyboard-key-keydown");
+                    key.classList.remove('keyboard-key-keydown');
                 }, 100);
             }
         }
@@ -43,55 +43,55 @@ function main(event) {
         text.cursorMove(event.key);
     });
 
-    const settings = document.getElementsByClassName("settings")[0];
+    const settings = document.getElementsByClassName('settings')[0];
 
-    const settingsTitlebar = document.getElementsByClassName("settings-titlebar")[0];
+    const settingsTitlebar = document.getElementsByClassName('settings-titlebar')[0];
 
     draggable(settingsTitlebar, settings);
 
-    const settingsButton = document.getElementsByClassName("settings-button")[0];
+    const settingsButton = document.getElementsByClassName('settings-button')[0];
 
-    settingsButton.addEventListener("click", function (event) {
-        settings.classList.toggle("settings-show");
+    settingsButton.addEventListener('click', function (event) {
+        settings.classList.toggle('settings-show');
     });
 
-    settingsButton.addEventListener("mouseenter", function (event) {
-        event.target.classList.add("settings-button-rotate-right");
+    settingsButton.addEventListener('mouseenter', function (event) {
+        event.target.classList.add('settings-button-rotate-right');
 
         setTimeout(function () {
-            event.target.classList.remove("settings-button-rotate-right");
+            event.target.classList.remove('settings-button-rotate-right');
         }, 500);
     });
 
-    settingsButton.addEventListener("mouseleave", function (event) {
-        event.target.classList.add("settings-button-rotate-left");
+    settingsButton.addEventListener('mouseleave', function (event) {
+        event.target.classList.add('settings-button-rotate-left');
 
         setTimeout(function () {
-            event.target.classList.remove("settings-button-rotate-left");
+            event.target.classList.remove('settings-button-rotate-left');
         }, 500);
     });
 
-    const settingsClose = document.getElementsByClassName("settings-close")[0];
+    const settingsClose = document.getElementsByClassName('settings-close')[0];
 
-    settingsClose.addEventListener("click", function (event) {
-        settings.classList.remove("settings-show");
+    settingsClose.addEventListener('click', function (event) {
+        settings.classList.remove('settings-show');
     });
 
-    const settingsForm = document.getElementsByClassName("settings-form")[0];
+    const settingsForm = document.getElementsByClassName('settings-form')[0];
 
-    settingsForm.addEventListener("submit", function (event) {
+    settingsForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
         let newText = null;
 
-        if (document.getElementsByClassName("settings-usertext")[0].value.length) {
-            newText = document.getElementsByClassName("settings-usertext")[0].value;
+        if (document.getElementsByClassName('settings-usertext')[0].value.length) {
+            newText = document.getElementsByClassName('settings-usertext')[0].value;
         }
 
         let newChunkSize = null;
 
-        if (document.getElementsByClassName("settings-chunk-size")[0].value.length) {
-            const int = parseInt(document.getElementsByClassName("settings-chunk-size")[0].value, 10);
+        if (document.getElementsByClassName('settings-chunk-size')[0].value.length) {
+            const int = parseInt(document.getElementsByClassName('settings-chunk-size')[0].value, 10);
 
             if (!isNaN(int)) {
                 newChunkSize = int;
@@ -102,10 +102,10 @@ function main(event) {
 
         text.render();
 
-        settings.classList.remove("settings-show");
+        settings.classList.remove('settings-show');
     });
 
-    const settingsChunkSize = settingsForm.getElementsByClassName("settings-chunk-size")[0];
+    const settingsChunkSize = settingsForm.getElementsByClassName('settings-chunk-size')[0];
 
-    settingsChunkSize.setAttribute("placeholder", settingsChunkSize.getAttribute("placeholder") + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
+    settingsChunkSize.setAttribute('placeholder', settingsChunkSize.getAttribute('placeholder') + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
 }

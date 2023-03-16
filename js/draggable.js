@@ -6,25 +6,25 @@ function draggable(handle, element) {
     let offsetY = 0;
 
     for (const child of handle.children) {
-        child.addEventListener("mousedown", function (event) {
+        child.addEventListener('mousedown', function (event) {
             event.stopPropagation();
         });
     }
 
-    document.addEventListener("mousemove", function (event) {
+    document.addEventListener('mousemove', function (event) {
         if (moving) {
             element.style.left = `${event.clientX - offsetX}px`;
             element.style.top = `${event.clientY - offsetY}px`;
         }
     });
 
-    handle.addEventListener("mousedown", function (event) {
+    handle.addEventListener('mousedown', function (event) {
         offsetX = event.clientX - element.offsetLeft;
         offsetY = event.clientY - element.offsetTop;
         moving = true;
     });
 
-    handle.addEventListener("mouseup", function (event) {
+    handle.addEventListener('mouseup', function (event) {
         moving = false;
     });
 }

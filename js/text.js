@@ -2,22 +2,22 @@ export { Text };
 
 class Text {
     constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
-        this.text = text.replace(/[^ -~]+/g, "");
+        this.text = text.replace(/[^ -~]+/g, '');
         this.chunkSize = chunkSize;
 
         if (this.text.length === 0) {
-            throw new Error("Invalid text length");
+            throw new Error('Invalid text length');
         }
 
         if (this.chunkSize < Text.chunkSizeMin ||
             this.chunkSize > Text.chunkSizeMax ||
             this.chunkSize > this.text.length) {
-            throw new Error("Invalid chunk size");
+            throw new Error('Invalid chunk size');
         }
 
         this.chunks = this.chunked();
         this.chunk = this.chunks.next().value;
-        this.textElement = document.getElementsByClassName("text")[0];
+        this.textElement = document.getElementsByClassName('text')[0];
     }
 
     clear() {
@@ -28,20 +28,20 @@ class Text {
 
     cursorMove(key) {
         for (const character of this.characters) {
-            if (character.classList.contains("text-character-cursor")) {
+            if (character.classList.contains('text-character-cursor')) {
                 if (character.textContent === key) {
-                    character.classList.add("text-character-correct");
+                    character.classList.add('text-character-correct');
                 } else {
-                    character.classList.add("text-character-incorrect");
+                    character.classList.add('text-character-incorrect');
 
-                    const keys = document.getElementsByClassName("keyboard-key");
+                    const keys = document.getElementsByClassName('keyboard-key');
 
                     for (const key of keys) {
                         if (key.dataset.value === character.textContent || key.dataset.valueAlt === character.textContent) {
-                            key.classList.add("keyboard-key-highlight");
+                            key.classList.add('keyboard-key-highlight');
 
                             setTimeout(function () {
-                                key.classList.remove("keyboard-key-highlight");
+                                key.classList.remove('keyboard-key-highlight');
                             }, 300);
 
                             break;
@@ -49,10 +49,10 @@ class Text {
                     }
                 }
 
-                character.classList.remove("text-character-cursor");
+                character.classList.remove('text-character-cursor');
 
                 try {
-                    character.nextSibling.classList.add("text-character-cursor");
+                    character.nextSibling.classList.add('text-character-cursor');
                 } catch (e) {
                     this.chunk = this.chunks.next().value;
 
@@ -62,11 +62,11 @@ class Text {
                         this.chunks = this.chunked();
                         this.chunk = this.chunks.next().value;
 
-                        this.textElement.classList.add("text-rotate");
+                        this.textElement.classList.add('text-rotate');
 
                         const that = this;
                         setTimeout(function () {
-                            that.textElement.classList.remove("text-rotate");
+                            that.textElement.classList.remove('text-rotate');
                             that.render();
                         }, 800);
                     }
@@ -81,12 +81,12 @@ class Text {
         this.clear();
 
         for (const character of this.chunk) {
-            const div = document.createElement("div");
+            const div = document.createElement('div');
 
-            div.classList.add("text-character");
+            div.classList.add('text-character');
 
-            if (character === " ") {
-                div.classList.add("text-character-space");
+            if (character === ' ') {
+                div.classList.add('text-character-space');
             }
 
             div.appendChild(document.createTextNode(character));
@@ -94,9 +94,9 @@ class Text {
             this.textElement.appendChild(div);
         }
 
-        this.textElement.firstChild.classList.add("text-character-cursor");
+        this.textElement.firstChild.classList.add('text-character-cursor');
 
-        this.characters = this.textElement.getElementsByClassName("text-character");
+        this.characters = this.textElement.getElementsByClassName('text-character');
     }
 
     *chunked() {
@@ -117,5 +117,5 @@ class Text {
     static chunkSizeMax = 128;
     static chunkSizeMin = 1;
     static initialChunkSize = 32;
-    static initialText = "Touch typing (also called blind typing, or touch keyboarding) is a style of typing.";
+    static initialText = 'Touch typing (also called blind typing, or touch keyboarding) is a style of typing.';
 }

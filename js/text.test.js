@@ -1,65 +1,65 @@
-import { open } from "node:fs/promises";
+import { open } from 'node:fs/promises';
 
-import { Text } from "./text.js";
+import { Text } from './text.js';
 
 beforeEach(async function () {
-    return open("index.html")
+    return open('index.html')
         .then(function (fileHandle) {
-            const result = fileHandle.readFile("UTF-8");
+            const result = fileHandle.readFile('UTF-8');
             fileHandle.close();
             return result;
         })
         .then(function (buffer) {
-            document.body.innerHTML = buffer.replace(/.*<body>/s, "").replace(/<\/body>.*/s, "");
+            document.body.innerHTML = buffer.replace(/.*<body>/s, '').replace(/<\/body>.*/s, '');
         });
 });
 
-describe("Text class", function () {
-    test("constructor with an empty text throws an error", function () {
+describe('Text class', function () {
+    test('constructor with an empty text throws an error', function () {
         expect(function () {
-            new Text("", 1);
-        }).toThrow("Invalid text length");
+            new Text('', 1);
+        }).toThrow('Invalid text length');
     });
 
-    test("constructor with a chunk size less than a minimum chunk size throws an error", function () {
+    test('constructor with a chunk size less than a minimum chunk size throws an error', function () {
         expect(function () {
-            new Text("text", Text.chunkSizeMin - 1);
-        }).toThrow("Invalid chunk size");
+            new Text('text', Text.chunkSizeMin - 1);
+        }).toThrow('Invalid chunk size');
     });
 
-    test("constructor with a chunk size greater than a maximum chunk size throws an error", function () {
+    test('constructor with a chunk size greater than a maximum chunk size throws an error', function () {
         expect(function () {
-            new Text("text", Text.chunkSizeMax + 1);
-        }).toThrow("Invalid chunk size");
+            new Text('text', Text.chunkSizeMax + 1);
+        }).toThrow('Invalid chunk size');
     });
 
-    test("constructor with a chunk size greater than a text length throws an error", function () {
+    test('constructor with a chunk size greater than a text length throws an error', function () {
         expect(function () {
-            new Text("text", 16);
-        }).toThrow("Invalid chunk size");
+            new Text('text', 16);
+        }).toThrow('Invalid chunk size');
     });
 
-    test("method clear removes HTML elements", function () {
-        const text = new Text("text", 4);
+    test('method clear removes HTML elements', function () {
+        const text = new Text('text', 4);
 
         text.render();
         text.clear();
 
-        const textElement = document.getElementsByClassName("text")[0];
+        const textElement = document.getElementsByClassName('text')[0];
 
-        expect(textElement.innerHTML).toStrictEqual("");
+        expect(textElement.innerHTML).toStrictEqual('');
     });
 
-    test("method cursorMove advances the cursor", function () {
-        const text = new Text(" text", 4);
+    test('method cursorMove advances the cursor', function () {
+        const text = new Text(' text', 4);
 
         text.render();
 
-        text.cursorMove(" ");
-        text.cursorMove("t");
-        text.cursorMove("t");
+        text.cursorMove(' ');
+        text.cursorMove('t');
+        text.cursorMove('t');
 
-        const textElement = document.getElementsByClassName("text")[0];
+        const textElement = document.getElementsByClassName('text')[0];
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-space text-character-correct"> </div>' +
@@ -69,15 +69,15 @@ describe("Text class", function () {
         );
     });
 
-    test("method cursorMove advances the cursor past the current chunk", function () {
-        const text = new Text("text", 2);
+    test('method cursorMove advances the cursor past the current chunk', function () {
+        const text = new Text('text', 2);
 
         text.render();
 
-        text.cursorMove("t");
-        text.cursorMove("e");
+        text.cursorMove('t');
+        text.cursorMove('e');
 
-        const textElement = document.getElementsByClassName("text")[0];
+        const textElement = document.getElementsByClassName('text')[0];
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-cursor">x</div>' +
@@ -85,17 +85,17 @@ describe("Text class", function () {
         );
     });
 
-    test("method cursorMove advances the cursor past the last chunk", function (done) {
-        const text = new Text("text", 2);
+    test('method cursorMove advances the cursor past the last chunk', function (done) {
+        const text = new Text('text', 2);
 
         text.render();
 
-        text.cursorMove("t");
-        text.cursorMove("e");
-        text.cursorMove("x");
-        text.cursorMove("t");
+        text.cursorMove('t');
+        text.cursorMove('e');
+        text.cursorMove('x');
+        text.cursorMove('t');
 
-        const textElement = document.getElementsByClassName("text")[0];
+        const textElement = document.getElementsByClassName('text')[0];
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-correct">x</div>' +
@@ -111,12 +111,12 @@ describe("Text class", function () {
         }, 800);
     });
 
-    test("method render creates HTML elements", function () {
-        const text = new Text("text", 2);
+    test('method render creates HTML elements', function () {
+        const text = new Text('text', 2);
 
         text.render();
 
-        const textElement = document.getElementsByClassName("text")[0];
+        const textElement = document.getElementsByClassName('text')[0];
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-cursor">t</div>' +
@@ -124,15 +124,15 @@ describe("Text class", function () {
         );
     });
 
-    test("generator method chunked works correcty with a chunk size less than text length", function () {
-        const text = new Text("text", 3);
+    test('generator method chunked works correcty with a chunk size less than text length', function () {
+        const text = new Text('text', 3);
 
-        expect([...text.chunked()]).toStrictEqual(["tex", "t"]);
+        expect([...text.chunked()]).toStrictEqual(['tex', 't']);
     });
 
-    test("generator method chunked works correcty with a chunk size equal to text length", function () {
-        const text = new Text("text", 4);
+    test('generator method chunked works correcty with a chunk size equal to text length', function () {
+        const text = new Text('text', 4);
 
-        expect([...text.chunked()]).toStrictEqual(["text"]);
+        expect([...text.chunked()]).toStrictEqual(['text']);
     });
 });
