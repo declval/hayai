@@ -41,6 +41,16 @@ body {
     width: 1rem;
 }
 
+.text-character-cursor {
+    animation: blinking 800ms infinite;
+}
+
+@keyframes blinking {
+    50% {
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+    }
+}
+
 .text-character-space::after {
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     content: "";
