@@ -249,6 +249,14 @@ body {
     padding: 10px;
 }
 
+.settings-invalid {
+    color: rgb(230, 63, 85);
+}
+
+.settings-invalid::placeholder {
+    color: rgb(230, 63, 85);
+}
+
 .settings-save {
     background-color: rgb(255, 255, 255);
     border: none;

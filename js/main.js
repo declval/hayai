@@ -82,20 +82,42 @@ function main(event) {
     settingsForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
+        let errors = false;
+
         let newText = null;
 
         if (document.getElementsByClassName('settings-usertext')[0].value.length) {
-            newText = document.getElementsByClassName('settings-usertext')[0].value;
+            newText = document.getElementsByClassName('settings-usertext')[0].value.replace(/[^ -~]+/g, '');
+
+            if (newText.length) {
+                document.getElementsByClassName('settings-usertext')[0].classList.remove('settings-invalid');
+            } else {
+                document.getElementsByClassName('settings-usertext')[0].classList.add('settings-invalid');
+                errors = true;
+            }
+        } else {
+            document.getElementsByClassName('settings-usertext')[0].classList.add('settings-invalid');
+            errors = true;
         }
 
         let newChunkSize = null;
 
         if (document.getElementsByClassName('settings-chunk-size')[0].value.length) {
-            const int = parseInt(document.getElementsByClassName('settings-chunk-size')[0].value, 10);
+            newChunkSize = parseInt(document.getElementsByClassName('settings-chunk-size')[0].value, 10);
 
-            if (!isNaN(int)) {
-                newChunkSize = int;
+            if (!isNaN(newChunkSize) && newChunkSize >= Text.chunkSizeMin && newChunkSize <= Text.chunkSizeMax && newChunkSize <= newText.length) {
+                document.getElementsByClassName('settings-chunk-size')[0].classList.remove('settings-invalid');
+            } else {
+                document.getElementsByClassName('settings-chunk-size')[0].classList.add('settings-invalid');
+                errors = true;
             }
+        } else {
+            document.getElementsByClassName('settings-chunk-size')[0].classList.add('settings-invalid');
+            errors = true;
+        }
+
+        if (errors) {
+            return;
         }
 
         text = new Text(newText, newChunkSize);
