@@ -25,7 +25,7 @@ function* chunked(string, length) {
     }
 }
 
-function keydown(event, keys) {
+function keydown(event) {
     const settings = document.getElementsByClassName("settings")[0];
 
     if (settings.classList.contains("settings-show")) {
@@ -39,6 +39,8 @@ function keydown(event, keys) {
     } else {
         caps.classList.remove("keyboard-key-caps-indicator-active");
     }
+
+    const keys = document.getElementsByClassName("keyboard-key");
 
     for (const key of keys) {
         if (key.dataset.value === event.key || key.dataset.valueAlt === event.key) {
@@ -67,6 +69,18 @@ function textCursorMove(key) {
                 character.classList.add("text-character-correct");
             } else {
                 character.classList.add("text-character-incorrect");
+
+                const keys = document.getElementsByClassName("keyboard-key");
+
+                for (const key of keys) {
+                    if (key.dataset.value === character.textContent || key.dataset.valueAlt === character.textContent) {
+                        key.classList.add("keyboard-key-highlight");
+
+                        setTimeout(function () {
+                            key.classList.remove("keyboard-key-highlight");
+                        }, 300);
+                    }
+                }
             }
             character.classList.remove("text-character-cursor");
             try {
@@ -129,11 +143,7 @@ function textRemove() {
 function main(event) {
     textInit(chunks.next().value);
 
-    const keys = document.getElementsByClassName("keyboard-key");
-
-    document.addEventListener("keydown", function (event) {
-        keydown(event, keys);
-    });
+    document.addEventListener("keydown", keydown);
 
     const settings = document.getElementsByClassName("settings")[0];
 
