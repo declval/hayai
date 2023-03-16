@@ -74,6 +74,8 @@ function text_init(string) {
 
     const text = document.getElementById("text");
 
+    string = string.replace(/[^ -~]+/g, "");
+
     for (const character of string) {
         const div = document.createElement("div");
 
