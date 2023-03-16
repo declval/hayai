@@ -1,11 +1,12 @@
-DEFAULT_TEXT = "Touch typing (also called blind typing, or touch keyboarding) is a style of typing.";
-CHUNK_SIZE = 32
+const CHUNK_SIZE = 32;
+
+let textToDisplay = "Touch typing (also called blind typing, or touch keyboarding) is a style of typing.";
 
 let moving = false;
 let offsetX = 0;
 let offsetY = 0;
 
-let chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
+let chunks = chunked(textToDisplay, CHUNK_SIZE);
 
 document.addEventListener("DOMContentLoaded", main);
 
@@ -83,7 +84,7 @@ function textCursorMove(key) {
                     setTimeout(function () {
                         text.classList.remove("text-rotate");
 
-                        chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
+                        chunks = chunked(textToDisplay, CHUNK_SIZE);
                         textInit(chunks.next().value);
                     }, 800);
                 }
@@ -194,9 +195,9 @@ function main(event) {
         event.preventDefault();
 
         if (document.getElementsByClassName("settings-usertext")[0].value.length) {
-            DEFAULT_TEXT = document.getElementsByClassName("settings-usertext")[0].value;
+            textToDisplay = document.getElementsByClassName("settings-usertext")[0].value;
         }
-        chunks = chunked(DEFAULT_TEXT, CHUNK_SIZE);
+        chunks = chunked(textToDisplay, CHUNK_SIZE);
         textInit(chunks.next().value);
 
         settings.classList.remove("settings-show");
