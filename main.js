@@ -132,6 +132,22 @@ function main(event) {
         settings.classList.toggle("settings-show");
     });
 
+    settings_button.addEventListener("mouseenter", function (event) {
+        event.target.classList.add("settings-button-rotate-right");
+
+        setTimeout(function () {
+            event.target.classList.remove("settings-button-rotate-right");
+        }, 500);
+    });
+
+    settings_button.addEventListener("mouseleave", function (event) {
+        event.target.classList.add("settings-button-rotate-left");
+
+        setTimeout(function () {
+            event.target.classList.remove("settings-button-rotate-left");
+        }, 500);
+    });
+
     const settings_close = document.getElementsByClassName("settings-close")[0];
 
     settings_close.addEventListener("click", function (event) {

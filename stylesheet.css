@@ -125,10 +125,30 @@ body {
 
 .settings-button {
     cursor: pointer;
-    padding: 10px;
+    margin: 10px;
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.settings-button-rotate-left {
+    animation: settings-button-rotate-left 500ms;
+}
+
+.settings-button-rotate-right {
+    animation: settings-button-rotate-right 500ms;
+}
+
+@keyframes settings-button-rotate-left {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes settings-button-rotate-right {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .settings {
