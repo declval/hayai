@@ -53,6 +53,7 @@ body {
     align-items: center;
     background-color: rgb(255, 255, 255);
     border-radius: 2px;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     margin: 2px;
@@ -87,6 +88,7 @@ body {
 
 .keyboard-key-keydown {
     background-color: rgb(190, 200, 255);
+    box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .settings-button {
