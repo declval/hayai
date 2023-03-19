@@ -245,6 +245,7 @@ main {
     background-color: rgb(236, 236, 236);
     border-radius: 2px;
     display: none;
+    font-size: 14px;
     left: 50%;
     overflow: hidden;
     position: fixed;
@@ -280,24 +281,20 @@ main {
     margin-bottom: 5px;
 }
 
-.settings-usertext {
-    border: none;
-    border-radius: 2px;
-    font-family: "Roboto Mono", monospace;
-    height: 300px;
-    margin-bottom: 5px;
-    outline: none;
-    padding: 10px;
-    resize: none;
-}
-
+.settings-usertext,
 .settings-chunk-size {
     border: none;
     border-radius: 2px;
-    font-family: "Roboto Mono", monospace;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
     margin-bottom: 5px;
     outline: none;
     padding: 10px;
+}
+
+.settings-usertext {
+    height: 300px;
+    resize: none;
 }
 
 .settings-invalid {
