@@ -17,6 +17,14 @@ class Text {
 
         this.chunks = this.chunked();
         this.chunk = this.chunks.next().value;
+        this.errorRateElement = document.getElementsByClassName('error-rate')[0];
+        this.errorRate = null;
+        this.firstKeyPressed = false;
+        this.nCorrect = 0;
+        this.nIncorrect = 0;
+        this.speed = null;
+        this.speedElement = document.getElementsByClassName('speed')[0];
+        this.startTime = null;
         this.textElement = document.getElementsByClassName('text')[0];
     }
 
@@ -27,12 +35,24 @@ class Text {
     }
 
     cursorMove(key) {
+        if (!this.firstKeyPressed) {
+            this.firstKeyPressed = true;
+
+            this.startTime = Date.now();
+            this.nCorrect = 0;
+            this.nIncorrect = 0;
+        }
+
         for (const character of this.characters) {
             if (character.classList.contains('text-character-cursor')) {
                 if (character.textContent === key) {
                     character.classList.add('text-character-correct');
+
+                    this.nCorrect++;
                 } else {
                     character.classList.add('text-character-incorrect');
+
+                    this.nIncorrect++;
 
                     const keys = document.getElementsByClassName('keyboard-key');
 
@@ -54,6 +74,11 @@ class Text {
                 try {
                     character.nextSibling.classList.add('text-character-cursor');
                 } catch (e) {
+                    const timeDifference = (Date.now() - this.startTime) / 1000 / 60;
+
+                    this.speed = Math.floor(this.nCorrect / timeDifference);
+                    this.errorRate = Math.floor(this.nIncorrect / timeDifference);
+
                     this.chunk = this.chunks.next().value;
 
                     if (this.chunk) {
@@ -79,6 +104,16 @@ class Text {
 
     render() {
         this.clear();
+
+        this.firstKeyPressed = false;
+
+        if (this.speed != null) {
+            this.speedElement.textContent = `${this.speed} chars / min`;
+        }
+
+        if (this.errorRate != null) {
+            this.errorRateElement.textContent = `${this.errorRate} errors / min`;
+        }
 
         for (const character of this.chunk) {
             const div = document.createElement('div');

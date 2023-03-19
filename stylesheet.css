@@ -171,6 +171,48 @@ main {
     }
 }
 
+.statistics {
+    display: flex;
+    font-size: 10px;
+    gap: 10px;
+    left: 0;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+}
+
+.speed-container,
+.error-rate-container {
+    align-items: center;
+    display: flex;
+    gap: 4px;
+    position: relative;
+}
+
+.speed-container:hover::after,
+.error-rate-container:hover::after {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    display: flex;
+    font-size: 12px;
+    height: 16px;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    top: 120%;
+    white-space: nowrap;
+}
+
+.speed-container:hover::after {
+    content: "Typing speed";
+}
+
+.error-rate-container:hover::after {
+    content: "Error rate";
+}
+
 .settings-button {
     cursor: pointer;
     margin: 10px;

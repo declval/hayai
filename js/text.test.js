@@ -135,4 +135,30 @@ describe('Text class', function () {
 
         expect([...text.chunked()]).toStrictEqual(['text']);
     });
+
+    test('count of correct characters is as expected', function () {
+        const text = new Text('text', 4);
+
+        text.render();
+
+        text.cursorMove('t');
+        text.cursorMove('a');
+        text.cursorMove('x');
+        text.cursorMove('t');
+
+        expect(text.nCorrect).toBe(3);
+    });
+
+    test('count of incorrect characters is as expected', function () {
+        const text = new Text('text', 4);
+
+        text.render();
+
+        text.cursorMove('t');
+        text.cursorMove('a');
+        text.cursorMove('x');
+        text.cursorMove('t');
+
+        expect(text.nIncorrect).toBe(1);
+    });
 });
