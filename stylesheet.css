@@ -113,6 +113,15 @@ main {
     width: 50%;
 }
 
+div.keyboard-home-key {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 40px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .keyboard-key-caps {
     width: 100%;
 }
