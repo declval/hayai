@@ -6,7 +6,16 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    margin: 0;
     user-select: none;
+}
+
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 900px;
 }
 
 .text {
