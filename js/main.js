@@ -43,9 +43,28 @@ function main(event) {
         text.cursorMove(event.key);
     });
 
+    const darkModeButton = document.getElementsByClassName('dark-mode-button')[0];
+
+    const darkMode = localStorage.getItem('darkMode');
+
+    if (darkMode === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : darkMode) {
+        darkModeButton.classList.toggle('dark-mode-button-enabled');
+        document.documentElement.classList.toggle('dark-mode');
+    }
+
+    darkModeButton.addEventListener('click', function (event) {
+        if (event.target.classList.contains('dark-mode-button-enabled')) {
+            localStorage.setItem('darkMode', '');
+        } else {
+            localStorage.setItem('darkMode', 'on');
+        }
+        event.target.classList.toggle('dark-mode-button-enabled');
+        document.documentElement.classList.toggle('dark-mode');
+    });
+
     const settings = document.getElementsByClassName('settings')[0];
 
-    const settingsTitlebar = document.getElementsByClassName('settings-titlebar')[0];
+    const settingsTitlebar = document.getElementsByClassName('settings-title-bar')[0];
 
     draggable(settingsTitlebar, settings);
 
