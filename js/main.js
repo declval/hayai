@@ -60,7 +60,7 @@ function main(event) {
 
         setTimeout(function () {
             event.target.classList.remove('settings-button-rotate-right');
-        }, 500);
+        }, 800);
     });
 
     settingsButton.addEventListener('mouseleave', function (event) {
@@ -68,7 +68,7 @@ function main(event) {
 
         setTimeout(function () {
             event.target.classList.remove('settings-button-rotate-left');
-        }, 500);
+        }, 800);
     });
 
     const settingsClose = document.getElementsByClassName('settings-close')[0];

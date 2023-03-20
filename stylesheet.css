@@ -1,8 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap");
 
+:root {
+    --animation-duration: 300ms;
+    --background-color: rgb(255, 255, 255);
+    --border: 1px solid rgba(0, 0, 0, 0.1);
+    --border-radius: 4px;
+    --box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
+    --color: rgb(22, 22, 22);
+    --padding: 4px;
+
+    --alt-animation-duration: 800ms;
+    --alt-background-color: rgb(64, 64, 64);
+    --alt-padding: 10px;
+
+    --blue: rgb(190, 200, 255);
+    --gray: rgb(236, 236, 236);
+    --green: rgb(237, 255, 223);
+    --red: rgb(255, 210, 210);
+}
+
 body {
     align-items: center;
-    color: rgb(22, 22, 22);
+    color: var(--color);
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
@@ -23,35 +42,36 @@ main {
     flex-wrap: wrap;
     font-family: "Roboto Mono", monospace;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 7rem;
+    transform: perspective(400px);
     width: 700px;
 }
 
 .text-rotate {
-    animation: text-rotate 800ms linear;
+    animation: text-rotate var(--alt-animation-duration) linear;
 }
 
 @keyframes text-rotate {
     100% {
         opacity: 0;
-        transform: perspective(300px) rotateY(180deg);
+        transform: perspective(400px) rotateY(180deg);
     }
 }
 
 .text-character {
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    border: var(--border);
+    border-radius: var(--border-radius);
     display: flex;
     height: 1rem;
     justify-content: center;
     margin: 1px;
-    padding: 4px;
+    padding: var(--padding);
     width: 1rem;
 }
 
 .text-character-cursor {
-    animation: blinking 800ms infinite;
+    animation: blinking var(--alt-animation-duration) infinite;
 }
 
 @keyframes blinking {
@@ -68,19 +88,19 @@ main {
 }
 
 .text-character-correct {
-    background-color: rgb(237, 255, 223);
+    background-color: var(--green);
 }
 
 .text-character-incorrect {
-    background-color: rgb(255, 210, 210);
+    background-color: var(--red);
 }
 
 .keyboard {
-    background-color: rgb(236, 236, 236);
-    border-radius: 2px;
-    font-size: 12px;
-    margin-top: 50px;
-    padding: 2px;
+    background-color: var(--gray);
+    border-radius: var(--border-radius);
+    font-size: 0.7rem;
+    margin-top: 2.5rem;
+    padding: var(--padding);
     width: fit-content;
 }
 
@@ -90,15 +110,15 @@ main {
 
 .keyboard-key {
     align-items: center;
-    background-color: rgb(255, 255, 255);
-    border-radius: 2px;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
     display: flex;
     justify-content: center;
     margin: 2px;
     min-height: 30px;
     min-width: 30px;
-    padding: 10px;
+    padding: var(--alt-padding);
     position: relative;
 }
 
@@ -115,7 +135,7 @@ main {
 
 div.keyboard-home-key {
     color: rgba(0, 0, 0, 0.2);
-    font-size: 40px;
+    font-size: 2.4rem;
     left: 50%;
     position: absolute;
     top: 50%;
@@ -128,10 +148,10 @@ div.keyboard-home-key {
 
 .keyboard-key-caps-indicator {
     background-color: rgb(181, 181, 181);
-    border-radius: 2px;
+    border-radius: var(--border-radius);
     height: 4px;
     position: absolute;
-    right: 10px;
+    right: var(--alt-padding);
     top: 50%;
     transform: translateY(-50%);
     width: 4px;
@@ -163,17 +183,17 @@ div.keyboard-home-key {
 }
 
 .keyboard-key-keydown {
-    background-color: rgb(190, 200, 255);
-    box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--blue);
+    box-shadow: inset var(--box-shadow);
 }
 
 .keyboard-key-highlight {
-    animation: keyboard-key-highlight 200ms;
+    animation: keyboard-key-highlight var(--animation-duration);
 }
 
 @keyframes keyboard-key-highlight {
     100% {
-        background-color: rgb(255, 210, 210);
+        background-color: var(--red);
         transform: scale(1.5);
         z-index: 1;
     }
@@ -181,10 +201,10 @@ div.keyboard-home-key {
 
 .statistics {
     display: flex;
-    font-size: 10px;
-    gap: 10px;
+    font-size: 0.7rem;
+    gap: var(--alt-padding);
     left: 0;
-    margin: 10px;
+    margin: var(--alt-padding);
     position: absolute;
     top: 0;
 }
@@ -193,21 +213,21 @@ div.keyboard-home-key {
 .error-rate-container {
     align-items: center;
     display: flex;
-    gap: 4px;
+    gap: var(--padding);
     position: relative;
 }
 
 .speed-container:hover::after,
 .error-rate-container:hover::after {
     align-items: center;
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
     display: flex;
-    font-size: 12px;
+    font-size: 0.7rem;
     height: 16px;
     left: 0;
-    padding: 4px;
+    padding: var(--padding);
     position: absolute;
     top: 120%;
     white-space: nowrap;
@@ -223,37 +243,37 @@ div.keyboard-home-key {
 
 .settings-button {
     cursor: pointer;
-    margin: 10px;
+    margin: var(--alt-padding);
     position: absolute;
     right: 0;
     top: 0;
 }
 
 .settings-button-rotate-left {
-    animation: settings-button-rotate-left 500ms;
+    animation: settings-button-rotate-left var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
 }
 
 .settings-button-rotate-right {
-    animation: settings-button-rotate-right 500ms;
+    animation: settings-button-rotate-right var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
 }
 
 @keyframes settings-button-rotate-left {
     100% {
-        transform: rotate(-360deg);
+        transform: rotate(-180deg);
     }
 }
 
 @keyframes settings-button-rotate-right {
     100% {
-        transform: rotate(360deg);
+        transform: rotate(180deg);
     }
 }
 
 .settings {
-    background-color: rgb(236, 236, 236);
-    border-radius: 2px;
+    background-color: var(--gray);
+    border-radius: var(--border-radius);
     display: none;
-    font-size: 14px;
+    font-size: 0.85rem;
     left: 50%;
     overflow: hidden;
     position: fixed;
@@ -268,10 +288,11 @@ div.keyboard-home-key {
 
 .settings-titlebar {
     align-items: center;
-    background-color: rgb(64, 64, 64);
-    color: rgb(255, 255, 255);
+    background-color: var(--alt-background-color);
+    color: var(--background-color);
     display: flex;
-    padding: 10px;
+    gap: var(--padding);
+    padding: var(--alt-padding);
 }
 
 .settings-close {
@@ -282,7 +303,7 @@ div.keyboard-home-key {
 .settings-form {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: var(--alt-padding);
 }
 
 .settings-label {
@@ -292,32 +313,32 @@ div.keyboard-home-key {
 .settings-usertext,
 .settings-chunk-size {
     border: none;
-    border-radius: 2px;
+    border-radius: var(--border-radius);
     font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 0.8rem;
+    margin-bottom: var(--alt-padding);
     outline: none;
-    padding: 10px;
+    padding: var(--alt-padding);
 }
 
 .settings-usertext {
-    height: 300px;
+    height: 180px;
     resize: none;
 }
 
 .settings-invalid {
-    color: rgb(230, 63, 85);
+    background-color: var(--red);
 }
 
 .settings-invalid::placeholder {
-    color: rgb(230, 63, 85);
+    background-color: var(--red);
 }
 
 .settings-save {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--background-color);
     border: none;
-    border-radius: 2px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     margin-left: auto;
-    padding: 10px;
+    padding: var(--alt-padding);
 }
