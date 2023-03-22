@@ -88,11 +88,11 @@ class Text {
 
         this.firstKeyPressed = false;
 
-        if (this.speed != null) {
+        if (Number.isFinite(this.speed)) {
             this.speedElement.textContent = `${this.speed} chars / min`;
         }
 
-        if (this.errorRate != null) {
+        if (Number.isFinite(this.errorRate)) {
             this.errorRateElement.textContent = `${this.errorRate} errors / min`;
         }
 
