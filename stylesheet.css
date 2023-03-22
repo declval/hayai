@@ -387,7 +387,7 @@ div.keyboard-home-key {
     margin-bottom: 5px;
 }
 
-.settings-usertext,
+.settings-custom-text,
 .settings-chunk-size {
     background-color: var(--background-color);
     border: var(--border);
@@ -402,7 +402,7 @@ div.keyboard-home-key {
                 color var(--animation-duration);
 }
 
-.settings-usertext::placeholder,
+.settings-custom-text::placeholder,
 .settings-chunk-size::placeholder {
     background-color: var(--background-color);
     color: var(--placeholder-color);
@@ -410,7 +410,7 @@ div.keyboard-home-key {
                 color var(--animation-duration);
 }
 
-.settings-usertext {
+.settings-custom-text {
     height: 180px;
     resize: none;
 }

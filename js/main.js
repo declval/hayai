@@ -1,9 +1,9 @@
+import { Settings } from './settings.js';
 import { Text } from './text.js';
-import { draggable } from './draggable.js';
 
 document.addEventListener('DOMContentLoaded', main);
 
-function main(event) {
+function main() {
     let text = new Text();
 
     text.render();
@@ -62,16 +62,12 @@ function main(event) {
         document.documentElement.classList.toggle('dark-mode');
     });
 
-    const settings = document.getElementsByClassName('settings')[0];
-
-    const settingsTitlebar = document.getElementsByClassName('settings-title-bar')[0];
-
-    draggable(settingsTitlebar, settings);
+    const settings = new Settings(text);
 
     const settingsButton = document.getElementsByClassName('settings-button')[0];
 
-    settingsButton.addEventListener('click', function (event) {
-        settings.classList.toggle('settings-show');
+    settingsButton.addEventListener('click', function () {
+        settings.toggle();
     });
 
     settingsButton.addEventListener('mouseenter', function (event) {
@@ -89,64 +85,4 @@ function main(event) {
             event.target.classList.remove('settings-button-rotate-left');
         }, 800);
     });
-
-    const settingsClose = document.getElementsByClassName('settings-close')[0];
-
-    settingsClose.addEventListener('click', function (event) {
-        settings.classList.remove('settings-show');
-    });
-
-    const settingsForm = document.getElementsByClassName('settings-form')[0];
-
-    settingsForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        let errors = false;
-
-        let newText = null;
-
-        if (document.getElementsByClassName('settings-usertext')[0].value.length) {
-            newText = document.getElementsByClassName('settings-usertext')[0].value.replace(/[^ -~]+/g, '');
-
-            if (newText.length) {
-                document.getElementsByClassName('settings-usertext')[0].classList.remove('settings-invalid');
-            } else {
-                document.getElementsByClassName('settings-usertext')[0].classList.add('settings-invalid');
-                errors = true;
-            }
-        } else {
-            document.getElementsByClassName('settings-usertext')[0].classList.add('settings-invalid');
-            errors = true;
-        }
-
-        let newChunkSize = null;
-
-        if (document.getElementsByClassName('settings-chunk-size')[0].value.length) {
-            newChunkSize = parseInt(document.getElementsByClassName('settings-chunk-size')[0].value, 10);
-
-            if (!isNaN(newChunkSize) && newChunkSize >= Text.chunkSizeMin && newChunkSize <= Text.chunkSizeMax && newChunkSize <= newText.length) {
-                document.getElementsByClassName('settings-chunk-size')[0].classList.remove('settings-invalid');
-            } else {
-                document.getElementsByClassName('settings-chunk-size')[0].classList.add('settings-invalid');
-                errors = true;
-            }
-        } else {
-            document.getElementsByClassName('settings-chunk-size')[0].classList.add('settings-invalid');
-            errors = true;
-        }
-
-        if (errors) {
-            return;
-        }
-
-        text = new Text(newText, newChunkSize);
-
-        text.render();
-
-        settings.classList.remove('settings-show');
-    });
-
-    const settingsChunkSize = settingsForm.getElementsByClassName('settings-chunk-size')[0];
-
-    settingsChunkSize.setAttribute('placeholder', settingsChunkSize.getAttribute('placeholder') + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
 }

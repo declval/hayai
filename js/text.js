@@ -2,29 +2,10 @@ export { Text };
 
 class Text {
     constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
-        this.text = text.replace(/[^ -~]+/g, '');
-        this.chunkSize = chunkSize;
+        this.reset(text, chunkSize);
 
-        if (this.text.length === 0) {
-            throw new Error('Invalid text length');
-        }
-
-        if (this.chunkSize < Text.chunkSizeMin ||
-            this.chunkSize > Text.chunkSizeMax ||
-            this.chunkSize > this.text.length) {
-            throw new Error('Invalid chunk size');
-        }
-
-        this.chunks = this.chunked();
-        this.chunk = this.chunks.next().value;
         this.errorRateElement = document.getElementsByClassName('error-rate')[0];
-        this.errorRate = null;
-        this.firstKeyPressed = false;
-        this.nCorrect = 0;
-        this.nIncorrect = 0;
-        this.speed = null;
         this.speedElement = document.getElementsByClassName('speed')[0];
-        this.startTime = null;
         this.textElement = document.getElementsByClassName('text')[0];
     }
 
@@ -132,6 +113,30 @@ class Text {
         this.textElement.firstChild.classList.add('text-character-cursor');
 
         this.characters = this.textElement.getElementsByClassName('text-character');
+    }
+
+    reset(text, chunkSize) {
+        this.text = text.replace(/[^ -~]+/g, '');
+        this.chunkSize = chunkSize;
+
+        if (this.text.length === 0) {
+            throw new Error('Invalid text length');
+        }
+
+        if (this.chunkSize < Text.chunkSizeMin ||
+            this.chunkSize > Text.chunkSizeMax ||
+            this.chunkSize > this.text.length) {
+            throw new Error('Invalid chunk size');
+        }
+
+        this.chunks = this.chunked();
+        this.chunk = this.chunks.next().value;
+        this.errorRate = null;
+        this.firstKeyPressed = false;
+        this.nCorrect = 0;
+        this.nIncorrect = 0;
+        this.speed = null;
+        this.startTime = null;
     }
 
     *chunked() {
