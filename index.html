@@ -102,7 +102,13 @@
                 </div>
                 <form class="settings-form">
                     <label class="settings-label" for="settings-custom-text">Custom text</label>
-                    <textarea class="settings-custom-text" id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
+                    <div class="settings-custom-text-container">
+                        <textarea class="settings-custom-text" id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
+                        <div class="settings-custom-text-fetch-container">
+                            <input class="settings-custom-text-fetch-number" placeholder="Number of news items" type="text">
+                            <button class="settings-custom-text-fetch-button">Fill with recent space news</button>
+                        </div>
+                    </div>
                     <label class="settings-label" for="settings-chunk-size">Number of characters per screen</label>
                     <input class="settings-chunk-size" id="settings-chunk-size" placeholder="Number of characters" type="text">
                     <button class="settings-save" type="submit">Save</button>

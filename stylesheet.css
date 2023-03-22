@@ -6,6 +6,7 @@
     --blue: rgb(190, 200, 255);
     --border-radius: 4px;
     --border: 1px solid rgba(0, 0, 0, 0.1);
+    --border-hover: 1px solid rgba(0, 0, 0, 0.3);
     --box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
     --color: rgb(22, 22, 22);
     --fingerprint-color: rgba(0, 0, 0, 0.2);
@@ -25,6 +26,7 @@
 
 :root.dark-mode {
     --background-color: rgb(64, 64, 64);
+    --border-hover: 1px solid rgba(0, 0, 0, 0.4);
     --color: rgb(255, 255, 255);
     --fingerprint-color: rgba(255, 255, 255, 0.2);
     --gray: rgb(79, 79, 79);
@@ -46,6 +48,21 @@ body {
     transition: background-color var(--animation-duration),
                 color var(--animation-duration);
     user-select: none;
+}
+
+button {
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    color: var(--color);
+    cursor: pointer;
+    padding: var(--alt-padding);
+    transition: background-color var(--animation-duration),
+                color var(--animation-duration);
+}
+
+button:hover {
+    border: var(--border-hover);
 }
 
 main {
@@ -384,10 +401,18 @@ div.keyboard-home-key {
 }
 
 .settings-label {
-    margin-bottom: 5px;
+    margin-bottom: var(--padding);
+}
+
+.settings-custom-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+    margin-bottom: var(--alt-padding);
 }
 
 .settings-custom-text,
+.settings-custom-text-fetch-number,
 .settings-chunk-size {
     background-color: var(--background-color);
     border: var(--border);
@@ -395,7 +420,6 @@ div.keyboard-home-key {
     color: var(--color);
     font-family: 'Roboto', sans-serif;
     font-size: 0.8rem;
-    margin-bottom: var(--alt-padding);
     outline: none;
     padding: var(--alt-padding);
     transition: background-color var(--animation-duration),
@@ -403,6 +427,7 @@ div.keyboard-home-key {
 }
 
 .settings-custom-text::placeholder,
+.settings-custom-text-fetch-number::placeholder,
 .settings-chunk-size::placeholder {
     background-color: var(--background-color);
     color: var(--placeholder-color);
@@ -411,8 +436,22 @@ div.keyboard-home-key {
 }
 
 .settings-custom-text {
-    height: 180px;
+    height: 220px;
     resize: none;
+}
+
+.settings-custom-text-fetch-container {
+    display: flex;
+    gap: var(--padding);
+}
+
+.settings-custom-text-fetch-number,
+.settings-custom-text-fetch-button {
+    flex-grow: 1;
+}
+
+.settings-chunk-size {
+    margin-bottom: var(--alt-padding);
 }
 
 .settings-invalid {
@@ -424,13 +463,5 @@ div.keyboard-home-key {
 }
 
 .settings-save {
-    background-color: var(--background-color);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    color: var(--color);
-    cursor: pointer;
     margin-left: auto;
-    padding: var(--alt-padding);
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
 }

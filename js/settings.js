@@ -51,7 +51,10 @@ class Settings {
             if (chunkSize.value.length) {
                 newChunkSize = parseInt(chunkSize.value, 10);
 
-                if (!isNaN(newChunkSize) && newChunkSize >= Text.chunkSizeMin && newChunkSize <= Text.chunkSizeMax && newChunkSize <= newCustomText.length) {
+                if (Number.isFinite(newChunkSize) &&
+                        newChunkSize >= Text.chunkSizeMin &&
+                        newChunkSize <= Text.chunkSizeMax &&
+                        newChunkSize <= newCustomText.length) {
                     chunkSize.classList.remove('settings-invalid');
                 } else {
                     chunkSize.classList.add('settings-invalid');
@@ -70,6 +73,57 @@ class Settings {
             that.text.render();
 
             that.toggle();
+        });
+
+        const settingsCustomText = this.settings.getElementsByClassName('settings-custom-text')[0];
+
+        const settingsCustomTextFetchNumber = this.settings.getElementsByClassName('settings-custom-text-fetch-number')[0];
+
+        const customTextFetchNumberMax = 128;
+        const customTextFetchNumberMin = 1;
+
+        settingsCustomTextFetchNumber.setAttribute('placeholder', settingsCustomTextFetchNumber.getAttribute('placeholder') + ` (${customTextFetchNumberMin} to ${customTextFetchNumberMax})`);
+
+        const settingsCustomTextFetchButton = this.settings.getElementsByClassName('settings-custom-text-fetch-button')[0];
+
+        settingsCustomTextFetchButton.addEventListener('click', async function (event) {
+            event.preventDefault();
+
+            let errors = false;
+
+            let customTextFetchNumber = null;
+
+            if (settingsCustomTextFetchNumber.value.length) {
+                customTextFetchNumber = parseInt(settingsCustomTextFetchNumber.value, 10);
+
+                if (Number.isFinite(customTextFetchNumber) &&
+                        customTextFetchNumber >= customTextFetchNumberMin &&
+                        customTextFetchNumber <= customTextFetchNumberMax) {
+                    settingsCustomTextFetchNumber.classList.remove('settings-invalid');
+                } else {
+                    settingsCustomTextFetchNumber.classList.add('settings-invalid');
+                    errors = true;
+                }
+            } else {
+                settingsCustomTextFetchNumber.classList.add('settings-invalid');
+                errors = true;
+            }
+
+            if (errors) {
+                return;
+            }
+
+            const response = await fetch(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${customTextFetchNumber}`);
+            const articles = await response.json();
+
+            let customText = '';
+
+            for (const [i, article] of articles.entries()) {
+                customText += article.title.trim();
+                customText += i < articles.length - 1 ? '\n' : '';
+            }
+
+            settingsCustomText.value = customText;
         });
 
         const settingsChunkSize = this.settings.getElementsByClassName('settings-chunk-size')[0];
