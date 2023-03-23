@@ -126,6 +126,14 @@ class Settings {
             settingsCustomText.value = customText;
         });
 
+        const settingsCustomTextClearButton = this.settings.getElementsByClassName('settings-custom-text-clear-button')[0];
+
+        settingsCustomTextClearButton.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            settingsCustomText.value = '';
+        });
+
         const settingsChunkSize = this.settings.getElementsByClassName('settings-chunk-size')[0];
 
         settingsChunkSize.setAttribute('placeholder', settingsChunkSize.getAttribute('placeholder') + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);

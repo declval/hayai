@@ -373,7 +373,7 @@ div.keyboard-home-key {
     transform: translate(-50%, -50%);
     transition: background-color var(--animation-duration),
                 color var(--animation-duration);
-    width: 500px;
+    width: 520px;
 }
 
 .settings-show {
@@ -445,9 +445,14 @@ div.keyboard-home-key {
     gap: var(--padding);
 }
 
-.settings-custom-text-fetch-number,
-.settings-custom-text-fetch-button {
-    flex-grow: 1;
+.settings-custom-text-fetch-number {
+    box-sizing: border-box;
+    min-width: 50%;
+}
+
+.settings-custom-text-fetch-button,
+.settings-custom-text-clear-button {
+    flex: 1;
 }
 
 .settings-chunk-size {
