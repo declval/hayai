@@ -45,7 +45,7 @@ describe('Text class', function () {
         text.render();
         text.clear();
 
-        const textElement = document.getElementsByClassName('text')[0];
+        const textElement = document.getElementById('text');
 
         expect(textElement.innerHTML).toStrictEqual('');
     });
@@ -59,7 +59,7 @@ describe('Text class', function () {
         text.cursorMove('t');
         text.cursorMove('t');
 
-        const textElement = document.getElementsByClassName('text')[0];
+        const textElement = document.getElementById('text');
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-space text-character-correct"> </div>' +
@@ -77,7 +77,7 @@ describe('Text class', function () {
         text.cursorMove('t');
         text.cursorMove('e');
 
-        const textElement = document.getElementsByClassName('text')[0];
+        const textElement = document.getElementById('text');
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-cursor">x</div>' +
@@ -95,7 +95,7 @@ describe('Text class', function () {
         text.cursorMove('x');
         text.cursorMove('t');
 
-        const textElement = document.getElementsByClassName('text')[0];
+        const textElement = document.getElementById('text');
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-correct">x</div>' +
@@ -116,7 +116,7 @@ describe('Text class', function () {
 
         text.render();
 
-        const textElement = document.getElementsByClassName('text')[0];
+        const textElement = document.getElementById('text');
 
         expect(textElement.innerHTML).toStrictEqual(
             '<div class="text-character text-character-cursor">t</div>' +

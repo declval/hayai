@@ -7,13 +7,13 @@ class Settings {
     constructor(text) {
         this.text = text;
 
-        this.settings = document.getElementsByClassName('settings')[0];
+        this.settings = document.getElementById('settings');
 
-        const settingsTitlebar = this.settings.getElementsByClassName('settings-title-bar')[0];
+        const settingsTitlebar = document.getElementById('settings-title-bar');
 
         draggable(settingsTitlebar, this.settings);
 
-        const settingsClose = this.settings.getElementsByClassName('settings-close')[0];
+        const settingsClose = document.getElementById('settings-close');
 
         const that = this;
 
@@ -21,14 +21,14 @@ class Settings {
             that.toggle();
         });
 
-        const settingsForm = this.settings.getElementsByClassName('settings-form')[0];
+        const settingsForm = document.getElementById('settings-form');
 
         settingsForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
             let errors = false;
 
-            const customText = that.settings.getElementsByClassName('settings-custom-text')[0];
+            const customText = document.getElementById('settings-custom-text');
             let newCustomText = '';
 
             if (customText.value.length) {
@@ -45,7 +45,7 @@ class Settings {
                 errors = true;
             }
 
-            const chunkSize = that.settings.getElementsByClassName('settings-chunk-size')[0];
+            const chunkSize = document.getElementById('settings-chunk-size');
             let newChunkSize = null;
 
             if (chunkSize.value.length) {
@@ -75,16 +75,16 @@ class Settings {
             that.toggle();
         });
 
-        const settingsCustomText = this.settings.getElementsByClassName('settings-custom-text')[0];
+        const settingsCustomText = document.getElementById('settings-custom-text');
 
-        const settingsCustomTextFetchNumber = this.settings.getElementsByClassName('settings-custom-text-fetch-number')[0];
+        const settingsCustomTextFetchNumber = document.getElementById('settings-custom-text-fetch-number');
 
         const customTextFetchNumberMax = 128;
         const customTextFetchNumberMin = 1;
 
         settingsCustomTextFetchNumber.setAttribute('placeholder', settingsCustomTextFetchNumber.getAttribute('placeholder') + ` (${customTextFetchNumberMin} to ${customTextFetchNumberMax})`);
 
-        const settingsCustomTextFetchButton = this.settings.getElementsByClassName('settings-custom-text-fetch-button')[0];
+        const settingsCustomTextFetchButton = document.getElementById('settings-custom-text-fetch-button');
 
         settingsCustomTextFetchButton.addEventListener('click', async function (event) {
             event.preventDefault();
@@ -126,7 +126,7 @@ class Settings {
             settingsCustomText.value = customText;
         });
 
-        const settingsCustomTextClearButton = this.settings.getElementsByClassName('settings-custom-text-clear-button')[0];
+        const settingsCustomTextClearButton = document.getElementById('settings-custom-text-clear-button');
 
         settingsCustomTextClearButton.addEventListener('click', function (event) {
             event.preventDefault();
@@ -134,7 +134,7 @@ class Settings {
             settingsCustomText.value = '';
         });
 
-        const settingsChunkSize = this.settings.getElementsByClassName('settings-chunk-size')[0];
+        const settingsChunkSize = document.getElementById('settings-chunk-size');
 
         settingsChunkSize.setAttribute('placeholder', settingsChunkSize.getAttribute('placeholder') + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
     }

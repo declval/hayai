@@ -8,7 +8,7 @@
     </head>
     <body>
         <main>
-            <div class="text"></div>
+            <div id="text"></div>
             <div class="keyboard">
                 <div class="keyboard-row">
                     <div class="keyboard-key" data-value="`" data-value-alt="~">`<div class="keyboard-key-alt">~</div></div>
@@ -43,7 +43,7 @@
                     <div class="keyboard-key" data-value="\" data-value-alt="|">\<div class="keyboard-key-alt">|</div></div>
                 </div>
                 <div class="keyboard-row">
-                    <div class="keyboard-key keyboard-key-caps" data-value="CapsLock">Caps Lock<div class="keyboard-key-caps-indicator"></div></div>
+                    <div class="keyboard-key keyboard-key-caps" data-value="CapsLock">Caps Lock<div id="keyboard-key-caps-indicator"></div></div>
                     <div class="keyboard-key" data-value="a" data-value-alt="A">A<div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
                     <div class="keyboard-key" data-value="s" data-value-alt="S">S<div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
                     <div class="keyboard-key" data-value="d" data-value-alt="D">D<div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
@@ -83,35 +83,35 @@
             <div class="statistics">
                 <div class="speed-container">
                     <div class="material-symbols-outlined speed-icon">speed</div>
-                    <div class="speed">N/A</div>
+                    <div id="speed">N/A</div>
                 </div>
                 <div class="error-rate-container">
                     <div class="material-symbols-outlined error-rate-icon">error</div>
-                    <div class="error-rate">N/A</div>
+                    <div id="error-rate">N/A</div>
                 </div>
             </div>
             <div class="buttons">
-                <div class="material-symbols-outlined dark-mode-button">dark_mode</div>
-                <div class="material-symbols-outlined settings-button">settings</div>
+                <div class="material-symbols-outlined" id="dark-mode-button">dark_mode</div>
+                <div class="material-symbols-outlined" id="settings-button">settings</div>
             </div>
-            <div class="settings">
-                <div class="settings-title-bar">
+            <div id="settings">
+                <div id="settings-title-bar">
                     <div class="material-symbols-outlined">settings</div>
                     Settings
-                    <div class="material-symbols-outlined settings-close">close</div>
+                    <div class="material-symbols-outlined" id="settings-close">close</div>
                 </div>
-                <form class="settings-form">
+                <form id="settings-form">
                     <label class="settings-label" for="settings-custom-text">Custom text</label>
                     <div class="settings-custom-text-container">
-                        <textarea class="settings-custom-text" id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
+                        <textarea id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
                         <div class="settings-custom-text-fetch-container">
-                            <input class="settings-custom-text-fetch-number" placeholder="Number of news items" type="text">
-                            <button class="settings-custom-text-fetch-button">Get space news</button>
-                            <button class="settings-custom-text-clear-button">Clear text</button>
+                            <input id="settings-custom-text-fetch-number" placeholder="Number of news items" type="text">
+                            <button id="settings-custom-text-fetch-button">Get space news</button>
+                            <button id="settings-custom-text-clear-button">Clear text</button>
                         </div>
                     </div>
                     <label class="settings-label" for="settings-chunk-size">Number of characters per screen</label>
-                    <input class="settings-chunk-size" id="settings-chunk-size" placeholder="Number of characters" type="text">
+                    <input id="settings-chunk-size" placeholder="Number of characters" type="text">
                     <button class="settings-save" type="submit">Save</button>
                 </form>
             </div>

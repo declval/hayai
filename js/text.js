@@ -4,9 +4,9 @@ class Text {
     constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
         this.reset(text, chunkSize);
 
-        this.errorRateElement = document.getElementsByClassName('error-rate')[0];
-        this.speedElement = document.getElementsByClassName('speed')[0];
-        this.textElement = document.getElementsByClassName('text')[0];
+        this.errorRateElement = document.getElementById('error-rate');
+        this.speedElement = document.getElementById('speed');
+        this.textElement = document.getElementById('text');
     }
 
     clear() {

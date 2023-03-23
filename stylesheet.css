@@ -73,7 +73,7 @@ main {
     width: 900px;
 }
 
-.text {
+#text {
     display: flex;
     flex-wrap: wrap;
     font-family: "Roboto Mono", monospace;
@@ -191,7 +191,7 @@ div.keyboard-home-key {
     width: 100%;
 }
 
-.keyboard-key-caps-indicator {
+#keyboard-key-caps-indicator {
     background-color: rgb(181, 181, 181);
     border-radius: var(--border-radius);
     height: 4px;
@@ -202,7 +202,7 @@ div.keyboard-home-key {
     width: 4px;
 }
 
-.keyboard-key-caps-indicator-active {
+#keyboard-key-caps-indicator.keyboard-key-caps-indicator-active {
     background-color: rgb(150, 255, 70);
     box-shadow: 0 0 4px 0 rgb(150, 255, 70);
 }
@@ -296,12 +296,12 @@ div.keyboard-home-key {
     top: 0;
 }
 
-.dark-mode-button,
-.settings-button {
+#dark-mode-button,
+#settings-button {
     cursor: pointer;
 }
 
-.dark-mode-button {
+#dark-mode-button {
     background-color: var(--background-color);
     color: var(--color);
     position: relative;
@@ -310,7 +310,7 @@ div.keyboard-home-key {
                 text-shadow var(--animation-duration);
 }
 
-.dark-mode-button:hover::after {
+#dark-mode-button:hover::after {
     align-items: center;
     background-color: var(--background-color);
     border: var(--border);
@@ -331,11 +331,11 @@ div.keyboard-home-key {
     white-space: nowrap;
 }
 
-.dark-mode-button.dark-mode-button-enabled:hover::after {
+#dark-mode-button.dark-mode-button-enabled:hover::after {
     content: "Dark mode (enabled)";
 }
 
-.dark-mode-button.dark-mode-button-enabled {
+#dark-mode-button.dark-mode-button-enabled {
     text-shadow: 0 0 4px var(--color);
 }
 
@@ -359,7 +359,7 @@ div.keyboard-home-key {
     }
 }
 
-.settings {
+#settings {
     background-color: var(--gray);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -376,11 +376,11 @@ div.keyboard-home-key {
     width: 520px;
 }
 
-.settings-show {
+#settings.settings-show {
     display: block;
 }
 
-.settings-title-bar {
+#settings-title-bar {
     align-items: center;
     background-color: var(--title-bar-background-color);
     color: var(--title-bar-color);
@@ -389,12 +389,12 @@ div.keyboard-home-key {
     padding: var(--alt-padding);
 }
 
-.settings-close {
+#settings-close {
     cursor: pointer;
     margin-left: auto;
 }
 
-.settings-form {
+#settings-form {
     display: flex;
     flex-direction: column;
     padding: var(--alt-padding);
@@ -411,9 +411,9 @@ div.keyboard-home-key {
     margin-bottom: var(--alt-padding);
 }
 
-.settings-custom-text,
-.settings-custom-text-fetch-number,
-.settings-chunk-size {
+#settings-custom-text,
+#settings-custom-text-fetch-number,
+#settings-chunk-size {
     background-color: var(--background-color);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -426,16 +426,16 @@ div.keyboard-home-key {
                 color var(--animation-duration);
 }
 
-.settings-custom-text::placeholder,
-.settings-custom-text-fetch-number::placeholder,
-.settings-chunk-size::placeholder {
+#settings-custom-text::placeholder,
+#settings-custom-text-fetch-number::placeholder,
+#settings-chunk-size::placeholder {
     background-color: var(--background-color);
     color: var(--placeholder-color);
     transition: background-color var(--animation-duration),
                 color var(--animation-duration);
 }
 
-.settings-custom-text {
+#settings-custom-text {
     height: 220px;
     resize: none;
 }
@@ -445,25 +445,29 @@ div.keyboard-home-key {
     gap: var(--padding);
 }
 
-.settings-custom-text-fetch-number {
+#settings-custom-text-fetch-number {
     box-sizing: border-box;
     min-width: 50%;
 }
 
-.settings-custom-text-fetch-button,
-.settings-custom-text-clear-button {
+#settings-custom-text-fetch-button,
+#settings-custom-text-clear-button {
     flex: 1;
 }
 
-.settings-chunk-size {
+#settings-chunk-size {
     margin-bottom: var(--alt-padding);
 }
 
-.settings-invalid {
+#settings-custom-text.settings-invalid,
+#settings-custom-text-fetch-number.settings-invalid,
+#settings-chunk-size.settings-invalid {
     background-color: var(--red);
 }
 
-.settings-invalid::placeholder {
+#settings-custom-text.settings-invalid::placeholder,
+#settings-custom-text-fetch-number.settings-invalid::placeholder,
+#settings-chunk-size.settings-invalid::placeholder {
     background-color: var(--red);
 }
 

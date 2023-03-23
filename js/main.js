@@ -9,13 +9,13 @@ function main() {
     text.render();
 
     document.addEventListener('keydown', function (event) {
-        const settings = document.getElementsByClassName('settings')[0];
+        const settings = document.getElementById('settings');
 
         if (settings.classList.contains('settings-show')) {
             return;
         }
 
-        const caps = document.getElementsByClassName('keyboard-key-caps-indicator')[0];
+        const caps = document.getElementById('keyboard-key-caps-indicator');
 
         if (event.getModifierState('CapsLock')) {
             caps.classList.add('keyboard-key-caps-indicator-active');
@@ -43,7 +43,7 @@ function main() {
         text.cursorMove(event.key);
     });
 
-    const darkModeButton = document.getElementsByClassName('dark-mode-button')[0];
+    const darkModeButton = document.getElementById('dark-mode-button');
 
     const darkMode = localStorage.getItem('darkMode');
 
@@ -64,7 +64,7 @@ function main() {
 
     const settings = new Settings(text);
 
-    const settingsButton = document.getElementsByClassName('settings-button')[0];
+    const settingsButton = document.getElementById('settings-button');
 
     settingsButton.addEventListener('click', function () {
         settings.toggle();
