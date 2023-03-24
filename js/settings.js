@@ -137,6 +137,12 @@ class Settings {
         const settingsChunkSize = document.getElementById('settings-chunk-size');
 
         settingsChunkSize.setAttribute('placeholder', settingsChunkSize.getAttribute('placeholder') + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
+
+        const settingsSave = document.getElementById('settings-save');
+
+        settingsSave.addEventListener('click', function () {
+            settingsForm.requestSubmit();
+        });
     }
 
     toggle() {

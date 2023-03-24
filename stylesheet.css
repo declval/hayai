@@ -471,6 +471,6 @@ div.keyboard-home-key {
     background-color: var(--red);
 }
 
-.settings-save {
+#settings-save {
     margin-left: auto;
 }
