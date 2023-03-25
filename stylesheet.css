@@ -455,6 +455,31 @@ div.keyboard-home-key {
     flex: 1;
 }
 
+#settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting {
+    color: var(--gray);
+    position: relative;
+}
+
+#settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting::after {
+    animation: waiting 1s linear infinite;
+    border: 2px solid;
+    border-color: var(--color) transparent var(--color) transparent;
+    border-radius: 50%;
+    content: "";
+    height: 1rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+}
+
+@keyframes waiting {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 #settings-chunk-size {
     margin-bottom: var(--alt-padding);
 }

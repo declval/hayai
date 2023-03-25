@@ -113,8 +113,24 @@ class Settings {
                 return;
             }
 
-            const response = await fetch(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${customTextFetchNumber}`);
-            const articles = await response.json();
+            event.target.classList.add('settings-custom-text-fetch-button-waiting');
+
+            let articles = null;
+
+            try {
+                const url = `https://api.spaceflightnewsapi.net/v3/articles?_limit=${customTextFetchNumber}`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Failed fetching data from ${url}`);
+                }
+                articles = await response.json();
+            } catch (e) {
+                console.log(e);
+                event.target.classList.remove('settings-custom-text-fetch-button-waiting');
+                return;
+            }
+
+            event.target.classList.remove('settings-custom-text-fetch-button-waiting');
 
             let customText = '';
 
