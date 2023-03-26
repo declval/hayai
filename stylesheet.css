@@ -19,6 +19,12 @@
     --title-bar-background-color: rgb(64, 64, 64);
     --title-bar-color: rgb(255, 255, 255);
 
+    --pinkie-color: rgb(211, 210, 245);
+    --ring-color: rgb(238, 243, 223);
+    --middle-color: rgb(216, 244, 229);
+    --lindex-color: rgb(202, 225, 234);
+    --rindex-color: rgb(227, 210, 232);
+
     --alt-animation-duration: 800ms;
     --alt-color: rgb(255, 255, 255);
     --alt-padding: 10px;
@@ -33,6 +39,12 @@
     --green: rgb(93, 215, 177);
     --red: rgb(255, 142, 172);
     --space-color: rgba(255, 255, 255, 0.4);
+
+    --pinkie-color: rgb(65, 53, 72);
+    --ring-color: rgb(83, 69, 77);
+    --middle-color: rgb(79, 93, 97);
+    --lindex-color: rgb(68, 64, 89);
+    --rindex-color: rgb(53, 53, 72);
 
     --alt-color: rgb(255, 255, 255);
 }
@@ -69,6 +81,7 @@ main {
     align-items: center;
     display: flex;
     flex-direction: column;
+    gap: 2.5rem;
     position: relative;
     width: 900px;
 }
@@ -135,11 +148,10 @@ main {
     background-color: var(--red);
 }
 
-.keyboard {
+#keyboard {
     background-color: var(--gray);
     border-radius: var(--border-radius);
     font-size: 0.7rem;
-    margin-top: 2.5rem;
     padding: var(--padding);
     transition: background-color var(--animation-duration);
     width: fit-content;
@@ -164,6 +176,26 @@ main {
     position: relative;
     transition: background-color var(--animation-duration),
                 color var(--animation-duration);
+}
+
+.keyboard-guide-show .keyboard-key-pinkie {
+    background-color: var(--pinkie-color);
+}
+
+.keyboard-guide-show .keyboard-key-ring {
+    background-color: var(--ring-color);
+}
+
+.keyboard-guide-show .keyboard-key-middle {
+    background-color: var(--middle-color);
+}
+
+.keyboard-guide-show .keyboard-key-lindex {
+    background-color: var(--lindex-color);
+}
+
+.keyboard-guide-show .keyboard-key-rindex {
+    background-color: var(--rindex-color);
 }
 
 .keyboard-key-alt {
@@ -402,6 +434,41 @@ div.keyboard-home-key {
 
 .settings-label {
     margin-bottom: var(--padding);
+}
+
+.settings-guide-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--alt-padding);
+}
+
+#settings-guide {
+    appearance: none;
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    height: 1.2rem;
+    outline: none;
+    position: relative;
+    width: 1.2rem;
+}
+
+#settings-guide:hover {
+    border: var(--border-hover);
+}
+
+#settings-guide:checked::after {
+    background-color: var(--color);
+    border-radius: 50%;
+    content: "";
+    height: 0.6rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.6rem;
 }
 
 .settings-custom-text-container {

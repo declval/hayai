@@ -75,6 +75,26 @@ class Settings {
             that.toggle();
         });
 
+        const keyboard = document.getElementById('keyboard');
+        const settingsGuide = document.getElementById('settings-guide');
+
+        const guide = localStorage.getItem('guide');
+
+        if (guide === 'on') {
+            keyboard.classList.add('keyboard-guide-show');
+            settingsGuide.checked = true;
+        }
+
+        settingsGuide.addEventListener('input', function (event) {
+            if (keyboard.classList.contains('keyboard-guide-show')) {
+                keyboard.classList.remove('keyboard-guide-show');
+                localStorage.setItem('guide', '');
+            } else {
+                keyboard.classList.add('keyboard-guide-show');
+                localStorage.setItem('guide', 'on');
+            }
+        });
+
         const settingsCustomText = document.getElementById('settings-custom-text');
 
         const settingsCustomTextFetchNumber = document.getElementById('settings-custom-text-fetch-number');
