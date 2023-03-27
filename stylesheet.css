@@ -109,7 +109,6 @@ main {
 
 .text-character {
     align-items: center;
-    border: var(--border);
     border-radius: var(--border-radius);
     color: var(--color);
     display: flex;
@@ -117,6 +116,7 @@ main {
     justify-content: center;
     margin: 1px;
     padding: var(--padding);
+    position: relative;
     transition: background-color var(--animation-duration),
                 color var(--animation-duration);
     width: 1rem;
@@ -128,16 +128,18 @@ main {
 
 @keyframes blinking {
     50% {
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+        background-color: var(--gray);
     }
 }
 
 .text-character-space::after {
-    border-bottom: 3px solid var(--space-color);
+    border: 1px solid var(--space-color);
+    border-radius: 1px;
+    bottom: var(--padding);
     content: "";
-    height: 100%;
-    transition: border-bottom var(--animation-duration);
-    width: 100%;
+    position: absolute;
+    transition: border var(--animation-duration);
+    width: 50%;
 }
 
 .text-character-correct {
