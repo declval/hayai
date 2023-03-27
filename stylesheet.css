@@ -248,7 +248,7 @@ div.keyboard-home-key {
     width: 100%;
 }
 
-.keyboard-key-keydown {
+.keyboard-key.keyboard-key-keydown {
     background-color: var(--blue);
     box-shadow: inset var(--box-shadow);
 }
