@@ -57,8 +57,6 @@ body {
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
     user-select: none;
 }
 
@@ -69,8 +67,6 @@ button {
     color: var(--color);
     cursor: pointer;
     padding: var(--alt-padding);
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
 }
 
 button:hover {
@@ -110,15 +106,12 @@ main {
 .text-character {
     align-items: center;
     border-radius: var(--border-radius);
-    color: var(--color);
     display: flex;
     height: 1rem;
     justify-content: center;
     margin: 1px;
     padding: var(--padding);
     position: relative;
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
     width: 1rem;
 }
 
@@ -138,7 +131,6 @@ main {
     bottom: var(--padding);
     content: "";
     position: absolute;
-    transition: border var(--animation-duration);
     width: 50%;
 }
 
@@ -155,7 +147,6 @@ main {
     border-radius: var(--border-radius);
     font-size: 0.7rem;
     padding: var(--padding);
-    transition: background-color var(--animation-duration);
     width: fit-content;
 }
 
@@ -168,7 +159,6 @@ main {
     background-color: var(--background-color);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    color: var(--color);
     display: flex;
     justify-content: center;
     margin: 2px;
@@ -176,8 +166,6 @@ main {
     min-width: 30px;
     padding: var(--alt-padding);
     position: relative;
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
 }
 
 .keyboard-guide-show .keyboard-key-pinkie {
@@ -218,7 +206,6 @@ div.keyboard-home-key {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: color var(--animation-duration);
 }
 
 .keyboard-key-caps {
@@ -299,7 +286,6 @@ div.keyboard-home-key {
 .speed-container:hover::after,
 .error-rate-container:hover::after {
     align-items: center;
-    background-color: var(--background-color);
     border: var(--border);
     border-radius: var(--border-radius);
     display: flex;
@@ -336,20 +322,13 @@ div.keyboard-home-key {
 }
 
 #dark-mode-button {
-    background-color: var(--background-color);
-    color: var(--color);
     position: relative;
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration),
-                text-shadow var(--animation-duration);
 }
 
 #dark-mode-button:hover::after {
     align-items: center;
-    background-color: var(--background-color);
     border: var(--border);
     border-radius: var(--border-radius);
-    color: var(--color);
     content: "Dark mode (disabled)";
     display: flex;
     font-family: 'Roboto', sans-serif;
@@ -360,8 +339,6 @@ div.keyboard-home-key {
     position: absolute;
     text-shadow: none;
     top: 120%;
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
     white-space: nowrap;
 }
 
@@ -397,7 +374,6 @@ div.keyboard-home-key {
     background-color: var(--gray);
     border: var(--border);
     border-radius: var(--border-radius);
-    color: var(--color);
     display: none;
     font-size: 0.85rem;
     left: 50%;
@@ -405,8 +381,6 @@ div.keyboard-home-key {
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
     width: 520px;
 }
 
@@ -491,17 +465,12 @@ div.keyboard-home-key {
     font-size: 0.8rem;
     outline: none;
     padding: var(--alt-padding);
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
 }
 
 #settings-custom-text::placeholder,
 #settings-custom-text-fetch-number::placeholder,
 #settings-chunk-size::placeholder {
-    background-color: var(--background-color);
     color: var(--placeholder-color);
-    transition: background-color var(--animation-duration),
-                color var(--animation-duration);
 }
 
 #settings-custom-text {
