@@ -15,15 +15,13 @@ class Settings {
 
         const settingsClose = document.getElementById('settings-close');
 
-        const that = this;
-
-        settingsClose.addEventListener('click', function () {
-            that.toggle();
+        settingsClose.addEventListener('click', () => {
+            this.toggle();
         });
 
         const settingsForm = document.getElementById('settings-form');
 
-        settingsForm.addEventListener('submit', function (event) {
+        settingsForm.addEventListener('submit', event => {
             event.preventDefault();
 
             let errors = false;
@@ -69,10 +67,10 @@ class Settings {
                 return;
             }
 
-            that.text.reset(newCustomText, newChunkSize);
-            that.text.render();
+            this.text.reset(newCustomText, newChunkSize);
+            this.text.render();
 
-            that.toggle();
+            this.toggle();
         });
 
         const keyboard = document.getElementById('keyboard');
@@ -85,7 +83,7 @@ class Settings {
             settingsGuide.checked = true;
         }
 
-        settingsGuide.addEventListener('input', function (event) {
+        settingsGuide.addEventListener('input', () => {
             if (keyboard.classList.contains('keyboard-guide-show')) {
                 keyboard.classList.remove('keyboard-guide-show');
                 localStorage.setItem('guide', '');
@@ -106,7 +104,7 @@ class Settings {
 
         const settingsCustomTextFetchButton = document.getElementById('settings-custom-text-fetch-button');
 
-        settingsCustomTextFetchButton.addEventListener('click', async function (event) {
+        settingsCustomTextFetchButton.addEventListener('click', async event => {
             event.preventDefault();
 
             let errors = false;
@@ -164,7 +162,7 @@ class Settings {
 
         const settingsCustomTextClearButton = document.getElementById('settings-custom-text-clear-button');
 
-        settingsCustomTextClearButton.addEventListener('click', function (event) {
+        settingsCustomTextClearButton.addEventListener('click', event => {
             event.preventDefault();
 
             settingsCustomText.value = '';
@@ -176,12 +174,12 @@ class Settings {
 
         const settingsSave = document.getElementById('settings-save');
 
-        settingsSave.addEventListener('click', function () {
+        settingsSave.addEventListener('click', () => {
             settingsForm.requestSubmit();
         });
     }
 
-    toggle() {
+    toggle = () => {
         this.settings.classList.toggle('settings-show');
     }
 }

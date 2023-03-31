@@ -9,13 +9,13 @@ class Text {
         this.textElement = document.getElementById('text');
     }
 
-    clear() {
+    clear = () => {
         while (this.textElement.firstChild) {
             this.textElement.firstChild.remove();
         }
     }
 
-    cursorMove(key) {
+    cursorMove = key => {
         if (!this.firstKeyPressed) {
             this.firstKeyPressed = true;
 
@@ -38,7 +38,7 @@ class Text {
                         if (key.dataset.value === character.textContent || key.dataset.valueAlt === character.textContent) {
                             key.classList.add('keyboard-key-highlight');
 
-                            setTimeout(function () {
+                            setTimeout(() => {
                                 key.classList.remove('keyboard-key-highlight');
                             }, 300);
 
@@ -67,10 +67,9 @@ class Text {
 
                         this.textElement.classList.add('text-rotate');
 
-                        const that = this;
-                        setTimeout(function () {
-                            that.textElement.classList.remove('text-rotate');
-                            that.render();
+                        setTimeout(() => {
+                            this.textElement.classList.remove('text-rotate');
+                            this.render();
                         }, 800);
                     }
                 }
@@ -80,7 +79,7 @@ class Text {
         }
     }
 
-    render() {
+    render = () => {
         this.clear();
 
         this.firstKeyPressed = false;
@@ -146,7 +145,7 @@ class Text {
         this.characters = this.textElement.getElementsByClassName('text-character');
     }
 
-    reset(text, chunkSize) {
+    reset = (text, chunkSize) => {
         this.text = text.replace(/[^ -~]+/g, '');
         this.chunkSize = chunkSize;
 

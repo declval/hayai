@@ -1,14 +1,12 @@
 import { Settings } from './settings.js';
 import { Text } from './text.js';
 
-document.addEventListener('DOMContentLoaded', main);
-
-function main() {
+const main = () => {
     let text = new Text();
 
     text.render();
 
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', event => {
         const settings = document.getElementById('settings');
 
         if (settings.classList.contains('settings-show')) {
@@ -29,7 +27,7 @@ function main() {
             if (key.dataset.value === event.key || key.dataset.valueAlt === event.key) {
                 key.classList.add('keyboard-key-keydown');
 
-                setTimeout(function () {
+                setTimeout(() => {
                     key.classList.remove('keyboard-key-keydown');
                 }, 100);
             }
@@ -52,7 +50,7 @@ function main() {
         document.documentElement.classList.toggle('dark-mode');
     }
 
-    darkModeButton.addEventListener('click', function (event) {
+    darkModeButton.addEventListener('click', event => {
         if (event.target.classList.contains('dark-mode-button-enabled')) {
             localStorage.setItem('darkMode', '');
         } else {
@@ -66,23 +64,25 @@ function main() {
 
     const settingsButton = document.getElementById('settings-button');
 
-    settingsButton.addEventListener('click', function () {
+    settingsButton.addEventListener('click', () => {
         settings.toggle();
     });
 
-    settingsButton.addEventListener('mouseenter', function (event) {
+    settingsButton.addEventListener('mouseenter', event => {
         event.target.classList.add('settings-button-rotate-right');
 
-        setTimeout(function () {
+        setTimeout(() => {
             event.target.classList.remove('settings-button-rotate-right');
         }, 800);
     });
 
-    settingsButton.addEventListener('mouseleave', function (event) {
+    settingsButton.addEventListener('mouseleave', event => {
         event.target.classList.add('settings-button-rotate-left');
 
-        setTimeout(function () {
+        setTimeout(() => {
             event.target.classList.remove('settings-button-rotate-left');
         }, 800);
     });
 }
+
+document.addEventListener('DOMContentLoaded', main);
