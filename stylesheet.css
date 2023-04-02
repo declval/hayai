@@ -118,10 +118,10 @@ main {
 }
 
 .text-character-cursor {
-    animation: blinking var(--alt-animation-duration) infinite;
+    animation: blinking-background-color var(--alt-animation-duration) infinite;
 }
 
-@keyframes blinking {
+@keyframes blinking-background-color {
     50% {
         background-color: var(--gray);
     }
@@ -319,15 +319,18 @@ div.keyboard-home-key {
     top: 0;
 }
 
+#tutorial-button,
 #dark-mode-button,
 #settings-button {
     cursor: pointer;
 }
 
+#tutorial-button,
 #dark-mode-button {
     position: relative;
 }
 
+#tutorial-button:hover::after,
 #dark-mode-button:hover::after {
     align-items: center;
     border: var(--border);
@@ -417,9 +420,11 @@ div.keyboard-home-key {
 
 .settings-guide-container {
     align-items: center;
+    border-bottom: var(--border);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--alt-padding);
+    padding-bottom: var(--padding);
 }
 
 #settings-guide {
@@ -429,6 +434,7 @@ div.keyboard-home-key {
     border-radius: var(--border-radius);
     cursor: pointer;
     height: 1.2rem;
+    margin: 0;
     outline: none;
     position: relative;
     width: 1.2rem;
@@ -539,4 +545,86 @@ div.keyboard-home-key {
 
 #settings-save {
     margin-left: auto;
+}
+
+.tutorial-background {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    content: "";
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.tutorial-background-show {
+    display: block;
+}
+
+.tutorial {
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    font-size: 0.9rem;
+    gap: var(--alt-padding);
+    left: 50%;
+    line-height: 1.4;
+    padding: var(--alt-padding);
+    position: fixed;
+    transform: translate(-50%, calc(-100% - var(--alt-padding)));
+    width: 400px;
+}
+
+.tutorial-show {
+    display: flex;
+}
+
+.tutorial-title {
+    border-bottom: 2px solid var(--gray);
+    font-size: 1.2rem;
+    font-weight: normal;
+    letter-spacing: 0.8px;
+    line-height: initial;
+    margin: 0;
+    padding-bottom: var(--padding);
+}
+
+.tutorial-buttons {
+    display: flex;
+    gap: var(--alt-padding);
+    margin-left: auto;
+}
+
+.tutorial-keyboard-home-key {
+    animation: blinking-color var(--alt-animation-duration) infinite;
+}
+
+@keyframes blinking-color {
+    50% {
+        color: var(--blue);
+    }
+}
+
+.tutorial-keyboard-guide-key {
+    animation: blinking-brightness var(--alt-animation-duration) infinite;
+}
+
+@keyframes blinking-brightness {
+    50% {
+        filter: brightness(80%);
+    }
+}
+
+.tutorial-settings-button {
+    animation: blinking-scale var(--alt-animation-duration) infinite;
+}
+
+@keyframes blinking-scale {
+    50% {
+        transform: scale(1.8);
+    }
 }

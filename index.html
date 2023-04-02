@@ -91,6 +91,7 @@
                 </div>
             </div>
             <div class="buttons">
+                <div class="material-symbols-outlined" data-tooltip="Tutorial" id="tutorial-button">help</div>
                 <div class="material-symbols-outlined" data-tooltip="Dark mode (disabled)" data-tooltip-alt="Dark mode (enabled)" id="dark-mode-button">dark_mode</div>
                 <div class="material-symbols-outlined" id="settings-button">settings</div>
             </div>
@@ -102,7 +103,7 @@
                 </div>
                 <form id="settings-form">
                     <div class="settings-guide-container">
-                        <label class="settings-label" for="settings-guide">Show what keys to press with each finger</label>
+                        <label for="settings-guide">Keyboard color guide</label>
                         <input id="settings-guide" type="checkbox">
                     </div>
                     <label class="settings-label" for="settings-custom-text">Custom text</label>
@@ -120,5 +121,38 @@
                 </form>
             </div>
         </main>
+        <div class="tutorial-background" id="tutorial-background"></div>
+        <div class="tutorial" id="tutorial-home-row">
+            <h2 class="tutorial-title">Placing Fingers</h2>
+            Place your fingertips on the home row (the middle row of the
+            keyboard) keys highlighted below.
+            You can easily find them by the fingerprint icons on top of them.
+            Your thumbs should rest on the space bar.
+            <div class="tutorial-buttons">
+                <button class="tutorial-close-button">Close</button>
+                <button id="tutorial-home-row-button">Next</button>
+            </div>
+        </div>
+        <div class="tutorial" id="tutorial-fingers">
+            <h2 class="tutorial-title">Pressing keys</h2>
+            Press keys according to the colors below.
+            For example use your left index finger to press the keys 4, 5, R, T,
+            F, G, V, B, your left middle finger to press 3, E, D, C and so on...
+            After each key press return the finger back to the home row.
+            <div class="tutorial-buttons">
+                <button class="tutorial-close-button">Close</button>
+                <button id="tutorial-fingers-button">Next</button>
+            </div>
+        </div>
+        <div class="tutorial" id="tutorial-settings">
+            <h2 class="tutorial-title">Settings</h2>
+            If you want to leave the color guide on while practicing enable it
+            in settings.
+            There you can also add a text of your choice, choose how
+            many characters to display per screen and more.
+            <div class="tutorial-buttons">
+                <button id="tutorial-settings-button">Finish</button>
+            </div>
+        </div>
     </body>
 </html>

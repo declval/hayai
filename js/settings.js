@@ -83,13 +83,13 @@ class Settings {
             settingsGuide.checked = true;
         }
 
-        settingsGuide.addEventListener('input', () => {
-            if (keyboard.classList.contains('keyboard-guide-show')) {
-                keyboard.classList.remove('keyboard-guide-show');
-                localStorage.setItem('guide', '');
-            } else {
+        settingsGuide.addEventListener('input', event => {
+            if (event.target.checked) {
                 keyboard.classList.add('keyboard-guide-show');
                 localStorage.setItem('guide', 'on');
+            } else {
+                keyboard.classList.remove('keyboard-guide-show');
+                localStorage.setItem('guide', '');
             }
         });
 

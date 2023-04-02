@@ -1,5 +1,6 @@
 import { Settings } from './settings.js';
 import { Text } from './text.js';
+import { tutorialToggle } from './tutorial.js';
 
 const main = () => {
     let text = new Text();
@@ -39,6 +40,12 @@ const main = () => {
         }
 
         text.cursorMove(event.key);
+    });
+
+    const tutorialButton = document.getElementById('tutorial-button');
+
+    tutorialButton.addEventListener('click', () => {
+        tutorialToggle();
     });
 
     const darkModeButton = document.getElementById('dark-mode-button');
