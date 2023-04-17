@@ -54,7 +54,6 @@ const main = () => {
 
     if (darkMode === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : darkMode) {
         darkModeButton.classList.toggle('dark-mode-button-enabled');
-        document.documentElement.classList.toggle('dark-mode');
     }
 
     darkModeButton.addEventListener('click', event => {
