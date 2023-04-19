@@ -54,13 +54,16 @@ const main = () => {
 
     if (darkMode === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : darkMode) {
         darkModeButton.classList.toggle('dark-mode-button-enabled');
+        darkModeButton.textContent = 'light_mode';
     }
 
     darkModeButton.addEventListener('click', event => {
         if (event.target.classList.contains('dark-mode-button-enabled')) {
             localStorage.setItem('darkMode', '');
+            darkModeButton.textContent = 'dark_mode';
         } else {
             localStorage.setItem('darkMode', 'on');
+            darkModeButton.textContent = 'light_mode';
         }
         event.target.classList.toggle('dark-mode-button-enabled');
         document.documentElement.classList.toggle('dark-mode');

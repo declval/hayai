@@ -352,10 +352,6 @@ div.keyboard-home-key {
     content: attr(data-tooltip-alt);
 }
 
-#dark-mode-button.dark-mode-button-enabled {
-    text-shadow: 0 0 4px var(--color);
-}
-
 .settings-button-rotate-left {
     animation: settings-button-rotate-left var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
 }
