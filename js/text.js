@@ -184,7 +184,7 @@ class Text {
     }
 
     static chunkSizeMax = 128;
-    static chunkSizeMin = 1;
+    static chunkSizeMin = 32;
     static initialChunkSize = 32;
     static initialText = 'Touch typing (also called blind typing, or touch keyboarding) is a style of typing.';
 }
