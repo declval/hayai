@@ -77,14 +77,23 @@ button:hover {
 
 main {
     align-items: center;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    padding: var(--alt-padding);
     position: relative;
     width: 900px;
 }
 
+@media (max-width: 900px) {
+    main {
+        width: 100%;
+    }
+}
+
 #text {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     font-family: "Roboto Mono", monospace;
@@ -92,6 +101,19 @@ main {
     margin-top: 7rem;
     transform: perspective(400px);
     width: 700px;
+}
+
+@media (max-width: 900px) {
+    #text {
+        font-size: 0.9em;
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    #text {
+        font-size: 0.8em;
+    }
 }
 
 .text-rotate {
@@ -111,7 +133,7 @@ main {
     display: flex;
     height: 1rem;
     justify-content: center;
-    margin: 1px;
+    margin: 0 2px 2px 0;
     padding: var(--padding);
     position: relative;
     width: 1rem;
@@ -147,9 +169,22 @@ main {
 #keyboard {
     background-color: var(--gray);
     border-radius: var(--border-radius);
+    box-sizing: border-box;
     font-size: 0.7rem;
     padding: var(--padding);
     width: fit-content;
+}
+
+@media (max-width: 900px) {
+    #keyboard {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 700px) {
+    #keyboard {
+        transform: scale(0.6);
+    }
 }
 
 .keyboard-row {
@@ -376,6 +411,7 @@ div.keyboard-home-key {
     background-color: var(--gray);
     border: var(--border);
     border-radius: var(--border-radius);
+    box-sizing: border-box;
     display: none;
     font-size: 0.85rem;
     left: 50%;
@@ -386,8 +422,21 @@ div.keyboard-home-key {
     width: 520px;
 }
 
+@media (max-width: 900px) {
+    #settings {
+        border: none;
+        border-radius: 0;
+        height: 100vh;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none;
+        width: 100vw;
+    }
+}
+
 #settings.settings-show {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 #settings-title-bar {
@@ -407,6 +456,7 @@ div.keyboard-home-key {
 #settings-form {
     display: flex;
     flex-direction: column;
+    height: 100%;
     padding: var(--alt-padding);
 }
 
@@ -416,11 +466,9 @@ div.keyboard-home-key {
 
 .settings-guide-container {
     align-items: center;
-    border-bottom: var(--border);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--alt-padding);
-    padding-bottom: var(--padding);
 }
 
 #settings-guide {
@@ -488,6 +536,12 @@ div.keyboard-home-key {
     gap: var(--padding);
 }
 
+@media (max-width: 900px) {
+    .settings-custom-text-fetch-container {
+        flex-direction: column;
+    }
+}
+
 #settings-custom-text-fetch-number {
     box-sizing: border-box;
     min-width: 50%;
@@ -541,6 +595,12 @@ div.keyboard-home-key {
 
 #settings-save {
     margin-left: auto;
+}
+
+@media (max-width: 900px) {
+    #settings-save {
+        margin-top: auto;
+    }
 }
 
 .tutorial-background {

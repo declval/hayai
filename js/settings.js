@@ -1,17 +1,30 @@
 export { Settings };
 
+import { Draggable } from './draggable.js';
 import { Text } from './text.js';
-import { draggable } from './draggable.js';
 
 class Settings {
     constructor(text) {
         this.text = text;
 
+        this.mediaQuery = window.matchMedia('(max-width: 900px)');
         this.settings = document.getElementById('settings');
 
         const settingsTitlebar = document.getElementById('settings-title-bar');
 
-        draggable(settingsTitlebar, this.settings);
+        const draggable = new Draggable(settingsTitlebar, this.settings);
+
+        const mediaQueryHandler = event => {
+            if (event.matches) {
+                draggable.deactivate();
+            } else {
+                draggable.activate();
+            }
+        };
+
+        this.mediaQuery.addEventListener('change', mediaQueryHandler);
+
+        mediaQueryHandler(this.mediaQuery);
 
         const settingsClose = document.getElementById('settings-close');
 

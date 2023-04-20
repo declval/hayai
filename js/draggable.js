@@ -1,30 +1,42 @@
-export { draggable };
+export { Draggable };
 
-const draggable = (handle, element) => {
-    let moving = false;
-    let offsetX = 0;
-    let offsetY = 0;
+class Draggable {
+    constructor(handle, element) {
+        this.activated = false;
+        this.moving = false;
 
-    for (const child of handle.children) {
-        child.addEventListener('mousedown', event => {
-            event.stopPropagation();
+        let offsetX = 0;
+        let offsetY = 0;
+
+        for (const child of handle.children) {
+            child.addEventListener('mousedown', event => {
+                event.stopPropagation();
+            });
+        }
+
+        document.addEventListener('mousemove', event => {
+            if (this.activated && this.moving) {
+                element.style.left = `${event.clientX - offsetX}px`;
+                element.style.top = `${event.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            this.moving = false;
+        });
+
+        handle.addEventListener('mousedown', event => {
+            offsetX = event.clientX - element.offsetLeft;
+            offsetY = event.clientY - element.offsetTop;
+            this.moving = true;
         });
     }
 
-    document.addEventListener('mousemove', event => {
-        if (moving) {
-            element.style.left = `${event.clientX - offsetX}px`;
-            element.style.top = `${event.clientY - offsetY}px`;
-        }
-    });
+    activate = () => {
+        this.activated = true;
+    }
 
-    handle.addEventListener('mousedown', event => {
-        offsetX = event.clientX - element.offsetLeft;
-        offsetY = event.clientY - element.offsetTop;
-        moving = true;
-    });
-
-    handle.addEventListener('mouseup', () => {
-        moving = false;
-    });
+    deactivate = () => {
+        this.activated = false;
+    }
 }
