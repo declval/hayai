@@ -575,15 +575,12 @@ div.keyboard-home-key {
 }
 
 #settings-custom-text.settings-invalid,
-#settings-custom-text-fetch-number.settings-invalid,
-#settings-chunk-size.settings-invalid {
-    background-color: var(--red);
-}
-
 #settings-custom-text.settings-invalid::placeholder,
+#settings-custom-text-fetch-number.settings-invalid,
 #settings-custom-text-fetch-number.settings-invalid::placeholder,
+#settings-chunk-size.settings-invalid,
 #settings-chunk-size.settings-invalid::placeholder {
-    background-color: var(--red);
+    color: var(--red);
 }
 
 #settings-save {
