@@ -149,7 +149,7 @@ class Settings {
             let articles = null;
 
             try {
-                const url = `https://api.spaceflightnewsapi.net/v3/articles?_limit=${customTextFetchNumber}`;
+                const url = `https://api.spaceflightnewsapi.net/v4/articles?limit=${customTextFetchNumber}`;
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error(`Failed fetching data from ${url}`);
@@ -165,9 +165,9 @@ class Settings {
 
             let customText = '';
 
-            for (const [i, article] of articles.entries()) {
-                customText += article.title.trim();
-                customText += i < articles.length - 1 ? '\n' : '';
+            for (const [i, article] of articles.results.entries()) {
+                customText += article.summary.trim();
+                customText += i < articles.results.length - 1 ? '\n' : '';
             }
 
             settingsCustomText.value = customText;
