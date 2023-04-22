@@ -31,20 +31,6 @@ class Text {
                     this.nCorrect++;
                 } else {
                     character.classList.add('text-character-incorrect');
-
-                    const keys = document.getElementsByClassName('keyboard-key');
-
-                    for (const key of keys) {
-                        if (key.dataset.value === character.textContent || key.dataset.valueAlt === character.textContent) {
-                            key.classList.add('keyboard-key-highlight');
-
-                            setTimeout(() => {
-                                key.classList.remove('keyboard-key-highlight');
-                            }, 300);
-
-                            break;
-                        }
-                    }
                 }
 
                 character.classList.remove('text-character-cursor');

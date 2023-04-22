@@ -3,8 +3,6 @@
 :root {
     --animation-duration: 300ms;
     --background-color: rgb(255, 255, 255);
-    --better-color: rgb(20, 206, 100);
-    --blue: rgb(190, 200, 255);
     --border-hover: 1px solid rgba(0, 0, 0, 0.3);
     --border-radius: 4px;
     --border: 1px solid rgba(0, 0, 0, 0.1);
@@ -12,14 +10,13 @@
     --color: rgb(22, 22, 22);
     --fingerprint-color: rgba(0, 0, 0, 0.2);
     --gray: rgb(236, 236, 236);
-    --green: rgb(237, 255, 223);
+    --green: rgb(105, 255, 164);
     --padding: 4px;
     --placeholder-color: rgb(142, 142, 142);
-    --red: rgb(255, 210, 210);
-    --space-color: rgba(0, 0, 0, 0.2);
+    --red: rgb(255, 52, 52);
+    --space-color: rgba(0, 0, 0, 0.3);
     --title-bar-background-color: rgb(64, 64, 64);
     --title-bar-color: rgb(255, 255, 255);
-    --worse-color: rgb(232, 102, 136);
 
     --pinkie-color: rgb(211, 210, 245);
     --ring-color: rgb(238, 243, 223);
@@ -38,8 +35,6 @@
     --color: rgb(255, 255, 255);
     --fingerprint-color: rgba(255, 255, 255, 0.2);
     --gray: rgb(79, 79, 79);
-    --green: rgb(93, 215, 177);
-    --red: rgb(255, 142, 172);
     --space-color: rgba(255, 255, 255, 0.4);
 
     --pinkie-color: rgb(65, 53, 72);
@@ -159,11 +154,19 @@ main {
 }
 
 .text-character-correct {
-    background-color: var(--green);
+    color: var(--fingerprint-color);
+}
+
+.text-character-correct.text-character-space::after {
+    border-color: var(--fingerprint-color);
 }
 
 .text-character-incorrect {
-    background-color: var(--red);
+    color: var(--red);
+}
+
+.text-character-incorrect.text-character-space::after {
+    border-color: var(--red);
 }
 
 #keyboard {
@@ -286,25 +289,14 @@ div.keyboard-home-key {
 }
 
 .keyboard-key.keyboard-key-keydown {
-    background-color: var(--blue);
+    background-color: var(--gray);
     box-shadow: inset var(--box-shadow);
-}
-
-.keyboard-key-highlight {
-    animation: keyboard-key-highlight var(--animation-duration);
-}
-
-@keyframes keyboard-key-highlight {
-    100% {
-        background-color: var(--red);
-        transform: scale(1.5);
-        z-index: 1;
-    }
 }
 
 .statistics {
     display: flex;
-    font-size: 0.7rem;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 0.8rem;
     gap: var(--alt-padding);
     left: 0;
     margin: var(--alt-padding);
@@ -338,11 +330,11 @@ div.keyboard-home-key {
 }
 
 .statistics-better {
-    color: var(--better-color);
+    color: var(--green);
 }
 
 .statistics-worse {
-    color: var(--worse-color);
+    color: var(--red);
 }
 
 .buttons {
@@ -662,7 +654,6 @@ div.keyboard-home-key {
 
 @keyframes blinking-color-scale {
     50% {
-        color: var(--blue);
         transform: translate(-50%, -50%) scale(1.5);
     }
 }
@@ -685,7 +676,6 @@ div.keyboard-home-key {
 
 @keyframes blinking-scale {
     50% {
-        color: var(--blue);
         transform: scale(1.5);
     }
 }
