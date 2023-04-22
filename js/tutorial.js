@@ -26,7 +26,9 @@ const tutorialToggle = () => {
         tutorialSettings.classList.remove('tutorial-show');
         settingsButton.classList.remove('tutorial-settings-button');
         tutorialFingers.classList.remove('tutorial-show');
-        if (!document.getElementById('settings-guide').checked) {
+        if (document.getElementById('settings-guide').checked) {
+            keyboard.classList.add('keyboard-guide-show');
+        } else {
             keyboard.classList.remove('keyboard-guide-show');
         }
         for (const keyboardGuideKey of keyboardGuideKeys) {
@@ -47,6 +49,8 @@ const tutorialToggle = () => {
     }
 
     tutorialOpen = true;
+
+    keyboard.classList.remove('keyboard-guide-show');
 
     tutorialBackground.classList.add('tutorial-background-show');
     tutorialHomeRow.classList.add('tutorial-show');
@@ -76,6 +80,7 @@ const tutorialToggle = () => {
         for (const keyboardGuideKey of keyboardGuideKeys) {
             keyboardGuideKey.classList.remove('tutorial-keyboard-guide-key');
         }
+        keyboard.classList.remove('keyboard-guide-show');
 
         tutorialSettings.style.top = `${keyboard.getBoundingClientRect().y}px`;
         settingsButton.classList.add('tutorial-settings-button');
@@ -85,7 +90,9 @@ const tutorialToggle = () => {
     tutorialSettingsButton.addEventListener('click', () => {
         tutorialSettings.classList.remove('tutorial-show');
         settingsButton.classList.remove('tutorial-settings-button');
-        if (!document.getElementById('settings-guide').checked) {
+        if (document.getElementById('settings-guide').checked) {
+            keyboard.classList.add('keyboard-guide-show');
+        } else {
             keyboard.classList.remove('keyboard-guide-show');
         }
         tutorialBackground.classList.remove('tutorial-background-show');

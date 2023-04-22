@@ -656,17 +656,20 @@ div.keyboard-home-key {
 }
 
 .tutorial-keyboard-home-key {
-    animation: blinking-color var(--alt-animation-duration) infinite;
+    animation: blinking-color-scale var(--alt-animation-duration) infinite;
+    z-index: 1;
 }
 
-@keyframes blinking-color {
+@keyframes blinking-color-scale {
     50% {
         color: var(--blue);
+        transform: translate(-50%, -50%) scale(1.5);
     }
 }
 
 .tutorial-keyboard-guide-key {
     animation: blinking-brightness var(--alt-animation-duration) infinite;
+    z-index: 1;
 }
 
 @keyframes blinking-brightness {
@@ -677,10 +680,12 @@ div.keyboard-home-key {
 
 .tutorial-settings-button {
     animation: blinking-scale var(--alt-animation-duration) infinite;
+    z-index: 1;
 }
 
 @keyframes blinking-scale {
     50% {
-        transform: scale(1.8);
+        color: var(--blue);
+        transform: scale(1.5);
     }
 }
