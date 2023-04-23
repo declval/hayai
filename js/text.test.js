@@ -2,6 +2,8 @@ import { open } from 'node:fs/promises';
 
 import { Text } from './text.js';
 
+Text.chunkSizeMin = 1;
+
 beforeEach(async () => {
     return open('index.html')
         .then(fileHandle => {
