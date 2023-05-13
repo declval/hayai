@@ -108,39 +108,71 @@ class Settings {
 
         const settingsCustomText = document.getElementById('settings-custom-text');
 
-        const settingsCustomTextFetchNumber = document.getElementById('settings-custom-text-fetch-number');
+        const settingsNewsListContainer = document.getElementById('settings-news-list-container');
 
         const customTextFetchNumberMax = 128;
         const customTextFetchNumberMin = 1;
 
-        settingsCustomTextFetchNumber.setAttribute('placeholder', settingsCustomTextFetchNumber.getAttribute('placeholder') + ` (${customTextFetchNumberMin} to ${customTextFetchNumberMax})`);
+        const settingsNewsList = document.createElement('div');
+
+        settingsNewsList.classList.add('settings-news-list');
+
+        const settingsNewsListToggleIcon = document.getElementById('settings-news-list-toggle-icon');
+
+        const settingsNewsListToggle = document.getElementById('settings-news-list-toggle');
+
+        settingsNewsListToggle.addEventListener('click', event => {
+            event.stopPropagation();
+
+            const close = event => {
+                if (event.target !== settingsNewsList) {
+                    document.removeEventListener('click', close);
+                    settingsNewsList.classList.remove('open');
+                    settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
+                }
+            };
+
+            if (settingsNewsList.classList.contains('open')) {
+                document.removeEventListener('click', close);
+                settingsNewsList.classList.remove('open');
+                settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
+            } else {
+                document.addEventListener('click', close);
+                settingsNewsList.classList.add('open');
+                settingsNewsList.scrollTop = 0;
+                settingsNewsListToggleIcon.textContent = 'keyboard_arrow_down';
+            }
+        });
+
+        for (let i = customTextFetchNumberMin; i <= customTextFetchNumberMax; ++i) {
+            const button = document.createElement('button');
+            button.appendChild(document.createTextNode(i.toString()));
+            button.setAttribute('type', 'button');
+            button.addEventListener('click', () => {
+                settingsNewsList.classList.remove('open');
+                settingsNewsListToggle.textContent = i.toString();
+            });
+            settingsNewsList.appendChild(button);
+        }
+
+        settingsNewsListContainer.appendChild(settingsNewsList);
 
         const settingsCustomTextFetchButton = document.getElementById('settings-custom-text-fetch-button');
 
         settingsCustomTextFetchButton.addEventListener('click', async event => {
             event.preventDefault();
 
-            let errors = false;
-
             let customTextFetchNumber = null;
 
-            if (settingsCustomTextFetchNumber.value.length) {
-                customTextFetchNumber = parseInt(settingsCustomTextFetchNumber.value, 10);
-
-                if (Number.isFinite(customTextFetchNumber) &&
-                        customTextFetchNumber >= customTextFetchNumberMin &&
-                        customTextFetchNumber <= customTextFetchNumberMax) {
-                    settingsCustomTextFetchNumber.classList.remove('settings-invalid');
-                } else {
-                    settingsCustomTextFetchNumber.classList.add('settings-invalid');
-                    errors = true;
-                }
-            } else {
-                settingsCustomTextFetchNumber.classList.add('settings-invalid');
-                errors = true;
+            if (!settingsNewsListToggle.textContent.length) {
+                return;
             }
 
-            if (errors) {
+            customTextFetchNumber = parseInt(settingsNewsListToggle.textContent, 10);
+
+            if (!(Number.isFinite(customTextFetchNumber) &&
+                    customTextFetchNumber >= customTextFetchNumberMin &&
+                    customTextFetchNumber <= customTextFetchNumberMax)) {
                 return;
             }
 
