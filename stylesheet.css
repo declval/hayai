@@ -14,6 +14,7 @@
     --padding: 4px;
     --placeholder-color: rgb(142, 142, 142);
     --red: rgb(255, 52, 52);
+    --scale: 1.5;
     --space-color: rgba(0, 0, 0, 0.3);
     --title-bar-background-color: rgb(64, 64, 64);
     --title-bar-color: rgb(255, 255, 255);
@@ -444,6 +445,11 @@ div.keyboard-home-key {
 #settings-close {
     cursor: pointer;
     margin-left: auto;
+    transition: transform var(--animation-duration);
+}
+
+#settings-close:hover {
+    transform: scale(var(--scale));
 }
 
 #settings-form {
@@ -690,7 +696,7 @@ div.keyboard-home-key {
 
 @keyframes blinking-color-scale {
     50% {
-        transform: translate(-50%, -50%) scale(1.5);
+        transform: translate(-50%, -50%) scale(var(--scale));
     }
 }
 
@@ -712,6 +718,6 @@ div.keyboard-home-key {
 
 @keyframes blinking-scale {
     50% {
-        transform: scale(1.5);
+        transform: scale(var(--scale));
     }
 }
