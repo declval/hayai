@@ -11,6 +11,7 @@ const tutorialToggle = () => {
     const tutorialSettings = document.getElementById('tutorial-settings');
     const tutorialSettingsButton = document.getElementById('tutorial-settings-button');
 
+    const settings = document.getElementById('settings');
     const settingsButton = document.getElementById('settings-button');
     const keyboard = document.getElementById('keyboard');
     const keyboardGuideKeys = [
@@ -47,6 +48,8 @@ const tutorialToggle = () => {
         tutorialClose();
         return;
     }
+
+    settings.classList.remove('settings-show');
 
     tutorialOpen = true;
 
