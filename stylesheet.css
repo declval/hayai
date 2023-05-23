@@ -539,7 +539,7 @@ div.keyboard-home-key {
     }
 }
 
-.settings-news-list-container {
+.settings-news-list-toggle-container {
     box-sizing: border-box;
     min-width: 50%;
     position: relative;
@@ -559,7 +559,7 @@ div.keyboard-home-key {
     transform: translateY(-50%);
 }
 
-.settings-news-list {
+.settings-news-list-container {
     background-color: var(--gray);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -567,19 +567,31 @@ div.keyboard-home-key {
     box-sizing: border-box;
     display: none;
     flex-direction: column;
-    gap: var(--padding);
     height: 180px;
     left: 0;
-    overflow-y: scroll;
-    padding: var(--padding);
+    overflow: hidden;
     position: absolute;
     top: 0;
     transform: translateY(calc(-100% - 1px));
     width: 100%;
 }
 
-.settings-news-list.open {
+.settings-news-list-container.open {
     display: flex;
+}
+
+.settings-news-list-title {
+    background-color: var(--background-color);
+    padding: var(--alt-padding);
+    pointer-events: none;
+}
+
+.settings-news-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+    overflow-y: scroll;
+    padding: var(--padding);
 }
 
 .settings-news-list::-webkit-scrollbar {

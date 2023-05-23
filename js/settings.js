@@ -108,14 +108,28 @@ class Settings {
 
         const settingsCustomText = document.getElementById('settings-custom-text');
 
-        const settingsNewsListContainer = document.getElementById('settings-news-list-container');
+        const settingsNewsListToggleContainer = document.getElementById('settings-news-list-toggle-container');
 
         const customTextFetchNumberMax = 128;
         const customTextFetchNumberMin = 1;
 
+        const settingsNewsListContainer = document.createElement('div');
+
+        settingsNewsListContainer.classList.add('settings-news-list-container');
+
+        const settingsNewsListTitle = document.createElement('div');
+
+        settingsNewsListTitle.classList.add('settings-news-list-title');
+
+        settingsNewsListTitle.appendChild(document.createTextNode('Number of news items'));
+
+        settingsNewsListContainer.appendChild(settingsNewsListTitle);
+
         const settingsNewsList = document.createElement('div');
 
         settingsNewsList.classList.add('settings-news-list');
+
+        settingsNewsListContainer.appendChild(settingsNewsList);
 
         const settingsNewsListToggleIcon = document.getElementById('settings-news-list-toggle-icon');
 
@@ -125,20 +139,20 @@ class Settings {
             event.stopPropagation();
 
             const close = event => {
-                if (event.target !== settingsNewsList) {
+                if (event.target !== settingsNewsListContainer) {
                     document.removeEventListener('click', close);
-                    settingsNewsList.classList.remove('open');
+                    settingsNewsListContainer.classList.remove('open');
                     settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
                 }
             };
 
-            if (settingsNewsList.classList.contains('open')) {
+            if (settingsNewsListContainer.classList.contains('open')) {
                 document.removeEventListener('click', close);
-                settingsNewsList.classList.remove('open');
+                settingsNewsListContainer.classList.remove('open');
                 settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
             } else {
                 document.addEventListener('click', close);
-                settingsNewsList.classList.add('open');
+                settingsNewsListContainer.classList.add('open');
                 settingsNewsList.scrollTop = 0;
                 settingsNewsListToggleIcon.textContent = 'keyboard_arrow_down';
             }
@@ -149,13 +163,13 @@ class Settings {
             button.appendChild(document.createTextNode(i.toString()));
             button.setAttribute('type', 'button');
             button.addEventListener('click', () => {
-                settingsNewsList.classList.remove('open');
+                settingsNewsListContainer.classList.remove('open');
                 settingsNewsListToggle.textContent = i.toString();
             });
             settingsNewsList.appendChild(button);
         }
 
-        settingsNewsListContainer.appendChild(settingsNewsList);
+        settingsNewsListToggleContainer.appendChild(settingsNewsListContainer);
 
         const settingsCustomTextFetchButton = document.getElementById('settings-custom-text-fetch-button');
 
