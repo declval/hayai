@@ -104,6 +104,10 @@ class Settings {
 
         const settingsCustomText = document.getElementById('settings-custom-text');
 
+        settingsCustomText.addEventListener('input', event => {
+            event.target.classList.remove('settings-invalid');
+        });
+
         const settingsNewsListToggleContainer = document.getElementById('settings-news-list-toggle-container');
 
         const customTextFetchNumberMax = 128;
