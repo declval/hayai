@@ -11,7 +11,6 @@
     --cursor-color: rgb(93, 131, 212);
     --fingerprint-color: rgba(0, 0, 0, 0.2);
     --gray: rgb(236, 236, 236);
-    --green: rgb(105, 255, 164);
     --padding: 4px;
     --placeholder-color: rgb(142, 142, 142);
     --red: rgb(255, 52, 52);
@@ -336,14 +335,6 @@ div.keyboard-home-key {
     position: absolute;
     top: 120%;
     white-space: nowrap;
-}
-
-.statistics-better {
-    color: var(--green);
-}
-
-.statistics-worse {
-    color: var(--red);
 }
 
 .buttons {

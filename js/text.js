@@ -70,43 +70,13 @@ class Text {
 
         this.firstKeyPressed = false;
 
-        const previousSpeed = parseInt(this.speedElement.textContent, 10);
-
         if (Number.isFinite(this.speed)) {
-            if (Number.isFinite(previousSpeed)) {
-                if (previousSpeed < this.speed) {
-                    this.speedElement.classList.add('statistics-better');
-                    this.speedElement.classList.remove('statistics-worse');
-                } else if (previousSpeed === this.speed) {
-                    this.speedElement.classList.remove('statistics-better');
-                    this.speedElement.classList.remove('statistics-worse');
-                } else {
-                    this.speedElement.classList.remove('statistics-better');
-                    this.speedElement.classList.add('statistics-worse');
-                }
-            }
-
             this.speedElement.textContent = `${this.speed} WPM`;
         } else {
             this.speedElement.textContent = 'N/A';
         }
 
-        const previousAccuracy = parseInt(this.accuracyElement.textContent, 10);
-
         if (Number.isFinite(this.accuracy)) {
-            if (Number.isFinite(previousAccuracy)) {
-                if (previousAccuracy < this.accuracy) {
-                    this.accuracyElement.classList.add('statistics-better');
-                    this.accuracyElement.classList.remove('statistics-worse');
-                } else if (previousAccuracy === this.accuracy) {
-                    this.accuracyElement.classList.remove('statistics-better');
-                    this.accuracyElement.classList.remove('statistics-worse');
-                } else {
-                    this.accuracyElement.classList.remove('statistics-better');
-                    this.accuracyElement.classList.add('statistics-worse');
-                }
-            }
-
             this.accuracyElement.textContent = `${this.accuracy}%`;
         } else {
             this.accuracyElement.textContent = 'N/A';
