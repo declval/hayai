@@ -119,16 +119,19 @@
                     <div class="settings-custom-text-container">
                         <textarea id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
                         <div class="settings-custom-text-fetch-container">
-                            <div class="settings-news-list-toggle-container" id="settings-news-list-toggle-container">
-                                <button class="settings-news-list-toggle" id="settings-news-list-toggle" type="button">1</button>
-                                <div class="material-symbols-outlined settings-news-list-toggle-icon" id="settings-news-list-toggle-icon">keyboard_arrow_up</div>
+                            <div class="settings-list-toggle-container" id="settings-news-list-toggle-container">
+                                <button class="settings-list-toggle" id="settings-news-list-toggle" type="button">1</button>
+                                <div class="material-symbols-outlined settings-list-toggle-icon" id="settings-news-list-toggle-icon">keyboard_arrow_up</div>
                             </div>
                             <button id="settings-custom-text-fetch-button" type="button">Get space news</button>
                             <button id="settings-custom-text-clear-button" type="button">Clear text</button>
                         </div>
                     </div>
-                    <label class="settings-label" for="settings-chunk-size">Number of characters per screen</label>
-                    <input id="settings-chunk-size" placeholder="Number of characters" type="text">
+                    <label class="settings-label">Number of characters per screen</label>
+                    <div class="settings-list-toggle-container" id="settings-chunk-size-list-toggle-container">
+                        <button class="settings-list-toggle" id="settings-chunk-size-list-toggle" type="button">32</button>
+                        <div class="material-symbols-outlined settings-list-toggle-icon" id="settings-chunk-size-list-toggle-icon">keyboard_arrow_up</div>
+                    </div>
                     <button id="settings-save" type="button">Save</button>
                 </form>
             </div>

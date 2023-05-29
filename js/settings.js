@@ -56,27 +56,23 @@ class Settings {
                 errors = true;
             }
 
-            const chunkSize = document.getElementById('settings-chunk-size');
-            let newChunkSize = null;
-
-            if (chunkSize.value.length) {
-                newChunkSize = parseInt(chunkSize.value, 10);
-
-                if (Number.isFinite(newChunkSize) &&
-                        newChunkSize >= Text.chunkSizeMin &&
-                        newChunkSize <= Text.chunkSizeMax &&
-                        newChunkSize <= newCustomText.length) {
-                    chunkSize.classList.remove('settings-invalid');
-                } else {
-                    chunkSize.classList.add('settings-invalid');
-                    errors = true;
-                }
-            } else {
-                chunkSize.classList.add('settings-invalid');
-                errors = true;
+            if (errors) {
+                return;
             }
 
-            if (errors) {
+            const chunkSize = document.getElementById('settings-chunk-size-list-toggle');
+            let newChunkSize = null;
+
+            if (!chunkSize.textContent.length) {
+                return;
+            }
+
+            newChunkSize = parseInt(chunkSize.textContent, 10);
+
+            if (!(Number.isFinite(newChunkSize) &&
+                    newChunkSize >= Text.chunkSizeMin &&
+                    newChunkSize <= Text.chunkSizeMax &&
+                    newChunkSize <= newCustomText.length)) {
                 return;
             }
 
@@ -115,11 +111,11 @@ class Settings {
 
         const settingsNewsListContainer = document.createElement('div');
 
-        settingsNewsListContainer.classList.add('settings-news-list-container');
+        settingsNewsListContainer.classList.add('settings-list-container');
 
         const settingsNewsListTitle = document.createElement('div');
 
-        settingsNewsListTitle.classList.add('settings-news-list-title');
+        settingsNewsListTitle.classList.add('settings-list-title');
 
         settingsNewsListTitle.appendChild(document.createTextNode('Number of news items'));
 
@@ -127,7 +123,7 @@ class Settings {
 
         const settingsNewsList = document.createElement('div');
 
-        settingsNewsList.classList.add('settings-news-list');
+        settingsNewsList.classList.add('settings-list');
 
         settingsNewsListContainer.appendChild(settingsNewsList);
 
@@ -151,6 +147,14 @@ class Settings {
                 settingsNewsListContainer.classList.remove('open');
                 settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
             } else {
+                for (const settingsListContainer of
+                        document.getElementsByClassName('settings-list-container')) {
+                    settingsListContainer.classList.remove('open');
+                }
+                for (const settingsListToggleIcon of
+                        document.getElementsByClassName('settings-list-toggle-icon')) {
+                    settingsListToggleIcon.textContent = 'keyboard_arrow_up';
+                }
                 document.addEventListener('click', close);
                 settingsNewsListContainer.classList.add('open');
                 settingsNewsList.scrollTop = 0;
@@ -227,9 +231,73 @@ class Settings {
             settingsCustomText.value = '';
         });
 
-        const settingsChunkSize = document.getElementById('settings-chunk-size');
+        const settingsChunkSizeListToggleContainer = document.getElementById('settings-chunk-size-list-toggle-container');
 
-        settingsChunkSize.setAttribute('placeholder', settingsChunkSize.getAttribute('placeholder') + ` (${Text.chunkSizeMin} to ${Text.chunkSizeMax})`);
+        const settingsChunkSizeListContainer = document.createElement('div');
+
+        settingsChunkSizeListContainer.classList.add('settings-list-container');
+
+        const settingsChunkSizeListTitle = document.createElement('div');
+
+        settingsChunkSizeListTitle.classList.add('settings-list-title');
+
+        settingsChunkSizeListTitle.appendChild(document.createTextNode('Number of characters per screen'));
+
+        settingsChunkSizeListContainer.appendChild(settingsChunkSizeListTitle);
+
+        const settingsChunkSizeList = document.createElement('div');
+
+        settingsChunkSizeList.classList.add('settings-list');
+
+        settingsChunkSizeListContainer.appendChild(settingsChunkSizeList);
+
+        const settingsChunkSizeListToggleIcon = document.getElementById('settings-chunk-size-list-toggle-icon');
+
+        const settingsChunkSizeListToggle = document.getElementById('settings-chunk-size-list-toggle');
+
+        settingsChunkSizeListToggle.addEventListener('click', event => {
+            event.stopPropagation();
+
+            const close = event => {
+                if (event.target !== settingsChunkSizeListContainer) {
+                    document.removeEventListener('click', close);
+                    settingsChunkSizeListContainer.classList.remove('open');
+                    settingsChunkSizeListToggleIcon.textContent = 'keyboard_arrow_up';
+                }
+            };
+
+            if (settingsChunkSizeListContainer.classList.contains('open')) {
+                document.removeEventListener('click', close);
+                settingsChunkSizeListContainer.classList.remove('open');
+                settingsChunkSizeListToggleIcon.textContent = 'keyboard_arrow_up';
+            } else {
+                for (const settingsListContainer of
+                        document.getElementsByClassName('settings-list-container')) {
+                    settingsListContainer.classList.remove('open');
+                }
+                for (const settingsListToggleIcon of
+                        document.getElementsByClassName('settings-list-toggle-icon')) {
+                    settingsListToggleIcon.textContent = 'keyboard_arrow_up';
+                }
+                document.addEventListener('click', close);
+                settingsChunkSizeListContainer.classList.add('open');
+                settingsChunkSizeList.scrollTop = 0;
+                settingsChunkSizeListToggleIcon.textContent = 'keyboard_arrow_down';
+            }
+        });
+
+        for (let i = Text.chunkSizeMin; i <= Text.chunkSizeMax; ++i) {
+            const button = document.createElement('button');
+            button.appendChild(document.createTextNode(i.toString()));
+            button.setAttribute('type', 'button');
+            button.addEventListener('click', () => {
+                settingsChunkSizeListContainer.classList.remove('open');
+                settingsChunkSizeListToggle.textContent = i.toString();
+            });
+            settingsChunkSizeList.appendChild(button);
+        }
+
+        settingsChunkSizeListToggleContainer.appendChild(settingsChunkSizeListContainer);
 
         const settingsSave = document.getElementById('settings-save');
 
