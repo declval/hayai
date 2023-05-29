@@ -223,14 +223,6 @@ class Settings {
             settingsCustomText.value = customText;
         });
 
-        const settingsCustomTextClearButton = document.getElementById('settings-custom-text-clear-button');
-
-        settingsCustomTextClearButton.addEventListener('click', event => {
-            event.preventDefault();
-
-            settingsCustomText.value = '';
-        });
-
         const settingsChunkSizeListToggleContainer = document.getElementById('settings-chunk-size-list-toggle-container');
 
         const settingsChunkSizeListContainer = document.createElement('div');

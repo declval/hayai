@@ -599,14 +599,16 @@ div.keyboard-home-key {
     }
 }
 
-#settings-news-list-toggle-container {
-    box-sizing: border-box;
-    min-width: 50%;
+#settings-news-list-toggle-container,
+#settings-custom-text-fetch-button {
+    width: 50%;
 }
 
-#settings-custom-text-fetch-button,
-#settings-custom-text-clear-button {
-    flex: 1;
+@media (max-width: 900px) {
+    #settings-news-list-toggle-container,
+    #settings-custom-text-fetch-button {
+        width: 100%;
+    }
 }
 
 #settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting {
