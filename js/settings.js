@@ -108,32 +108,10 @@ class Settings {
             event.target.classList.remove('settings-invalid');
         });
 
-        const settingsNewsListToggleContainer = document.getElementById('settings-news-list-toggle-container');
-
-        const customTextFetchNumberMax = 128;
-        const customTextFetchNumberMin = 1;
-
-        const settingsNewsListContainer = document.createElement('div');
-
-        settingsNewsListContainer.classList.add('settings-list-container');
-
-        const settingsNewsListTitle = document.createElement('div');
-
-        settingsNewsListTitle.classList.add('settings-list-title');
-
-        settingsNewsListTitle.appendChild(document.createTextNode('Number of news items'));
-
-        settingsNewsListContainer.appendChild(settingsNewsListTitle);
-
-        const settingsNewsList = document.createElement('div');
-
-        settingsNewsList.classList.add('settings-list');
-
-        settingsNewsListContainer.appendChild(settingsNewsList);
-
         const settingsNewsListToggleIcon = document.getElementById('settings-news-list-toggle-icon');
-
         const settingsNewsListToggle = document.getElementById('settings-news-list-toggle');
+        const settingsNewsListContainer = document.getElementById('settings-news-list-container');
+        const settingsNewsList = document.getElementById('settings-news-list');
 
         settingsNewsListToggle.addEventListener('click', event => {
             event.stopPropagation();
@@ -166,6 +144,9 @@ class Settings {
             }
         });
 
+        const customTextFetchNumberMax = 128;
+        const customTextFetchNumberMin = 1;
+
         for (let i = customTextFetchNumberMin; i <= customTextFetchNumberMax; ++i) {
             const button = document.createElement('button');
             button.appendChild(document.createTextNode(i.toString()));
@@ -176,8 +157,6 @@ class Settings {
             });
             settingsNewsList.appendChild(button);
         }
-
-        settingsNewsListToggleContainer.appendChild(settingsNewsListContainer);
 
         const settingsCustomTextFetchButton = document.getElementById('settings-custom-text-fetch-button');
 
@@ -227,29 +206,10 @@ class Settings {
             settingsCustomText.value = customText;
         });
 
-        const settingsChunkSizeListToggleContainer = document.getElementById('settings-chunk-size-list-toggle-container');
-
-        const settingsChunkSizeListContainer = document.createElement('div');
-
-        settingsChunkSizeListContainer.classList.add('settings-list-container');
-
-        const settingsChunkSizeListTitle = document.createElement('div');
-
-        settingsChunkSizeListTitle.classList.add('settings-list-title');
-
-        settingsChunkSizeListTitle.appendChild(document.createTextNode('Number of characters per screen'));
-
-        settingsChunkSizeListContainer.appendChild(settingsChunkSizeListTitle);
-
-        const settingsChunkSizeList = document.createElement('div');
-
-        settingsChunkSizeList.classList.add('settings-list');
-
-        settingsChunkSizeListContainer.appendChild(settingsChunkSizeList);
-
         const settingsChunkSizeListToggleIcon = document.getElementById('settings-chunk-size-list-toggle-icon');
-
         const settingsChunkSizeListToggle = document.getElementById('settings-chunk-size-list-toggle');
+        const settingsChunkSizeListContainer = document.getElementById('settings-chunk-size-list-container');
+        const settingsChunkSizeList = document.getElementById('settings-chunk-size-list');
 
         settingsChunkSizeListToggle.addEventListener('click', event => {
             event.stopPropagation();
@@ -292,8 +252,6 @@ class Settings {
             });
             settingsChunkSizeList.appendChild(button);
         }
-
-        settingsChunkSizeListToggleContainer.appendChild(settingsChunkSizeListContainer);
 
         const settingsSave = document.getElementById('settings-save');
 
