@@ -36,26 +36,13 @@ class Settings {
         settingsForm.addEventListener('submit', event => {
             event.preventDefault();
 
-            let errors = false;
-
             const customText = document.getElementById('settings-custom-text');
-            let newCustomText = '';
+            const newCustomText = customText.value.replace(/\n/g, ' ');
 
-            if (customText.value.length) {
-                newCustomText = customText.value.replace(/[^ -~]+/g, '');
-
-                if (newCustomText.length) {
-                    customText.classList.remove('settings-invalid');
-                } else {
-                    customText.classList.add('settings-invalid');
-                    errors = true;
-                }
+            if (newCustomText.length) {
+                customText.classList.remove('settings-invalid');
             } else {
                 customText.classList.add('settings-invalid');
-                errors = true;
-            }
-
-            if (errors) {
                 return;
             }
 
