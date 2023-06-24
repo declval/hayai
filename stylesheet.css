@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&family=Roboto+Mono&display=swap");
 :root {
     --animation-duration: 300ms;
     --background-color: rgb(255, 255, 255);
@@ -19,11 +18,11 @@
     --title-bar-background-color: rgb(64, 64, 64);
     --title-bar-color: rgb(255, 255, 255);
 
-    --pinkie-color: rgb(211, 210, 245);
-    --ring-color: rgb(238, 243, 223);
-    --middle-color: rgb(216, 244, 229);
-    --lindex-color: rgb(202, 225, 234);
-    --rindex-color: rgb(227, 210, 232);
+    --pinkie-color: rgb(227, 227, 227);
+    --ring-color: rgb(204, 204, 204);
+    --middle-color: rgb(162, 162, 162);
+    --lindex-color: rgb(193, 193, 193);
+    --rindex-color: rgb(214, 214, 214);
 
     --alt-animation-duration: 800ms;
     --alt-color: rgb(255, 255, 255);
@@ -38,11 +37,11 @@
     --gray: rgb(79, 79, 79);
     --space-color: rgba(255, 255, 255, 0.4);
 
-    --pinkie-color: rgb(65, 53, 72);
-    --ring-color: rgb(83, 69, 77);
-    --middle-color: rgb(79, 93, 97);
-    --lindex-color: rgb(68, 64, 89);
-    --rindex-color: rgb(53, 53, 72);
+    --pinkie-color: rgb(88, 88, 88);
+    --ring-color: rgb(111, 111, 111);
+    --middle-color: rgb(153, 153, 153);
+    --lindex-color: rgb(122, 122, 122);
+    --rindex-color: rgb(101, 101, 101);
 
     --alt-color: rgb(255, 255, 255);
 }
@@ -72,20 +71,178 @@ button:hover {
     border: var(--border-hover);
 }
 
-main {
-    align-items: center;
+header {
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--alt-padding);
+    width: 1100px;
+}
+
+@media (max-width: 1100px) {
+    header {
+        width: 100%;
+    }
+}
+
+.statistics {
+    display: flex;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 0.8rem;
+    gap: var(--alt-padding);
+}
+
+.speed-container,
+.accuracy-container {
+    align-items: center;
+    display: flex;
+    gap: var(--padding);
+    position: relative;
+}
+
+.speed-container:hover::after,
+.accuracy-container:hover::after {
+    align-items: center;
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    content: attr(data-tooltip);
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7rem;
+    height: 16px;
+    left: 0;
+    padding: var(--padding);
+    position: absolute;
+    top: 120%;
+    white-space: nowrap;
+}
+
+.buttons {
+    display: flex;
+    gap: var(--alt-padding);
+}
+
+#tutorial-button,
+#dark-mode-button,
+#settings-button {
+    cursor: pointer;
+}
+
+#tutorial-button,
+#dark-mode-button {
+    position: relative;
+}
+
+#tutorial-button:hover::after,
+#dark-mode-button:hover::after {
+    align-items: center;
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    content: attr(data-tooltip);
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7rem;
+    height: 16px;
+    left: 0;
+    padding: var(--padding);
+    position: absolute;
+    text-shadow: none;
+    top: 120%;
+    white-space: nowrap;
+}
+
+#dark-mode-button.dark-mode-button-enabled:hover::after {
+    content: attr(data-tooltip-alt);
+}
+
+.settings-button-rotate-left {
+    animation: settings-button-rotate-left var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
+}
+
+.settings-button-rotate-right {
+    animation: settings-button-rotate-right var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
+}
+
+@keyframes settings-button-rotate-left {
+    100% {
+        transform: rotate(-180deg);
+    }
+}
+
+@keyframes settings-button-rotate-right {
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+.main {
+    box-sizing: border-box;
+    display: flex;
+    padding: var(--alt-padding);
+    width: 1100px;
+}
+
+@media (max-width: 1100px) {
+    .main {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.left {
+    width: 100px;
+}
+
+@media (max-width: 1100px) {
+    .left {
+        width: 100%;
+    }
+}
+
+.lessons {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 1100px) {
+    .lessons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.lesson {
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: var(--padding);
+}
+
+.lesson-current {
+    background-color: var(--gray);
+}
+
+.center {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    padding: var(--alt-padding);
-    position: relative;
-    width: 900px;
+    width: 100%;
 }
 
-@media (max-width: 900px) {
-    main {
-        width: 100%;
+@media (max-width: 1100px) {
+    .center {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .center {
+        gap: 0;
     }
 }
 
@@ -96,12 +253,12 @@ main {
     font-family: "Roboto Mono", monospace;
     font-size: 1.2em;
     justify-content: center;
-    margin-top: 7rem;
+    margin-top: 4rem;
     transform: perspective(400px);
-    width: 700px;
+    width: 80%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     #text {
         font-size: 1.1em;
         width: 100%;
@@ -186,7 +343,7 @@ main {
     width: fit-content;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     #keyboard {
         transform: scale(0.8);
     }
@@ -256,6 +413,10 @@ div.keyboard-home-key {
     transform: translate(-50%, -50%);
 }
 
+.keyboard-home-key-text {
+    z-index: 1;
+}
+
 .keyboard-key-caps {
     width: 100%;
 }
@@ -301,102 +462,15 @@ div.keyboard-home-key {
     box-shadow: inset var(--box-shadow);
 }
 
-.statistics {
-    display: flex;
-    font-family: 'Roboto Mono', sans-serif;
-    font-size: 0.8rem;
-    gap: var(--alt-padding);
-    left: 0;
-    margin: var(--alt-padding);
-    position: absolute;
-    top: 0;
+.keyboard-key-highlight {
+    background-color: rgb(126, 221, 255) !important;
+    color: var(--gray);
+    font-size: 1.1rem;
+    font-weight: 900;
 }
 
-.speed-container,
-.accuracy-container {
-    align-items: center;
-    display: flex;
-    gap: var(--padding);
-    position: relative;
-}
-
-.speed-container:hover::after,
-.accuracy-container:hover::after {
-    align-items: center;
-    border: var(--border);
-    border-radius: var(--border-radius);
-    content: attr(data-tooltip);
-    display: flex;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.7rem;
-    height: 16px;
-    left: 0;
-    padding: var(--padding);
-    position: absolute;
-    top: 120%;
-    white-space: nowrap;
-}
-
-.buttons {
-    display: flex;
-    gap: var(--alt-padding);
-    margin: var(--alt-padding);
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-#tutorial-button,
-#dark-mode-button,
-#settings-button {
-    cursor: pointer;
-}
-
-#tutorial-button,
-#dark-mode-button {
-    position: relative;
-}
-
-#tutorial-button:hover::after,
-#dark-mode-button:hover::after {
-    align-items: center;
-    border: var(--border);
-    border-radius: var(--border-radius);
-    content: attr(data-tooltip);
-    display: flex;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.7rem;
-    height: 16px;
-    left: 0;
-    padding: var(--padding);
-    position: absolute;
-    text-shadow: none;
-    top: 120%;
-    white-space: nowrap;
-}
-
-#dark-mode-button.dark-mode-button-enabled:hover::after {
-    content: attr(data-tooltip-alt);
-}
-
-.settings-button-rotate-left {
-    animation: settings-button-rotate-left var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
-}
-
-.settings-button-rotate-right {
-    animation: settings-button-rotate-right var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
-}
-
-@keyframes settings-button-rotate-left {
-    100% {
-        transform: rotate(-180deg);
-    }
-}
-
-@keyframes settings-button-rotate-right {
-    100% {
-        transform: rotate(180deg);
-    }
+.right {
+    width: 100px;
 }
 
 .settings-list-toggle-container {
@@ -469,18 +543,24 @@ div.keyboard-home-key {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 520px;
+    z-index: 2;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     #settings {
         border: none;
         border-radius: 0;
         height: 100vh;
         left: 0 !important;
+        overflow-y: scroll;
         top: 0 !important;
         transform: none;
         width: 100vw;
     }
+}
+
+#settings::-webkit-scrollbar {
+    width: 0;
 }
 
 #settings.settings-show {
@@ -591,7 +671,7 @@ div.keyboard-home-key {
     gap: var(--padding);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     .settings-custom-text-fetch-container {
         flex-direction: column;
     }
@@ -602,7 +682,7 @@ div.keyboard-home-key {
     width: 50%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     #settings-news-list-toggle-container,
     #settings-custom-text-fetch-button {
         width: 100%;
@@ -642,7 +722,7 @@ div.keyboard-home-key {
     margin-left: auto;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     #settings-save {
         margin-top: auto;
     }
@@ -677,7 +757,7 @@ div.keyboard-home-key {
     padding: var(--alt-padding);
     position: fixed;
     transform: translate(-50%, calc(-100% - var(--alt-padding)));
-    width: 400px;
+    width: 500px;
 }
 
 .tutorial-show {
@@ -712,13 +792,13 @@ div.keyboard-home-key {
 }
 
 .tutorial-keyboard-guide-key {
-    animation: blinking-brightness var(--alt-animation-duration) infinite;
+    animation: blinking-rotate-scale var(--alt-animation-duration) infinite;
     z-index: 1;
 }
 
-@keyframes blinking-brightness {
+@keyframes blinking-rotate-scale {
     50% {
-        filter: brightness(80%);
+        transform: rotate(5deg) scale(0.95);
     }
 }
 

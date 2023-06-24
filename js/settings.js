@@ -2,11 +2,10 @@ export { Settings };
 
 import { Draggable } from './draggable.js';
 import { Text } from './text.js';
+import { textAndChunkSize } from './main.js';
 
 class Settings {
-    constructor(text) {
-        this.text = text;
-
+    constructor() {
         this.mediaQuery = window.matchMedia('(max-width: 900px)');
         this.settings = document.getElementById('settings');
 
@@ -76,8 +75,10 @@ class Settings {
                 return;
             }
 
-            this.text.reset(newCustomText, newChunkSize);
-            this.text.render();
+            textAndChunkSize.chunkSize = newChunkSize;
+            textAndChunkSize.text = newCustomText;
+
+            document.getElementsByClassName('lesson')[0].click();
 
             this.toggle();
         });
