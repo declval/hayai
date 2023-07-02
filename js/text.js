@@ -150,7 +150,7 @@ class Text {
         if (this.chunkSize < Text.chunkSizeMin ||
             this.chunkSize > Text.chunkSizeMax ||
             this.chunkSize > this.text.length) {
-            throw new Error('Invalid chunk size');
+            throw new Error(`Invalid chunk size: ${this.chunkSize}`);
         }
 
         this.chunks = this.chunked();
@@ -176,7 +176,7 @@ class Text {
     }
 
     static chunkSizeMax = 128;
-    static chunkSizeMin = 32;
+    static chunkSizeMin = 16;
     static initialChunkSize = 32;
     static initialText = 'Touch typing (also called blind typing, or touch keyboarding) is a style of typing.';
 }

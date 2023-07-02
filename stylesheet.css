@@ -118,6 +118,17 @@ header {
     white-space: nowrap;
 }
 
+.sublesson {
+    align-items: center;
+    display: flex;
+    font-size: 0.8rem;
+    gap: var(--padding);
+}
+
+.sublesson-number {
+    filter: opacity(50%);
+}
+
 .buttons {
     display: flex;
     gap: var(--alt-padding);
@@ -464,7 +475,7 @@ div.keyboard-home-key {
 
 .keyboard-key-highlight {
     background-color: rgb(126, 221, 255) !important;
-    color: var(--gray);
+    color: rgb(79, 79, 79);
     font-size: 1.1rem;
     font-weight: 900;
 }

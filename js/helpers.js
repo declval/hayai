@@ -1,36 +1,36 @@
-export { lessonGenerate, permutations };
+export { lessonGenerate, permutations, randomNWordsContaining, shuffle };
 
 const randomInt = (min, max) => {
     return Math.floor(min + Math.random() * (max - min));
 };
 
-const shuffle = chars => {
-    const result = [...chars];
+const shuffle = array => {
+    const result = [...array];
     for (let i = result.length - 1; i > 0; --i) {
         const j = randomInt(0, i + 1);
         const temp = result[j];
         result[j] = result[i];
         result[i] = temp;
     }
-    return result.join('');
+    return result;
 };
 
-const lessonGenerate = chars => {
-    chars = chars.repeat(16);
-    chars = shuffle(chars);
+const lessonGenerate = string => {
+    string = string.repeat(4);
+    string = shuffle(string).join('');
     const result = [];
     let n = 0;
-    for (let i = 0; i < chars.length; i += n) {
+    for (let i = 0; i < string.length; i += n) {
         n = randomInt(1, 8);
-        if (n > chars.length - i) {
-            n = chars.length - i;
+        if (n > string.length - i) {
+            n = string.length - i;
         }
-        result.push(chars.slice(i, i + n));
+        result.push(string.slice(i, i + n));
     }
     return result.join(' ');
 };
 
-const permutations = chars => {
+const permutations = string => {
     const result = [];
     const permutationsHelper = (k, array) => {
         if (k === 1) {
@@ -51,6 +51,13 @@ const permutations = chars => {
             }
         }
     };
-    permutationsHelper(chars.length, [...chars]);
+    permutationsHelper(string.length, [...string]);
     return result;
+};
+
+const randomNWordsContaining = (n, words, string) => {
+    const re = new RegExp(`^[${string}]+$`);
+    let result = words.filter(elem => elem.match(re));
+    result = shuffle(result);
+    return result.slice(-n).join(' ');
 };

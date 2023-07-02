@@ -1,21 +1,18 @@
 export { textAndChunkSize };
 
+import { Course } from './course.js';
 import { Settings } from './settings.js';
 import { Text } from './text.js';
-import { lessonGenerate, permutations } from './helpers.js';
 import { tutorialToggle } from './tutorial.js';
 
-const english = [
-    'etao', 'insh', 'rdlc', 'umwf', 'gypb', 'vkjx', 'qz49', '1527', '3860',
-    '([.+', ':><`', '\',/"', ';{?-', '~@_}', ')$^!', '|#=&', ']%*\\'
-];
-const lessons = document.getElementsByClassName('lesson');
 const textAndChunkSize = {};
 
 const main = () => {
-    let text = new Text();
+    const text = new Text();
 
     text.render();
+
+    const course = new Course(text);
 
     document.addEventListener('keydown', event => {
         const settings = document.getElementById('settings');
@@ -52,48 +49,9 @@ const main = () => {
         const finished = text.cursorMove(event.key);
 
         if (finished) {
-            const lessonCurrent = document.getElementsByClassName('lesson-current')[0];
-            const index = parseInt(lessonCurrent.dataset.index);
-            let nextLesson = null;
-
-            if (index >= 0 && index < english.length - 1) {
-                nextLesson = lessonCurrent.nextElementSibling;
-            } else {
-                nextLesson = lessons[0];
-            }
-
-            setTimeout(() => {
-                nextLesson.click();
-            }, 800);
+            course.nextLesson();
         }
     });
-
-    for (const lesson of lessons) {
-        lesson.addEventListener('click', event => {
-            for (const lesson of lessons) {
-                if (lesson === event.target) {
-                    lesson.classList.add('lesson-current');
-                    const index = parseInt(event.target.dataset.index);
-                    if (index === -1) {
-                        if (textAndChunkSize.chunkSize && textAndChunkSize.text) {
-                            text.reset(textAndChunkSize.text, textAndChunkSize.chunkSize)
-                        } else {
-                            text.reset();
-                        }
-                    } else {
-                        const perviousChars = lessonGenerate(english.slice(0, index + 1).join(''));
-                        text.reset(
-                            `${permutations(english[index]).join(' ')} ${perviousChars}`,
-                            34
-                        );
-                    }
-                    text.render();
-                } else {
-                    lesson.classList.remove('lesson-current');
-                }
-            }
-        });
-    }
 
     const tutorialButton = document.getElementById('tutorial-button');
 
