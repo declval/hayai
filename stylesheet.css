@@ -388,15 +388,18 @@ header {
     position: relative;
 }
 
-.keyboard-guide-show .keyboard-key-pinkie {
+.keyboard-guide-show .keyboard-key-lpinkie,
+.keyboard-guide-show .keyboard-key-rpinkie {
     background-color: var(--pinkie-color);
 }
 
-.keyboard-guide-show .keyboard-key-ring {
+.keyboard-guide-show .keyboard-key-lring,
+.keyboard-guide-show .keyboard-key-rring {
     background-color: var(--ring-color);
 }
 
-.keyboard-guide-show .keyboard-key-middle {
+.keyboard-guide-show .keyboard-key-lmiddle,
+.keyboard-guide-show .keyboard-key-rmiddle {
     background-color: var(--middle-color);
 }
 
@@ -411,6 +414,8 @@ header {
 .keyboard-key-alt {
     align-items: center;
     display: flex;
+    font-size: 0.7rem;
+    font-weight: normal;
     height: 50%;
     justify-content: center;
     left: 0;
@@ -480,6 +485,9 @@ div.keyboard-home-key {
 .keyboard-key-highlight {
     background-color: rgb(126, 221, 255) !important;
     color: rgb(79, 79, 79);
+}
+
+.keyboard-key-text-highlight {
     font-size: 1.1rem;
     font-weight: 900;
 }

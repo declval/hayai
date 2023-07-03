@@ -15,11 +15,14 @@ const tutorialToggle = () => {
     const settingsButton = document.getElementById('settings-button');
     const keyboard = document.getElementById('keyboard');
     const keyboardGuideKeys = [
-        ...document.getElementsByClassName('keyboard-key-pinkie'),
-        ...document.getElementsByClassName('keyboard-key-ring'),
-        ...document.getElementsByClassName('keyboard-key-middle'),
+        ...document.getElementsByClassName('keyboard-key-lpinkie'),
+        ...document.getElementsByClassName('keyboard-key-lring'),
+        ...document.getElementsByClassName('keyboard-key-lmiddle'),
         ...document.getElementsByClassName('keyboard-key-lindex'),
-        ...document.getElementsByClassName('keyboard-key-rindex')
+        ...document.getElementsByClassName('keyboard-key-rindex'),
+        ...document.getElementsByClassName('keyboard-key-rmiddle'),
+        ...document.getElementsByClassName('keyboard-key-rring'),
+        ...document.getElementsByClassName('keyboard-key-rpinkie')
     ];
     const keyboardHomeKeys = document.getElementsByClassName('keyboard-home-key');
 

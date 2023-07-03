@@ -40,7 +40,7 @@ class Text {
 
                 try {
                     character.nextSibling.classList.add('text-character-cursor');
-                    this.highlightKeyUnderCursor(character.nextSibling);
+                    this.highlightKeysToPress(character.nextSibling);
                 } catch (e) {
                     const timeDifference = (Date.now() - this.startTime) / 1000 / 60;
 
@@ -72,16 +72,21 @@ class Text {
         return false;
     }
 
-    highlightKeyUnderCursor = cursor => {
-        const lessonCurrent = document.getElementsByClassName('lesson-current')[0];
-
-        if (lessonCurrent?.dataset.index === '-1') {
-            const highlighted = document.getElementsByClassName('keyboard-key-highlight')[0];
-            highlighted?.classList.remove('keyboard-key-highlight');
-            return;
+    highlightKeysToPress = cursor => {
+        // Unhighlight previously highlighted keys if any
+        const highlightedKeys = document.getElementsByClassName('keyboard-key-highlight');
+        while (highlightedKeys.length) {
+            highlightedKeys[0].classList.remove('keyboard-key-highlight');
         }
 
-        if (!cursor) {
+        const highlightedKeyTexts = document.getElementsByClassName('keyboard-key-text-highlight');
+        while (highlightedKeyTexts.length) {
+            highlightedKeyTexts[0].classList.remove('keyboard-key-text-highlight');
+        }
+
+        const lessonCurrent = document.getElementsByClassName('lesson-current')[0];
+
+        if (lessonCurrent.dataset.index === '-1') {
             return;
         }
 
@@ -90,9 +95,29 @@ class Text {
         for (const key of keys) {
             if (key.dataset.value === cursor.textContent ||
                     key.dataset.valueAlt === cursor.textContent) {
-                const highlighted = document.getElementsByClassName('keyboard-key-highlight')[0];
-                highlighted?.classList.remove('keyboard-key-highlight');
                 key.classList.add('keyboard-key-highlight');
+
+                if (key.dataset.value === cursor.textContent) {
+                    key.classList.add('keyboard-key-text-highlight');
+                } else {
+                    key.getElementsByClassName('keyboard-key-alt')[0]
+                        .classList.add('keyboard-key-text-highlight');
+
+                    const shifts = document.getElementsByClassName('keyboard-key-shift');
+                    let shiftIndex = null;
+
+                    if (key.classList.contains('keyboard-key-lpinkie') ||
+                            key.classList.contains('keyboard-key-lring') ||
+                            key.classList.contains('keyboard-key-lmiddle') ||
+                            key.classList.contains('keyboard-key-lindex')) {
+                        shiftIndex = 1;
+                    } else {
+                        shiftIndex = 0;
+                    }
+
+                    shifts[shiftIndex].classList.add('keyboard-key-highlight');
+                    shifts[shiftIndex].classList.add('keyboard-key-text-highlight');
+                }
             }
         }
     }
@@ -129,7 +154,7 @@ class Text {
         }
 
         this.textElement.firstChild.classList.add('text-character-cursor');
-        this.highlightKeyUnderCursor(this.textElement.firstChild);
+        this.highlightKeysToPress(this.textElement.firstChild);
 
         this.characters = this.textElement.getElementsByClassName('text-character');
     }
