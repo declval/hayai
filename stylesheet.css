@@ -14,6 +14,8 @@
     --placeholder-color: rgb(142, 142, 142);
     --red: rgb(255, 52, 52);
     --scale: 1.5;
+    --scrollbar-color: rgb(246, 246, 246);
+    --scrollbar-thumb-color: rgb(226, 226, 226);
     --space-color: rgba(0, 0, 0, 0.3);
     --title-bar-background-color: rgb(64, 64, 64);
     --title-bar-color: rgb(255, 255, 255);
@@ -35,6 +37,8 @@
     --color: rgb(255, 255, 255);
     --fingerprint-color: rgba(255, 255, 255, 0.2);
     --gray: rgb(79, 79, 79);
+    --scrollbar-color: rgb(69, 69, 69);
+    --scrollbar-thumb-color: rgb(89, 89, 89);
     --space-color: rgba(255, 255, 255, 0.4);
 
     --pinkie-color: rgb(88, 88, 88);
@@ -538,7 +542,17 @@ div.keyboard-home-key {
 }
 
 .settings-list::-webkit-scrollbar {
-    width: 0;
+    background-color: var(--scrollbar-color);
+}
+
+.settings-list::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border: 2px solid var(--scrollbar-color);
+    border-radius: var(--border-radius);
+}
+
+.settings-list::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-color);
 }
 
 #settings {
