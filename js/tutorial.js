@@ -3,18 +3,25 @@ export { tutorialToggle };
 let tutorialOpen = false;
 
 const tutorialToggle = () => {
-    const tutorialBackground = document.getElementById('tutorial-background');
-    const tutorialHomeRow = document.getElementById('tutorial-home-row');
-    const tutorialHomeRowButton = document.getElementById('tutorial-home-row-button');
-    const tutorialFingers = document.getElementById('tutorial-fingers');
-    const tutorialFingersButton = document.getElementById('tutorial-fingers-button');
-    const tutorialSettings = document.getElementById('tutorial-settings');
-    const tutorialSettingsButton = document.getElementById('tutorial-settings-button');
+    const tutorialBackgroundElement =
+        document.getElementById('tutorial-background');
+    const tutorialHomeRowElement =
+        document.getElementById('tutorial-home-row');
+    const tutorialHomeRowButtonElement =
+        document.getElementById('tutorial-home-row-button');
+    const tutorialFingersElement =
+        document.getElementById('tutorial-fingers');
+    const tutorialFingersButtonElement =
+        document.getElementById('tutorial-fingers-button');
+    const tutorialSettingsElement =
+        document.getElementById('tutorial-settings');
+    const tutorialSettingsButtonElement =
+        document.getElementById('tutorial-settings-button');
 
-    const settings = document.getElementById('settings');
-    const settingsButton = document.getElementById('settings-button');
-    const keyboard = document.getElementById('keyboard');
-    const keyboardGuideKeys = [
+    const settingsElement = document.getElementById('settings');
+    const settingsButtonElement = document.getElementById('settings-button');
+    const keyboardElement = document.getElementById('keyboard');
+    const keyboardGuideKeyElements = [
         ...document.getElementsByClassName('keyboard-key-lpinkie'),
         ...document.getElementsByClassName('keyboard-key-lring'),
         ...document.getElementsByClassName('keyboard-key-lmiddle'),
@@ -24,25 +31,26 @@ const tutorialToggle = () => {
         ...document.getElementsByClassName('keyboard-key-rring'),
         ...document.getElementsByClassName('keyboard-key-rpinkie')
     ];
-    const keyboardHomeKeys = document.getElementsByClassName('keyboard-home-key');
+    const keyboardHomeKeyElements =
+        document.getElementsByClassName('keyboard-home-key');
 
     const tutorialClose = () => {
-        tutorialSettings.classList.remove('tutorial-show');
-        settingsButton.classList.remove('tutorial-settings-button');
-        tutorialFingers.classList.remove('tutorial-show');
+        tutorialSettingsElement.classList.remove('tutorial-show');
+        settingsButtonElement.classList.remove('tutorial-settings-button');
+        tutorialFingersElement.classList.remove('tutorial-show');
         if (document.getElementById('settings-guide').checked) {
-            keyboard.classList.add('keyboard-guide-show');
+            keyboardElement.classList.add('keyboard-guide-show');
         } else {
-            keyboard.classList.remove('keyboard-guide-show');
+            keyboardElement.classList.remove('keyboard-guide-show');
         }
-        for (const keyboardGuideKey of keyboardGuideKeys) {
-            keyboardGuideKey.classList.remove('tutorial-keyboard-guide-key');
+        for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
+            keyboardGuideKeyElement.classList.remove('tutorial-keyboard-guide-key');
         }
-        for (const keyboardHomeKey of keyboardHomeKeys) {
-            keyboardHomeKey.classList.remove('tutorial-keyboard-home-key');
+        for (const keyboardHomeKeyElement of keyboardHomeKeyElements) {
+            keyboardHomeKeyElement.classList.remove('tutorial-keyboard-home-key');
         }
-        tutorialHomeRow.classList.remove('tutorial-show');
-        tutorialBackground.classList.remove('tutorial-background-show');
+        tutorialHomeRowElement.classList.remove('tutorial-show');
+        tutorialBackgroundElement.classList.remove('tutorial-background-show');
 
         tutorialOpen = false;
     };
@@ -52,64 +60,67 @@ const tutorialToggle = () => {
         return;
     }
 
-    settings.classList.remove('settings-show');
+    settingsElement.classList.remove('settings-show');
 
     tutorialOpen = true;
 
-    keyboard.classList.remove('keyboard-guide-show');
+    keyboardElement.classList.remove('keyboard-guide-show');
 
-    tutorialBackground.classList.add('tutorial-background-show');
-    tutorialHomeRow.classList.add('tutorial-show');
+    tutorialBackgroundElement.classList.add('tutorial-background-show');
+    tutorialHomeRowElement.classList.add('tutorial-show');
 
-    for (const keyboardHomeKey of keyboardHomeKeys) {
-        keyboardHomeKey.classList.add('tutorial-keyboard-home-key');
+    for (const keyboardHomeKeyElement of keyboardHomeKeyElements) {
+        keyboardHomeKeyElement.classList.add('tutorial-keyboard-home-key');
     }
 
-    tutorialHomeRow.style.top = `${keyboardHomeKeys[0].parentElement.getBoundingClientRect().y}px`;
+    tutorialHomeRowElement.style.top =
+        `${keyboardHomeKeyElements[0].parentElement.getBoundingClientRect().y}px`;
 
-    tutorialHomeRowButton.addEventListener('click', () => {
-        tutorialHomeRow.classList.remove('tutorial-show');
-        for (const keyboardHomeKey of keyboardHomeKeys) {
-            keyboardHomeKey.classList.remove('tutorial-keyboard-home-key');
+    tutorialHomeRowButtonElement.addEventListener('click', () => {
+        tutorialHomeRowElement.classList.remove('tutorial-show');
+        for (const keyboardHomeKeyElement of keyboardHomeKeyElements) {
+            keyboardHomeKeyElement.classList.remove('tutorial-keyboard-home-key');
         }
 
-        tutorialFingers.style.top = `${keyboard.getBoundingClientRect().y}px`;
-        for (const keyboardGuideKey of keyboardGuideKeys) {
-            keyboardGuideKey.classList.add('tutorial-keyboard-guide-key');
+        tutorialFingersElement.style.top = `${keyboardElement.getBoundingClientRect().y}px`;
+        for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
+            keyboardGuideKeyElement.classList.add('tutorial-keyboard-guide-key');
         }
-        keyboard.classList.add('keyboard-guide-show');
-        tutorialFingers.classList.add('tutorial-show');
+        keyboardElement.classList.add('keyboard-guide-show');
+        tutorialFingersElement.classList.add('tutorial-show');
     });
 
-    tutorialFingersButton.addEventListener('click', () => {
-        tutorialFingers.classList.remove('tutorial-show');
-        for (const keyboardGuideKey of keyboardGuideKeys) {
-            keyboardGuideKey.classList.remove('tutorial-keyboard-guide-key');
+    tutorialFingersButtonElement.addEventListener('click', () => {
+        tutorialFingersElement.classList.remove('tutorial-show');
+        for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
+            keyboardGuideKeyElement.classList.remove('tutorial-keyboard-guide-key');
         }
-        keyboard.classList.remove('keyboard-guide-show');
+        keyboardElement.classList.remove('keyboard-guide-show');
 
-        tutorialSettings.style.top = `${keyboard.getBoundingClientRect().y}px`;
-        settingsButton.classList.add('tutorial-settings-button');
-        tutorialSettings.classList.add('tutorial-show');
+        tutorialSettingsElement.style.top =
+            `${keyboardElement.getBoundingClientRect().y}px`;
+        settingsButtonElement.classList.add('tutorial-settings-button');
+        tutorialSettingsElement.classList.add('tutorial-show');
     });
 
-    tutorialSettingsButton.addEventListener('click', () => {
-        tutorialSettings.classList.remove('tutorial-show');
-        settingsButton.classList.remove('tutorial-settings-button');
+    tutorialSettingsButtonElement.addEventListener('click', () => {
+        tutorialSettingsElement.classList.remove('tutorial-show');
+        settingsButtonElement.classList.remove('tutorial-settings-button');
         if (document.getElementById('settings-guide').checked) {
-            keyboard.classList.add('keyboard-guide-show');
+            keyboardElement.classList.add('keyboard-guide-show');
         } else {
-            keyboard.classList.remove('keyboard-guide-show');
+            keyboardElement.classList.remove('keyboard-guide-show');
         }
-        tutorialBackground.classList.remove('tutorial-background-show');
+        tutorialBackgroundElement.classList.remove('tutorial-background-show');
 
         tutorialOpen = false;
     });
 
-    const tutorialCloseButtons = document.getElementsByClassName('tutorial-close-button');
+    const tutorialCloseButtonElements =
+        document.getElementsByClassName('tutorial-close-button');
 
-    for (const tutorialCloseButton of tutorialCloseButtons) {
-        tutorialCloseButton.addEventListener('click', () => {
+    for (const tutorialCloseButtonElement of tutorialCloseButtonElements) {
+        tutorialCloseButtonElement.addEventListener('click', () => {
             tutorialClose();
         });
     }
