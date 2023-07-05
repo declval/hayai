@@ -6,11 +6,11 @@ import { Text } from './text.js';
 class Settings {
     constructor() {
         this.mediaQuery = window.matchMedia('(max-width: 900px)');
-        this.settings = document.getElementById('settings');
+        this.settingsElement = document.getElementById('settings');
 
-        const settingsTitlebar = document.getElementById('settings-title-bar');
+        const settingsTitleBarElement = document.getElementById('settings-title-bar');
 
-        const draggable = new Draggable(settingsTitlebar, this.settings);
+        const draggable = new Draggable(settingsTitleBarElement, this.settingsElement);
 
         const mediaQueryHandler = event => {
             if (event.matches) {
@@ -24,35 +24,35 @@ class Settings {
 
         mediaQueryHandler(this.mediaQuery);
 
-        const settingsClose = document.getElementById('settings-close');
+        const settingsCloseElement = document.getElementById('settings-close');
 
-        settingsClose.addEventListener('click', () => {
+        settingsCloseElement.addEventListener('click', () => {
             this.toggle();
         });
 
-        const settingsForm = document.getElementById('settings-form');
+        const settingsFormElement = document.getElementById('settings-form');
 
-        settingsForm.addEventListener('submit', event => {
+        settingsFormElement.addEventListener('submit', event => {
             event.preventDefault();
 
-            const customText = document.getElementById('settings-custom-text');
-            const newCustomText = customText.value.replace(/\n/g, ' ');
+            const customTextElement = document.getElementById('settings-custom-text');
+            const newCustomText = customTextElement.value.replace(/\n/g, ' ');
 
             if (newCustomText.length) {
-                customText.classList.remove('settings-invalid');
+                customTextElement.classList.remove('settings-invalid');
             } else {
-                customText.classList.add('settings-invalid');
+                customTextElement.classList.add('settings-invalid');
                 return;
             }
 
-            const chunkSize = document.getElementById('settings-chunk-size-list-toggle');
+            const chunkSizeElement = document.getElementById('settings-chunk-size-list-toggle');
             let newChunkSize = null;
 
-            if (!chunkSize.textContent.length) {
+            if (!chunkSizeElement.textContent.length) {
                 return;
             }
 
-            newChunkSize = parseInt(chunkSize.textContent, 10);
+            newChunkSize = parseInt(chunkSizeElement.textContent, 10);
 
             if (!(Number.isFinite(newChunkSize) &&
                     newChunkSize >= Text.chunkSizeMin &&
@@ -69,52 +69,56 @@ class Settings {
             this.toggle();
         });
 
-        const keyboard = document.getElementById('keyboard');
-        const settingsGuide = document.getElementById('settings-guide');
+        const keyboardElement = document.getElementById('keyboard');
+        const settingsGuideElement = document.getElementById('settings-guide');
 
         const guide = localStorage.getItem('guide');
 
         if (guide === 'on') {
-            keyboard.classList.add('keyboard-guide-show');
-            settingsGuide.checked = true;
+            keyboardElement.classList.add('keyboard-guide-show');
+            settingsGuideElement.checked = true;
         }
 
-        settingsGuide.addEventListener('input', event => {
+        settingsGuideElement.addEventListener('input', event => {
             if (event.target.checked) {
-                keyboard.classList.add('keyboard-guide-show');
+                keyboardElement.classList.add('keyboard-guide-show');
                 localStorage.setItem('guide', 'on');
             } else {
-                keyboard.classList.remove('keyboard-guide-show');
+                keyboardElement.classList.remove('keyboard-guide-show');
                 localStorage.setItem('guide', '');
             }
         });
 
-        const settingsCustomText = document.getElementById('settings-custom-text');
+        const settingsCustomTextElement = document.getElementById('settings-custom-text');
 
-        settingsCustomText.addEventListener('input', event => {
+        settingsCustomTextElement.addEventListener('input', event => {
             event.target.classList.remove('settings-invalid');
         });
 
-        const settingsNewsListToggleIcon = document.getElementById('settings-news-list-toggle-icon');
-        const settingsNewsListToggle = document.getElementById('settings-news-list-toggle');
-        const settingsNewsListContainer = document.getElementById('settings-news-list-container');
-        const settingsNewsList = document.getElementById('settings-news-list');
+        const settingsNewsListToggleIconElement =
+            document.getElementById('settings-news-list-toggle-icon');
+        const settingsNewsListToggleElement =
+            document.getElementById('settings-news-list-toggle');
+        const settingsNewsListContainerElement =
+            document.getElementById('settings-news-list-container');
+        const settingsNewsListElement =
+            document.getElementById('settings-news-list');
 
-        settingsNewsListToggle.addEventListener('click', event => {
+        settingsNewsListToggleElement.addEventListener('click', event => {
             event.stopPropagation();
 
             const close = event => {
-                if (event.target !== settingsNewsListContainer) {
+                if (event.target !== settingsNewsListContainerElement) {
                     document.removeEventListener('click', close);
-                    settingsNewsListContainer.classList.remove('open');
-                    settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
+                    settingsNewsListContainerElement.classList.remove('open');
+                    settingsNewsListToggleIconElement.textContent = 'keyboard_arrow_up';
                 }
             };
 
-            if (settingsNewsListContainer.classList.contains('open')) {
+            if (settingsNewsListContainerElement.classList.contains('open')) {
                 document.removeEventListener('click', close);
-                settingsNewsListContainer.classList.remove('open');
-                settingsNewsListToggleIcon.textContent = 'keyboard_arrow_up';
+                settingsNewsListContainerElement.classList.remove('open');
+                settingsNewsListToggleIconElement.textContent = 'keyboard_arrow_up';
             } else {
                 for (const settingsListContainer of
                         document.getElementsByClassName('settings-list-container')) {
@@ -125,9 +129,9 @@ class Settings {
                     settingsListToggleIcon.textContent = 'keyboard_arrow_up';
                 }
                 document.addEventListener('click', close);
-                settingsNewsListContainer.classList.add('open');
-                settingsNewsList.scrollTop = 0;
-                settingsNewsListToggleIcon.textContent = 'keyboard_arrow_down';
+                settingsNewsListContainerElement.classList.add('open');
+                settingsNewsListElement.scrollTop = 0;
+                settingsNewsListToggleIconElement.textContent = 'keyboard_arrow_down';
             }
         });
 
@@ -135,28 +139,27 @@ class Settings {
         const customTextFetchNumberMin = 1;
 
         for (let i = customTextFetchNumberMin; i <= customTextFetchNumberMax; ++i) {
-            const button = document.createElement('button');
-            button.appendChild(document.createTextNode(i.toString()));
-            button.setAttribute('type', 'button');
-            button.addEventListener('click', () => {
-                settingsNewsListContainer.classList.remove('open');
-                settingsNewsListToggle.textContent = i.toString();
+            const buttonElement = document.createElement('button');
+            buttonElement.appendChild(document.createTextNode(i.toString()));
+            buttonElement.setAttribute('type', 'button');
+            buttonElement.addEventListener('click', () => {
+                settingsNewsListContainerElement.classList.remove('open');
+                settingsNewsListToggleElement.textContent = i.toString();
             });
-            settingsNewsList.appendChild(button);
+            settingsNewsListElement.appendChild(buttonElement);
         }
 
-        const settingsCustomTextFetchButton = document.getElementById('settings-custom-text-fetch-button');
+        const settingsCustomTextFetchButtonElement =
+            document.getElementById('settings-custom-text-fetch-button');
 
-        settingsCustomTextFetchButton.addEventListener('click', async event => {
+        settingsCustomTextFetchButtonElement.addEventListener('click', async event => {
             event.preventDefault();
 
-            let customTextFetchNumber = null;
-
-            if (!settingsNewsListToggle.textContent.length) {
+            if (!settingsNewsListToggleElement.textContent.length) {
                 return;
             }
 
-            customTextFetchNumber = parseInt(settingsNewsListToggle.textContent, 10);
+            const customTextFetchNumber = parseInt(settingsNewsListToggleElement.textContent, 10);
 
             if (!(Number.isFinite(customTextFetchNumber) &&
                     customTextFetchNumber >= customTextFetchNumberMin &&
@@ -190,29 +193,33 @@ class Settings {
                 customText += i < articles.results.length - 1 ? '\n' : '';
             }
 
-            settingsCustomText.value = customText;
+            settingsCustomTextElement.value = customText;
         });
 
-        const settingsChunkSizeListToggleIcon = document.getElementById('settings-chunk-size-list-toggle-icon');
-        const settingsChunkSizeListToggle = document.getElementById('settings-chunk-size-list-toggle');
-        const settingsChunkSizeListContainer = document.getElementById('settings-chunk-size-list-container');
-        const settingsChunkSizeList = document.getElementById('settings-chunk-size-list');
+        const settingsChunkSizeListToggleIconElement =
+            document.getElementById('settings-chunk-size-list-toggle-icon');
+        const settingsChunkSizeListToggleElement =
+            document.getElementById('settings-chunk-size-list-toggle');
+        const settingsChunkSizeListContainerElement =
+            document.getElementById('settings-chunk-size-list-container');
+        const settingsChunkSizeListElement =
+            document.getElementById('settings-chunk-size-list');
 
-        settingsChunkSizeListToggle.addEventListener('click', event => {
+        settingsChunkSizeListToggleElement.addEventListener('click', event => {
             event.stopPropagation();
 
             const close = event => {
-                if (event.target !== settingsChunkSizeListContainer) {
+                if (event.target !== settingsChunkSizeListContainerElement) {
                     document.removeEventListener('click', close);
-                    settingsChunkSizeListContainer.classList.remove('open');
-                    settingsChunkSizeListToggleIcon.textContent = 'keyboard_arrow_up';
+                    settingsChunkSizeListContainerElement.classList.remove('open');
+                    settingsChunkSizeListToggleIconElement.textContent = 'keyboard_arrow_up';
                 }
             };
 
-            if (settingsChunkSizeListContainer.classList.contains('open')) {
+            if (settingsChunkSizeListContainerElement.classList.contains('open')) {
                 document.removeEventListener('click', close);
-                settingsChunkSizeListContainer.classList.remove('open');
-                settingsChunkSizeListToggleIcon.textContent = 'keyboard_arrow_up';
+                settingsChunkSizeListContainerElement.classList.remove('open');
+                settingsChunkSizeListToggleIconElement.textContent = 'keyboard_arrow_up';
             } else {
                 for (const settingsListContainer of
                         document.getElementsByClassName('settings-list-container')) {
@@ -223,32 +230,32 @@ class Settings {
                     settingsListToggleIcon.textContent = 'keyboard_arrow_up';
                 }
                 document.addEventListener('click', close);
-                settingsChunkSizeListContainer.classList.add('open');
-                settingsChunkSizeList.scrollTop = 0;
-                settingsChunkSizeListToggleIcon.textContent = 'keyboard_arrow_down';
+                settingsChunkSizeListContainerElement.classList.add('open');
+                settingsChunkSizeListElement.scrollTop = 0;
+                settingsChunkSizeListToggleIconElement.textContent = 'keyboard_arrow_down';
             }
         });
 
         for (let i = Text.chunkSizeMin; i <= Text.chunkSizeMax; ++i) {
-            const button = document.createElement('button');
-            button.appendChild(document.createTextNode(i.toString()));
-            button.setAttribute('type', 'button');
-            button.addEventListener('click', () => {
-                settingsChunkSizeListContainer.classList.remove('open');
-                settingsChunkSizeListToggle.textContent = i.toString();
+            const buttonElement = document.createElement('button');
+            buttonElement.appendChild(document.createTextNode(i.toString()));
+            buttonElement.setAttribute('type', 'button');
+            buttonElement.addEventListener('click', () => {
+                settingsChunkSizeListContainerElement.classList.remove('open');
+                settingsChunkSizeListToggleElement.textContent = i.toString();
             });
-            settingsChunkSizeList.appendChild(button);
+            settingsChunkSizeListElement.appendChild(buttonElement);
         }
 
-        const settingsSave = document.getElementById('settings-save');
+        const settingsSaveElement = document.getElementById('settings-save');
 
-        settingsSave.addEventListener('click', () => {
-            settingsForm.requestSubmit();
+        settingsSaveElement.addEventListener('click', () => {
+            settingsFormElement.requestSubmit();
         });
     }
 
     toggle = () => {
-        this.settings.classList.toggle('settings-show');
+        this.settingsElement.classList.toggle('settings-show');
     }
 
     static chunkSize = null;
