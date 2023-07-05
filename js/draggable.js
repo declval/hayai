@@ -8,8 +8,8 @@ class Draggable {
         let offsetX = 0;
         let offsetY = 0;
 
-        for (const child of handle.children) {
-            child.addEventListener('mousedown', event => {
+        for (const childElement of handle.children) {
+            childElement.addEventListener('mousedown', event => {
                 event.stopPropagation();
             });
         }
