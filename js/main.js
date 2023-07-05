@@ -3,38 +3,41 @@ import { Settings } from './settings.js';
 import { Text } from './text.js';
 import { tutorialToggle } from './tutorial.js';
 
-const main = () => {
-    const text = new Text();
+const text = new Text();
+const course = new Course(text);
+const settings = new Settings();
 
+const main = () => {
     text.render();
 
-    const course = new Course(text);
-
     document.addEventListener('keydown', event => {
-        const settings = document.getElementById('settings');
+        const settingsElement = document.getElementById('settings');
 
-        if (settings.classList.contains('settings-show')) {
+        if (settingsElement.classList.contains('settings-show')) {
             return;
         }
 
-        const caps = document.getElementById('keyboard-key-caps-indicator');
+        const capsIndicatorElement = document.getElementById('keyboard-key-caps-indicator');
 
         if (event.getModifierState('CapsLock')) {
-            caps.classList.add('keyboard-key-caps-indicator-active');
+            capsIndicatorElement.classList.add('keyboard-key-caps-indicator-active');
         } else {
-            caps.classList.remove('keyboard-key-caps-indicator-active');
+            capsIndicatorElement.classList.remove('keyboard-key-caps-indicator-active');
         }
 
-        const keys = document.getElementsByClassName('keyboard-key');
+        const keyElements = document.getElementsByClassName('keyboard-key');
 
-        for (const key of keys) {
-            if (key.dataset.value === event.key || key.dataset.valueAlt === event.key) {
-                key.classList.add('keyboard-key-keydown');
+        for (const keyElement of keyElements) {
+            if (keyElement.dataset.value === event.key ||
+                    keyElement.dataset.valueAlt === event.key) {
+                keyElement.classList.add('keyboard-key-keydown');
 
                 setTimeout(() => {
-                    key.classList.remove('keyboard-key-keydown');
+                    keyElement.classList.remove('keyboard-key-keydown');
                 }, 100);
             }
+
+            break;
         }
 
         // Don't move the cursor if event.key is not a single character
@@ -49,13 +52,13 @@ const main = () => {
         }
     });
 
-    const tutorialButton = document.getElementById('tutorial-button');
+    const tutorialButtonElement = document.getElementById('tutorial-button');
 
-    tutorialButton.addEventListener('click', () => {
+    tutorialButtonElement.addEventListener('click', () => {
         tutorialToggle();
     });
 
-    const darkModeButton = document.getElementById('dark-mode-button');
+    const darkModeButtonElement = document.getElementById('dark-mode-button');
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -65,21 +68,21 @@ const main = () => {
         if (darkMode === null) {
             if (event.matches) {
                 document.documentElement.classList.add('dark-mode');
-                darkModeButton.classList.add('dark-mode-button-enabled');
-                darkModeButton.textContent = 'light_mode';
+                darkModeButtonElement.classList.add('dark-mode-button-enabled');
+                darkModeButtonElement.textContent = 'light_mode';
             } else {
                 document.documentElement.classList.remove('dark-mode');
-                darkModeButton.classList.remove('dark-mode-button-enabled');
-                darkModeButton.textContent = 'dark_mode';
+                darkModeButtonElement.classList.remove('dark-mode-button-enabled');
+                darkModeButtonElement.textContent = 'dark_mode';
             }
         } else if (darkMode) {
             document.documentElement.classList.add('dark-mode');
-            darkModeButton.classList.add('dark-mode-button-enabled');
-            darkModeButton.textContent = 'light_mode';
+            darkModeButtonElement.classList.add('dark-mode-button-enabled');
+            darkModeButtonElement.textContent = 'light_mode';
         } else {
             document.documentElement.classList.remove('dark-mode');
-            darkModeButton.classList.remove('dark-mode-button-enabled');
-            darkModeButton.textContent = 'dark_mode';
+            darkModeButtonElement.classList.remove('dark-mode-button-enabled');
+            darkModeButtonElement.textContent = 'dark_mode';
         }
     };
 
@@ -87,27 +90,25 @@ const main = () => {
 
     mediaQueryHandler(mediaQuery);
 
-    darkModeButton.addEventListener('click', event => {
+    darkModeButtonElement.addEventListener('click', event => {
         if (event.target.classList.contains('dark-mode-button-enabled')) {
             localStorage.setItem('darkMode', '');
-            darkModeButton.textContent = 'dark_mode';
+            event.target.textContent = 'dark_mode';
         } else {
             localStorage.setItem('darkMode', 'on');
-            darkModeButton.textContent = 'light_mode';
+            event.target.textContent = 'light_mode';
         }
         document.documentElement.classList.toggle('dark-mode');
         event.target.classList.toggle('dark-mode-button-enabled');
     });
 
-    const settings = new Settings();
+    const settingsButtonElement = document.getElementById('settings-button');
 
-    const settingsButton = document.getElementById('settings-button');
-
-    settingsButton.addEventListener('click', () => {
+    settingsButtonElement.addEventListener('click', () => {
         settings.toggle();
     });
 
-    settingsButton.addEventListener('mouseenter', event => {
+    settingsButtonElement.addEventListener('mouseenter', event => {
         event.target.classList.add('settings-button-rotate-right');
 
         setTimeout(() => {
@@ -115,7 +116,7 @@ const main = () => {
         }, 800);
     });
 
-    settingsButton.addEventListener('mouseleave', event => {
+    settingsButtonElement.addEventListener('mouseleave', event => {
         event.target.classList.add('settings-button-rotate-left');
 
         setTimeout(() => {
