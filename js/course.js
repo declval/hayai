@@ -26,10 +26,10 @@ class Course {
                 shuffle(permutations(Course.english[i].newChars)).join(' ');
         }
 
-        this.lessons = document.getElementsByClassName('lesson');
+        this.lessonElements = document.getElementsByClassName('lesson');
 
-        for (const lesson of this.lessons) {
-            lesson.addEventListener('click', event => {
+        for (const lessonElement of this.lessonElements) {
+            lessonElement.addEventListener('click', event => {
                 this.currentLesson().classList.remove('lesson-current');
                 event.target.classList.add('lesson-current');
 
@@ -46,7 +46,7 @@ class Course {
                 } else {
                     this.sublesson = 'newChars';
 
-                    this.renderSublessonName();
+                    this.renderSublessonName(this.sublesson);
 
                     this.text.reset(
                         Course.english[index].newChars,
@@ -57,6 +57,11 @@ class Course {
                 this.text.render();
             });
         }
+    }
+
+    clearSublessonName = () => {
+        document.getElementById('sublesson-number').textContent = '';
+        document.getElementById('sublesson-name').textContent = '';
     }
 
     currentLesson = () => {
@@ -74,7 +79,7 @@ class Course {
             this.sublesson = 'newAndPreviousChars';
 
             setTimeout(() => {
-                this.renderSublessonName();
+                this.renderSublessonName(this.sublesson);
             }, 800);
 
             this.text.reset(
@@ -96,7 +101,7 @@ class Course {
             }
 
             setTimeout(() => {
-                this.renderSublessonName();
+                this.renderSublessonName(this.sublesson);
             }, 800);
 
             this.text.reset(
@@ -111,40 +116,36 @@ class Course {
             return;
         }
 
-        let nextLesson = null;
+        let nextLessonElement = null;
 
         if (index >= 0 && index < Course.english.length - 1) {
-            nextLesson = this.currentLesson().nextElementSibling;
+            nextLessonElement = this.currentLesson().nextElementSibling;
         } else {
-            nextLesson = this.lessons[0];
+            nextLessonElement = this.lessonElements[0];
         }
 
         setTimeout(() => {
-            nextLesson.click();
+            nextLessonElement.click();
         }, 800);
     }
 
-    clearSublessonName = () => {
-        document.getElementById('sublesson-number').textContent = '';
-        document.getElementById('sublesson-name').textContent = '';
-    }
-
-    renderSublessonName = () => {
+    renderSublessonName = sublesson => {
         const index = this.currentLessonIndex();
-
         const sublessonDescription =
-            [...Course.sublessonPropertyNameToDescription[this.sublesson]];
+            Course.sublessonPropertyNameToDescription[sublesson];
+
+        let sublessonDescriptionIndex = 1;
+
         if (index === 0) {
-            if (this.sublesson === 'newAndPreviousChars') {
-                sublessonDescription[1] = 'Randomized new characters';
-            } else if (this.sublesson === 'wordsContainingNewAndPreviousChars') {
-                sublessonDescription[1] = 'Words containing new characters';
+            if (sublessonDescription.length === 3) {
+                sublessonDescriptionIndex = 2;
             }
         }
+
         document.getElementById('sublesson-number').textContent =
             `Lesson ${index + 1}.${sublessonDescription[0]}`;
         document.getElementById('sublesson-name').textContent =
-            `${sublessonDescription[1]}`;
+            `${sublessonDescription[sublessonDescriptionIndex]}`;
     }
 
     reset = () => {
@@ -173,8 +174,19 @@ class Course {
         { newChars: ']%*\\'}
     ];
     static sublessonPropertyNameToDescription = {
-        newChars: ['A', 'New characters'],
-        newAndPreviousChars: ['B', 'Randomized new and previous characters'],
-        wordsContainingNewAndPreviousChars: ['C', 'Words containing new and previous characters']
+        newChars: [
+            'A',
+            'New characters'
+        ],
+        newAndPreviousChars: [
+            'B',
+            'Randomized new and previous characters',
+            'Randomized new characters'
+        ],
+        wordsContainingNewAndPreviousChars: [
+            'C',
+            'Words containing new and previous characters',
+            'Words containing new characters'
+        ]
     };
 }
