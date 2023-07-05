@@ -2,9 +2,6 @@ export { Text };
 
 class Text {
     constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
-        this.accuracy = null;
-        this.speed = null;
-
         this.reset(text, chunkSize);
 
         this.accuracyElement = document.getElementById('accuracy');
@@ -19,116 +16,109 @@ class Text {
     }
 
     cursorMove = key => {
+        const cursorElement = document.getElementsByClassName('text-character-cursor')[0];
+
+        if (!cursorElement) {
+            return false;
+        }
+
         if (!this.firstKeyPressed) {
             this.firstKeyPressed = true;
 
             this.startTime = Date.now();
-            this.nCorrect = 0;
+            this.correctCount = 0;
         }
 
-        for (const character of this.characters) {
-            if (character.classList.contains('text-character-cursor')) {
-                if (character.textContent === key) {
-                    character.classList.add('text-character-correct');
+        if (cursorElement.textContent === key) {
+            this.correctCount++;
 
-                    this.nCorrect++;
-                } else {
-                    character.classList.add('text-character-incorrect');
-                }
+            cursorElement.classList.add('text-character-correct');
+        } else {
+            cursorElement.classList.add('text-character-incorrect');
+        }
 
-                character.classList.remove('text-character-cursor');
+        cursorElement.classList.remove('text-character-cursor');
 
-                try {
-                    character.nextSibling.classList.add('text-character-cursor');
-                    this.highlightKeysToPress(character.nextSibling);
-                } catch (e) {
-                    const timeDifference = (Date.now() - this.startTime) / 1000 / 60;
+        try {
+            cursorElement.nextSibling.classList.add('text-character-cursor');
+            this.highlightKeysToPress(cursorElement.nextSibling);
+        } catch (e) {
+            this.chunk = this.chunks.next().value;
 
-                    this.speed = Math.floor(this.chunk.length / 5 / timeDifference);
-                    this.accuracy = Math.floor(this.nCorrect / this.chunk.length * 100);
+            if (this.chunk) {
+                this.render();
+            } else {
+                const timeDifference = (Date.now() - this.startTime) / 1000 / 60;
 
-                    this.chunk = this.chunks.next().value;
+                this.speed = Math.floor(this.text.length / 5 / timeDifference);
+                this.accuracy = Math.floor(this.correctCount / this.text.length * 100);
 
-                    if (this.chunk) {
-                        this.render();
-                    } else {
-                        this.chunks = this.chunked();
-                        this.chunk = this.chunks.next().value;
+                this.chunks = this.chunked();
+                this.chunk = this.chunks.next().value;
 
-                        this.textElement.classList.add('text-rotate');
+                this.textElement.classList.add('text-rotate');
 
-                        setTimeout(() => {
-                            this.textElement.classList.remove('text-rotate');
-                        }, 800);
+                setTimeout(() => {
+                    this.textElement.classList.remove('text-rotate');
+                }, 800);
 
-                        return true;
-                    }
-                }
-
-                break;
+                return true;
             }
         }
 
         return false;
     }
 
-    highlightKeysToPress = cursor => {
-        // Unhighlight previously highlighted keys if any
-        const highlightedKeys = document.getElementsByClassName('keyboard-key-highlight');
-        while (highlightedKeys.length) {
-            highlightedKeys[0].classList.remove('keyboard-key-highlight');
+    highlightKeysToPress = cursorElement => {
+        const highlightedKeyElements = [
+            ...document.getElementsByClassName('keyboard-key-highlight'),
+            ...document.getElementsByClassName('keyboard-key-text-highlight')
+        ];
+
+        for (const highlightedKeyElement of highlightedKeyElements) {
+            highlightedKeyElement.classList.remove('keyboard-key-highlight');
+            highlightedKeyElement.classList.remove('keyboard-key-text-highlight');
         }
 
-        const highlightedKeyTexts = document.getElementsByClassName('keyboard-key-text-highlight');
-        while (highlightedKeyTexts.length) {
-            highlightedKeyTexts[0].classList.remove('keyboard-key-text-highlight');
-        }
+        const lessonCurrentElement = document.getElementsByClassName('lesson-current')[0];
 
-        const lessonCurrent = document.getElementsByClassName('lesson-current')[0];
-
-        if (lessonCurrent.dataset.index === '-1') {
+        if (lessonCurrentElement.dataset.index === '-1') {
             return;
         }
 
-        const keys = document.getElementsByClassName('keyboard-key');
+        const keyElements = document.getElementsByClassName('keyboard-key');
 
-        for (const key of keys) {
-            if (key.dataset.value === cursor.textContent ||
-                    key.dataset.valueAlt === cursor.textContent) {
-                key.classList.add('keyboard-key-highlight');
+        for (const keyElement of keyElements) {
+            if (keyElement.dataset.value === cursorElement.textContent ||
+                    keyElement.dataset.valueAlt === cursorElement.textContent) {
+                keyElement.classList.add('keyboard-key-highlight');
 
-                if (key.dataset.value === cursor.textContent) {
-                    key.classList.add('keyboard-key-text-highlight');
+                if (keyElement.dataset.value === cursorElement.textContent) {
+                    keyElement.classList.add('keyboard-key-text-highlight');
                 } else {
-                    key.getElementsByClassName('keyboard-key-alt')[0]
+                    keyElement.getElementsByClassName('keyboard-key-alt')[0]
                         .classList.add('keyboard-key-text-highlight');
 
                     const shifts = document.getElementsByClassName('keyboard-key-shift');
-                    let shiftIndex = null;
 
-                    if (key.classList.contains('keyboard-key-lpinkie') ||
-                            key.classList.contains('keyboard-key-lring') ||
-                            key.classList.contains('keyboard-key-lmiddle') ||
-                            key.classList.contains('keyboard-key-lindex')) {
-                        shiftIndex = 1;
+                    if (keyElement.classList.contains('keyboard-key-lpinkie') ||
+                            keyElement.classList.contains('keyboard-key-lring') ||
+                            keyElement.classList.contains('keyboard-key-lmiddle') ||
+                            keyElement.classList.contains('keyboard-key-lindex')) {
+                        shifts[1].classList.add('keyboard-key-highlight', 'keyboard-key-text-highlight');
                     } else {
-                        shiftIndex = 0;
+                        shifts[0].classList.add('keyboard-key-highlight', 'keyboard-key-text-highlight');
                     }
-
-                    shifts[shiftIndex].classList.add('keyboard-key-highlight');
-                    shifts[shiftIndex].classList.add('keyboard-key-text-highlight');
                 }
+
+                break;
             }
         }
     }
 
     render = () => {
-        this.clear();
-
-        this.firstKeyPressed = false;
-
         if (Number.isFinite(this.speed)) {
-            this.speedElement.textContent = `${this.speed} WPM`;
+            this.speedElement.textContent = `${this.speed}WPM`;
         } else {
             this.speedElement.textContent = 'N/A';
         }
@@ -139,24 +129,24 @@ class Text {
             this.accuracyElement.textContent = 'N/A';
         }
 
-        for (const character of this.chunk) {
-            const div = document.createElement('div');
+        this.clear();
 
-            div.classList.add('text-character');
+        for (const character of this.chunk) {
+            const divElement = document.createElement('div');
+
+            divElement.classList.add('text-character');
 
             if (character === ' ') {
-                div.classList.add('text-character-space');
+                divElement.classList.add('text-character-space');
             }
 
-            div.appendChild(document.createTextNode(character));
+            divElement.appendChild(document.createTextNode(character));
 
-            this.textElement.appendChild(div);
+            this.textElement.appendChild(divElement);
         }
 
         this.textElement.firstChild.classList.add('text-character-cursor');
         this.highlightKeysToPress(this.textElement.firstChild);
-
-        this.characters = this.textElement.getElementsByClassName('text-character');
     }
 
     reset = (text, chunkSize) => {
@@ -169,19 +159,19 @@ class Text {
         this.chunkSize = chunkSize;
 
         if (this.text.length === 0) {
-            throw new Error('Invalid text length');
+            throw new Error('Invalid text length: 0');
         }
 
         if (this.chunkSize < Text.chunkSizeMin ||
-            this.chunkSize > Text.chunkSizeMax ||
-            this.chunkSize > this.text.length) {
+                this.chunkSize > Text.chunkSizeMax ||
+                this.chunkSize > this.text.length) {
             throw new Error(`Invalid chunk size: ${this.chunkSize}`);
         }
 
         this.chunks = this.chunked();
         this.chunk = this.chunks.next().value;
+        this.correctCount = 0;
         this.firstKeyPressed = false;
-        this.nCorrect = 0;
         this.startTime = null;
     }
 
