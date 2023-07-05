@@ -2,7 +2,6 @@ export { Settings };
 
 import { Draggable } from './draggable.js';
 import { Text } from './text.js';
-import { textAndChunkSize } from './main.js';
 
 class Settings {
     constructor() {
@@ -62,8 +61,8 @@ class Settings {
                 return;
             }
 
-            textAndChunkSize.chunkSize = newChunkSize;
-            textAndChunkSize.text = newCustomText;
+            Settings.chunkSize = newChunkSize;
+            Settings.text = newCustomText;
 
             document.getElementsByClassName('lesson')[0].click();
 
@@ -251,4 +250,7 @@ class Settings {
     toggle = () => {
         this.settings.classList.toggle('settings-show');
     }
+
+    static chunkSize = null;
+    static text = null;
 }

@@ -1,7 +1,7 @@
 export { Course };
 
+import { Settings } from './settings.js';
 import { lessonGenerate, permutations, randomNWordsContaining, shuffle } from './helpers.js';
-import { textAndChunkSize } from './main.js';
 import { words } from './words.js';
 
 class Course {
@@ -38,8 +38,8 @@ class Course {
                 if (index === -1) {
                     this.reset();
 
-                    if (textAndChunkSize.chunkSize && textAndChunkSize.text) {
-                        this.text.reset(textAndChunkSize.text, textAndChunkSize.chunkSize)
+                    if (Settings.chunkSize && Settings.text) {
+                        this.text.reset(Settings.text, Settings.chunkSize)
                     } else {
                         this.text.reset();
                     }

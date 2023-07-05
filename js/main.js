@@ -1,11 +1,7 @@
-export { textAndChunkSize };
-
 import { Course } from './course.js';
 import { Settings } from './settings.js';
 import { Text } from './text.js';
 import { tutorialToggle } from './tutorial.js';
-
-const textAndChunkSize = {};
 
 const main = () => {
     const text = new Text();
