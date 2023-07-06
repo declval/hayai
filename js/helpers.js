@@ -1,4 +1,30 @@
-export { lessonGenerate, permutations, randomNWordsContaining, shuffle };
+export { createElement, lessonGenerate, permutations, randomNWordsContaining, shuffle };
+
+const createElement = ({ name, text, attributes, classNames, eventHandlers }) => {
+    if (!name) {
+        throw new Error('name property is required');
+    }
+    const element = document.createElement(name);
+    if (text) {
+        element.appendChild(document.createTextNode(text));
+    }
+    if (attributes) {
+        for (const attribute of attributes) {
+            element.setAttribute(attribute[0], attribute[1]);
+        }
+    }
+    if (classNames) {
+        for (const className of classNames) {
+            element.classList.add(className);
+        }
+    }
+    if (eventHandlers) {
+        for (const eventHandler of eventHandlers) {
+            element.addEventListener(eventHandler[0], eventHandler[1]);
+        }
+    }
+    return element;
+};
 
 const randomInt = (min, max) => {
     return Math.floor(min + Math.random() * (max - min));

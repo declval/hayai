@@ -1,5 +1,7 @@
 export { Text };
 
+import { createElement } from "./helpers.js";
+
 class Text {
     constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
         this.reset(text, chunkSize);
@@ -132,16 +134,12 @@ class Text {
         this.clear();
 
         for (const character of this.chunk) {
-            const divElement = document.createElement('div');
-
-            divElement.classList.add('text-character');
-
-            if (character === ' ') {
-                divElement.classList.add('text-character-space');
-            }
-
-            divElement.appendChild(document.createTextNode(character));
-
+            const divElement = createElement({
+                name: 'div',
+                text: character,
+                classNames: character === ' ' ?
+                    ['text-character', 'text-character-space'] : ['text-character']
+            });
             this.textElement.appendChild(divElement);
         }
 

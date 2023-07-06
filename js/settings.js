@@ -2,6 +2,7 @@ export { Settings };
 
 import { Draggable } from './draggable.js';
 import { Text } from './text.js';
+import { createElement } from './helpers.js';
 
 class Settings {
     constructor() {
@@ -139,12 +140,14 @@ class Settings {
         const customTextFetchNumberMin = 1;
 
         for (let i = customTextFetchNumberMin; i <= customTextFetchNumberMax; ++i) {
-            const buttonElement = document.createElement('button');
-            buttonElement.appendChild(document.createTextNode(i.toString()));
-            buttonElement.setAttribute('type', 'button');
-            buttonElement.addEventListener('click', () => {
-                settingsNewsListContainerElement.classList.remove('open');
-                settingsNewsListToggleElement.textContent = i.toString();
+            const buttonElement = createElement({
+                name: 'button',
+                text: i.toString(),
+                attributes: [['type', 'button']],
+                eventHandlers: [['click', () => {
+                    settingsNewsListContainerElement.classList.remove('open');
+                    settingsNewsListToggleElement.textContent = i.toString();
+                }]]
             });
             settingsNewsListElement.appendChild(buttonElement);
         }
@@ -237,12 +240,14 @@ class Settings {
         });
 
         for (let i = Text.chunkSizeMin; i <= Text.chunkSizeMax; ++i) {
-            const buttonElement = document.createElement('button');
-            buttonElement.appendChild(document.createTextNode(i.toString()));
-            buttonElement.setAttribute('type', 'button');
-            buttonElement.addEventListener('click', () => {
-                settingsChunkSizeListContainerElement.classList.remove('open');
-                settingsChunkSizeListToggleElement.textContent = i.toString();
+            const buttonElement = createElement({
+                name: 'button',
+                text: i.toString(),
+                attributes: [['type', 'button']],
+                eventHandlers: [['click', () => {
+                    settingsChunkSizeListContainerElement.classList.remove('open');
+                    settingsChunkSizeListToggleElement.textContent = i.toString();
+                }]]
             });
             settingsChunkSizeListElement.appendChild(buttonElement);
         }
