@@ -36,31 +36,22 @@ class Settings {
         settingsFormElement.addEventListener('submit', event => {
             event.preventDefault();
 
-            const customTextElement = document.getElementById('settings-custom-text');
-            const newCustomText = customTextElement.value.replace(/\n/g, ' ');
-
-            if (newCustomText.length) {
-                customTextElement.classList.remove('settings-invalid');
-            } else {
-                customTextElement.classList.add('settings-invalid');
-                return;
-            }
-
             const chunkSizeElement = document.getElementById('settings-chunk-size-list-toggle');
-            let newChunkSize = null;
 
             if (!chunkSizeElement.textContent.length) {
                 return;
             }
 
-            newChunkSize = parseInt(chunkSizeElement.textContent, 10);
+            const newChunkSize = parseInt(chunkSizeElement.textContent, 10);
 
             if (!(Number.isFinite(newChunkSize) &&
                     newChunkSize >= Text.chunkSizeMin &&
-                    newChunkSize <= Text.chunkSizeMax &&
-                    newChunkSize <= newCustomText.length)) {
+                    newChunkSize <= Text.chunkSizeMax)) {
                 return;
             }
+
+            const customTextElement = document.getElementById('settings-custom-text');
+            const newCustomText = customTextElement.value.replace(/\n/g, ' ');
 
             Settings.chunkSize = newChunkSize;
             Settings.text = newCustomText;
@@ -88,12 +79,6 @@ class Settings {
                 keyboardElement.classList.remove('keyboard-guide-show');
                 localStorage.setItem('guide', '');
             }
-        });
-
-        const settingsCustomTextElement = document.getElementById('settings-custom-text');
-
-        settingsCustomTextElement.addEventListener('input', event => {
-            event.target.classList.remove('settings-invalid');
         });
 
         const settingsNewsListToggleIconElement =
@@ -195,6 +180,8 @@ class Settings {
                 customText += article.summary.trim();
                 customText += i < articles.results.length - 1 ? '\n' : '';
             }
+
+            const settingsCustomTextElement = document.getElementById('settings-custom-text');
 
             settingsCustomTextElement.value = customText;
         });

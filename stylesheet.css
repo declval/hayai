@@ -694,11 +694,6 @@ div.keyboard-home-key {
     resize: none;
 }
 
-#settings-custom-text.settings-invalid,
-#settings-custom-text.settings-invalid::placeholder {
-    color: var(--red);
-}
-
 .settings-custom-text-fetch-container {
     display: flex;
     gap: var(--padding);

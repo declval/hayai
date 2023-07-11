@@ -37,12 +37,7 @@ class Course {
 
                 if (index === -1) {
                     this.reset();
-
-                    if (Settings.chunkSize && Settings.text) {
-                        this.text.reset(Settings.text, Settings.chunkSize)
-                    } else {
-                        this.text.reset();
-                    }
+                    this.text.reset(Settings.text, Settings.chunkSize)
                 } else {
                     this.sublesson = 'newChars';
 
