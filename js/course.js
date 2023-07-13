@@ -10,25 +10,14 @@ class Course {
 
         this.reset();
 
-        for (let i = 0; i < Course.english.length; ++i) {
-            Course.english[i].newAndPreviousChars = lessonGenerate(
-                Course.english.slice(0, i + 1).map(elem => elem.newChars).join('')
-            );
-        }
-
-        for (let i = 0; i < 7; ++i) {
-            Course.english[i].wordsContainingNewAndPreviousChars =
-                randomNWordsContaining(20, words, Course.english[i].newAndPreviousChars);
-        }
-
-        for (let i = 0; i < Course.english.length; ++i) {
-            Course.english[i].newChars =
-                shuffle(permutations(Course.english[i].newChars)).join(' ');
-        }
-
         this.lessonElements = document.getElementsByClassName('lesson');
 
         for (const lessonElement of this.lessonElements) {
+            const index = parseInt(lessonElement.dataset.index);
+            if (index !== -1) {
+                lessonElement.dataset.chars = [...Course.english[index].newChars].join(' ');
+            }
+
             lessonElement.addEventListener('click', event => {
                 this.currentLesson().classList.remove('lesson-current');
                 event.target.classList.add('lesson-current');
@@ -51,6 +40,22 @@ class Course {
 
                 this.text.render();
             });
+        }
+
+        for (let i = 0; i < Course.english.length; ++i) {
+            Course.english[i].newAndPreviousChars = lessonGenerate(
+                Course.english.slice(0, i + 1).map(elem => elem.newChars).join('')
+            );
+        }
+
+        for (let i = 0; i < 7; ++i) {
+            Course.english[i].wordsContainingNewAndPreviousChars =
+                randomNWordsContaining(20, words, Course.english[i].newAndPreviousChars);
+        }
+
+        for (let i = 0; i < Course.english.length; ++i) {
+            Course.english[i].newChars =
+                shuffle(permutations(Course.english[i].newChars)).join(' ');
         }
     }
 
