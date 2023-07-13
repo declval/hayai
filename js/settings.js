@@ -81,6 +81,27 @@ class Settings {
             }
         });
 
+        const settingsHighlightElement = document.getElementById('settings-highlight');
+
+        const highlight = localStorage.getItem('highlight');
+
+        if (highlight === 'on') {
+            Text.highlight = true;
+            settingsHighlightElement.checked = true;
+        }
+
+        settingsHighlightElement.addEventListener('input', event => {
+            if (event.target.checked) {
+                Text.highlight = true;
+                localStorage.setItem('highlight', 'on');
+            } else {
+                Text.highlight = false;
+                localStorage.setItem('highlight', '');
+            }
+            const cursorElement = document.getElementsByClassName('text-character-cursor')[0];
+            Text.highlightKeysToPress(cursorElement);
+        });
+
         const settingsNewsListToggleIconElement =
             document.getElementById('settings-news-list-toggle-icon');
         const settingsNewsListToggleElement =

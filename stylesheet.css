@@ -631,14 +631,16 @@ div.keyboard-home-key {
     margin-bottom: var(--padding);
 }
 
-.settings-guide-container {
+.settings-checkbox-container {
     align-items: center;
+    border-bottom: var(--border);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--alt-padding);
+    padding-bottom: var(--padding);
 }
 
-#settings-guide {
+.settings-checkbox {
     appearance: none;
     background-color: var(--background-color);
     border: var(--border);
@@ -651,11 +653,11 @@ div.keyboard-home-key {
     width: 1.2rem;
 }
 
-#settings-guide:hover {
+.settings-checkbox:hover {
     border: var(--border-hover);
 }
 
-#settings-guide:checked::after {
+.settings-checkbox:checked::after {
     background-color: var(--color);
     border-radius: 50%;
     content: "";
