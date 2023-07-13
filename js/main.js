@@ -107,22 +107,6 @@ const main = () => {
     settingsButtonElement.addEventListener('click', () => {
         settings.toggle();
     });
-
-    settingsButtonElement.addEventListener('mouseenter', event => {
-        event.target.classList.add('settings-button-rotate-right');
-
-        setTimeout(() => {
-            event.target.classList.remove('settings-button-rotate-right');
-        }, 800);
-    });
-
-    settingsButtonElement.addEventListener('mouseleave', event => {
-        event.target.classList.add('settings-button-rotate-left');
-
-        setTimeout(() => {
-            event.target.classList.remove('settings-button-rotate-left');
-        }, 800);
-    });
 }
 
 document.addEventListener('DOMContentLoaded', main);

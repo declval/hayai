@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&family=Roboto+Mono&display=swap");
 :root {
-    --animation-duration: 300ms;
+    --animation-duration: 200ms;
     --background-color: rgb(255, 255, 255);
     --border-hover: 1px solid rgba(0, 0, 0, 0.3);
     --border-radius: 4px;
@@ -173,24 +173,14 @@ header {
     content: attr(data-tooltip-alt);
 }
 
-.settings-button-rotate-left {
-    animation: settings-button-rotate-left var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
+.settings-button {
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform var(--animation-duration);
 }
 
-.settings-button-rotate-right {
-    animation: settings-button-rotate-right var(--alt-animation-duration) cubic-bezier(0.27, 1.77, 0.81, 1.31);
-}
-
-@keyframes settings-button-rotate-left {
-    100% {
-        transform: rotate(-180deg);
-    }
-}
-
-@keyframes settings-button-rotate-right {
-    100% {
-        transform: rotate(180deg);
-    }
+.settings-button:hover {
+    transform: rotate(60deg);
 }
 
 .main {
