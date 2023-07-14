@@ -3,6 +3,7 @@ export { Settings };
 import { Draggable } from './draggable.js';
 import { Text } from './text.js';
 import { createElement } from './helpers.js';
+import { keyboard } from './main.js';
 
 class Settings {
     constructor() {
@@ -61,22 +62,21 @@ class Settings {
             this.toggle();
         });
 
-        const keyboardElement = document.getElementById('keyboard');
         const settingsGuideElement = document.getElementById('settings-guide');
 
         const guide = localStorage.getItem('guide');
 
         if (guide === 'on') {
-            keyboardElement.classList.add('keyboard-guide-show');
+            keyboard.guideOn();
             settingsGuideElement.checked = true;
         }
 
         settingsGuideElement.addEventListener('input', event => {
             if (event.target.checked) {
-                keyboardElement.classList.add('keyboard-guide-show');
+                keyboard.guideOn();
                 localStorage.setItem('guide', 'on');
             } else {
-                keyboardElement.classList.remove('keyboard-guide-show');
+                keyboard.guideOff();
                 localStorage.setItem('guide', '');
             }
         });
@@ -86,20 +86,20 @@ class Settings {
         const highlight = localStorage.getItem('highlight');
 
         if (highlight === 'on') {
-            Text.highlight = true;
+            Settings.highlight = true;
             settingsHighlightElement.checked = true;
         }
 
         settingsHighlightElement.addEventListener('input', event => {
             if (event.target.checked) {
-                Text.highlight = true;
+                Settings.highlight = true;
                 localStorage.setItem('highlight', 'on');
             } else {
-                Text.highlight = false;
+                Settings.highlight = false;
                 localStorage.setItem('highlight', '');
             }
             const cursorElement = document.getElementsByClassName('text-character-cursor')[0];
-            Text.highlightKeysToPress(cursorElement);
+            keyboard.highlightKeysToPressFor(cursorElement.textContent);
         });
 
         const settingsNewsListToggleIconElement =
@@ -272,5 +272,6 @@ class Settings {
     }
 
     static chunkSize = null;
+    static highlight = false;
     static text = null;
 }

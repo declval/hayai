@@ -1,10 +1,14 @@
+export { keyboard };
+
 import { Course } from './course.js';
+import { Keyboard } from './keyboard.js';
 import { Settings } from './settings.js';
 import { Text } from './text.js';
 import { tutorialToggle } from './tutorial.js';
 
 const text = new Text();
 const course = new Course(text);
+const keyboard = new Keyboard();
 const settings = new Settings();
 
 const main = () => {
@@ -17,28 +21,13 @@ const main = () => {
             return;
         }
 
-        const capsIndicatorElement = document.getElementById('keyboard-key-caps-indicator');
-
         if (event.getModifierState('CapsLock')) {
-            capsIndicatorElement.classList.add('keyboard-key-caps-indicator-active');
+            keyboard.capsOn();
         } else {
-            capsIndicatorElement.classList.remove('keyboard-key-caps-indicator-active');
+            keyboard.capsOff();
         }
 
-        const keyElements = document.getElementsByClassName('keyboard-key');
-
-        for (const keyElement of keyElements) {
-            if (keyElement.dataset.value === event.key ||
-                    keyElement.dataset.valueAlt === event.key) {
-                keyElement.classList.add('keyboard-key-keydown');
-
-                setTimeout(() => {
-                    keyElement.classList.remove('keyboard-key-keydown');
-                }, 100);
-            }
-
-            break;
-        }
+        keyboard.press(event.key);
 
         // Don't move the cursor if event.key is not a single character
         if (event.key.length != 1) {

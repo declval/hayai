@@ -1,6 +1,7 @@
 export { Text };
 
-import { createElement } from "./helpers.js";
+import { createElement } from './helpers.js';
+import { keyboard } from './main.js';
 
 class Text {
     constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
@@ -43,7 +44,7 @@ class Text {
 
         try {
             cursorElement.nextSibling.classList.add('text-character-cursor');
-            Text.highlightKeysToPress(cursorElement.nextSibling);
+            keyboard.highlightKeysToPressFor(cursorElement.nextSibling.textContent);
         } catch (e) {
             this.chunk = this.chunks.next().value;
 
@@ -97,7 +98,7 @@ class Text {
         }
 
         this.textElement.firstChild.classList.add('text-character-cursor');
-        Text.highlightKeysToPress(this.textElement.firstChild);
+        keyboard.highlightKeysToPressFor(this.textElement.firstChild.textContent);
     }
 
     reset = (text, chunkSize) => {
@@ -146,62 +147,8 @@ class Text {
         }
     }
 
-    static highlightKeysToPress = cursorElement => {
-        const highlightedKeyElements = [
-            ...document.getElementsByClassName('keyboard-key-highlight'),
-            ...document.getElementsByClassName('keyboard-key-text-highlight')
-        ];
-
-        for (const highlightedKeyElement of highlightedKeyElements) {
-            highlightedKeyElement.classList.remove('keyboard-key-highlight');
-            highlightedKeyElement.classList.remove('keyboard-key-text-highlight');
-        }
-
-        const lessonCurrentElement = document.getElementsByClassName('lesson-current')[0];
-
-        if (lessonCurrentElement.dataset.index === '-1') {
-            if (!Text.highlight) {
-                return;
-            }
-        }
-
-        const keyElements = document.getElementsByClassName('keyboard-key');
-
-        for (const keyElement of keyElements) {
-            if (keyElement.dataset.value === cursorElement.textContent ||
-                    keyElement.dataset.valueAlt === cursorElement.textContent) {
-                keyElement.classList.add('keyboard-key-highlight');
-
-                if (keyElement.dataset.value === cursorElement.textContent) {
-                    keyElement.classList.add('keyboard-key-text-highlight');
-                } else {
-                    try {
-                        keyElement.getElementsByClassName('keyboard-key-alt')[0]
-                            .classList.add('keyboard-key-text-highlight');
-                    } catch (e) {
-                        keyElement.classList.add('keyboard-key-text-highlight');
-                    }
-
-                    const shifts = document.getElementsByClassName('keyboard-key-shift');
-
-                    if (keyElement.classList.contains('keyboard-key-lpinkie') ||
-                            keyElement.classList.contains('keyboard-key-lring') ||
-                            keyElement.classList.contains('keyboard-key-lmiddle') ||
-                            keyElement.classList.contains('keyboard-key-lindex')) {
-                        shifts[1].classList.add('keyboard-key-highlight', 'keyboard-key-text-highlight');
-                    } else {
-                        shifts[0].classList.add('keyboard-key-highlight', 'keyboard-key-text-highlight');
-                    }
-                }
-
-                break;
-            }
-        }
-    }
-
     static chunkSizeMax = 256;
     static chunkSizeMin = 1;
-    static highlight = false;
     static initialChunkSize = 32;
     static initialText = 'Touch typing (also called blind typing, or touch keyboarding) is a style of typing.';
 }

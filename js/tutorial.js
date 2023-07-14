@@ -1,5 +1,7 @@
 export { tutorialToggle };
 
+import { keyboard } from './main.js';
+
 let tutorialOpen = false;
 
 const tutorialToggle = () => {
@@ -39,9 +41,9 @@ const tutorialToggle = () => {
         settingsButtonElement.classList.remove('tutorial-settings-button');
         tutorialFingersElement.classList.remove('tutorial-show');
         if (document.getElementById('settings-guide').checked) {
-            keyboardElement.classList.add('keyboard-guide-show');
+            keyboard.guideOn();
         } else {
-            keyboardElement.classList.remove('keyboard-guide-show');
+            keyboard.guideOff();
         }
         for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
             keyboardGuideKeyElement.classList.remove('tutorial-keyboard-guide-key');
@@ -64,7 +66,7 @@ const tutorialToggle = () => {
 
     tutorialOpen = true;
 
-    keyboardElement.classList.remove('keyboard-guide-show');
+    keyboard.guideOff();
 
     tutorialBackgroundElement.classList.add('tutorial-background-show');
     tutorialHomeRowElement.classList.add('tutorial-show');
@@ -86,7 +88,7 @@ const tutorialToggle = () => {
         for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
             keyboardGuideKeyElement.classList.add('tutorial-keyboard-guide-key');
         }
-        keyboardElement.classList.add('keyboard-guide-show');
+        keyboard.guideOn();
         tutorialFingersElement.classList.add('tutorial-show');
     });
 
@@ -95,7 +97,7 @@ const tutorialToggle = () => {
         for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
             keyboardGuideKeyElement.classList.remove('tutorial-keyboard-guide-key');
         }
-        keyboardElement.classList.remove('keyboard-guide-show');
+        keyboard.guideOff();
 
         tutorialSettingsElement.style.top =
             `${keyboardElement.getBoundingClientRect().y}px`;
@@ -107,9 +109,9 @@ const tutorialToggle = () => {
         tutorialSettingsElement.classList.remove('tutorial-show');
         settingsButtonElement.classList.remove('tutorial-settings-button');
         if (document.getElementById('settings-guide').checked) {
-            keyboardElement.classList.add('keyboard-guide-show');
+            keyboard.guideOn();
         } else {
-            keyboardElement.classList.remove('keyboard-guide-show');
+            keyboard.guideOff();
         }
         tutorialBackgroundElement.classList.remove('tutorial-background-show');
 

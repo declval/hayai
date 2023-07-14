@@ -831,7 +831,6 @@ div.keyboard-home-key {
 
 .tutorial-keyboard-home-key {
     animation: blinking-color-scale var(--alt-animation-duration) infinite;
-    z-index: 1;
 }
 
 @keyframes blinking-color-scale {
@@ -842,7 +841,6 @@ div.keyboard-home-key {
 
 .tutorial-keyboard-guide-key {
     animation: blinking-rotate-scale var(--alt-animation-duration) infinite;
-    z-index: 1;
 }
 
 @keyframes blinking-rotate-scale {
@@ -853,7 +851,6 @@ div.keyboard-home-key {
 
 .tutorial-settings-button {
     animation: blinking-scale var(--alt-animation-duration) infinite;
-    z-index: 1;
 }
 
 @keyframes blinking-scale {
