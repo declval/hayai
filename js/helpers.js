@@ -1,4 +1,4 @@
-export { createElement, lessonGenerate, permutations, randomNWordsContaining, shuffle };
+export { createElement, darkMode, lessonGenerate, permutations, randomNWordsContaining, shuffle };
 
 const createElement = ({ name, text, attributes, classNames, eventHandlers }) => {
     if (!name) {
@@ -24,6 +24,20 @@ const createElement = ({ name, text, attributes, classNames, eventHandlers }) =>
         }
     }
     return element;
+};
+
+const darkMode = on => {
+    const darkModeButtonElement = document.getElementById('dark-mode-button');
+
+    if (on) {
+        document.documentElement.classList.add('dark-mode');
+        darkModeButtonElement.classList.add('dark-mode-button-enabled');
+        darkModeButtonElement.textContent = 'light_mode';
+    } else {
+        document.documentElement.classList.remove('dark-mode');
+        darkModeButtonElement.classList.remove('dark-mode-button-enabled');
+        darkModeButtonElement.textContent = 'dark_mode';
+    }
 };
 
 const randomInt = (min, max) => {

@@ -4,6 +4,7 @@ import { Course } from './course.js';
 import { Keyboard } from './keyboard.js';
 import { Settings } from './settings.js';
 import { Text } from './text.js';
+import { darkMode } from './helpers.js';
 import { tutorialToggle } from './tutorial.js';
 
 const text = new Text();
@@ -45,31 +46,21 @@ const main = () => {
         tutorialToggle();
     });
 
-    const darkModeButtonElement = document.getElementById('dark-mode-button');
-
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const mediaQueryHandler = event => {
-        const darkMode = localStorage.getItem('darkMode');
+        const darkModeItem = localStorage.getItem('darkMode');
 
-        if (darkMode === null) {
+        if (darkModeItem === null) {
             if (event.matches) {
-                document.documentElement.classList.add('dark-mode');
-                darkModeButtonElement.classList.add('dark-mode-button-enabled');
-                darkModeButtonElement.textContent = 'light_mode';
+                darkMode(true);
             } else {
-                document.documentElement.classList.remove('dark-mode');
-                darkModeButtonElement.classList.remove('dark-mode-button-enabled');
-                darkModeButtonElement.textContent = 'dark_mode';
+                darkMode(false);
             }
-        } else if (darkMode) {
-            document.documentElement.classList.add('dark-mode');
-            darkModeButtonElement.classList.add('dark-mode-button-enabled');
-            darkModeButtonElement.textContent = 'light_mode';
+        } else if (darkModeItem) {
+            darkMode(true);
         } else {
-            document.documentElement.classList.remove('dark-mode');
-            darkModeButtonElement.classList.remove('dark-mode-button-enabled');
-            darkModeButtonElement.textContent = 'dark_mode';
+            darkMode(false);
         }
     };
 
@@ -77,16 +68,16 @@ const main = () => {
 
     mediaQueryHandler(mediaQuery);
 
+    const darkModeButtonElement = document.getElementById('dark-mode-button');
+
     darkModeButtonElement.addEventListener('click', event => {
         if (event.target.classList.contains('dark-mode-button-enabled')) {
             localStorage.setItem('darkMode', '');
-            event.target.textContent = 'dark_mode';
+            darkMode(false);
         } else {
             localStorage.setItem('darkMode', 'on');
-            event.target.textContent = 'light_mode';
+            darkMode(true);
         }
-        document.documentElement.classList.toggle('dark-mode');
-        event.target.classList.toggle('dark-mode-button-enabled');
     });
 
     const settingsButtonElement = document.getElementById('settings-button');
