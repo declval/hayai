@@ -267,6 +267,10 @@ class Settings {
         });
     }
 
+    shown = () => {
+        return this.settingsElement.classList.contains('settings-show');
+    }
+
     toggle = () => {
         this.settingsElement.classList.toggle('settings-show');
     }

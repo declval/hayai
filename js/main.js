@@ -15,9 +15,7 @@ const main = () => {
     text.render();
 
     document.addEventListener('keydown', event => {
-        const settingsElement = document.getElementById('settings');
-
-        if (settingsElement.classList.contains('settings-show')) {
+        if (settings.shown()) {
             return;
         }
 
