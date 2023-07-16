@@ -30,7 +30,7 @@ const main = () => {
         keyboard.press(event.key);
 
         // Don't move the cursor if event.key is not a single character
-        if (event.key.length != 1) {
+        if (event.key.length !== 1) {
             return;
         }
 
