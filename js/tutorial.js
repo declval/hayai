@@ -23,16 +23,6 @@ const tutorialToggle = () => {
     const settingsElement = document.getElementById('settings');
     const settingsButtonElement = document.getElementById('settings-button');
     const keyboardElement = document.getElementById('keyboard');
-    const keyboardGuideKeyElements = [
-        ...document.getElementsByClassName('keyboard-key-lpinkie'),
-        ...document.getElementsByClassName('keyboard-key-lring'),
-        ...document.getElementsByClassName('keyboard-key-lmiddle'),
-        ...document.getElementsByClassName('keyboard-key-lindex'),
-        ...document.getElementsByClassName('keyboard-key-rindex'),
-        ...document.getElementsByClassName('keyboard-key-rmiddle'),
-        ...document.getElementsByClassName('keyboard-key-rring'),
-        ...document.getElementsByClassName('keyboard-key-rpinkie')
-    ];
     const keyboardHomeKeyElements =
         document.getElementsByClassName('keyboard-home-key');
 
@@ -44,9 +34,6 @@ const tutorialToggle = () => {
             keyboard.guideOn();
         } else {
             keyboard.guideOff();
-        }
-        for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
-            keyboardGuideKeyElement.classList.remove('tutorial-keyboard-guide-key');
         }
         for (const keyboardHomeKeyElement of keyboardHomeKeyElements) {
             keyboardHomeKeyElement.classList.remove('tutorial-keyboard-home-key');
@@ -85,18 +72,12 @@ const tutorialToggle = () => {
         }
 
         tutorialFingersElement.style.top = `${keyboardElement.getBoundingClientRect().y}px`;
-        for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
-            keyboardGuideKeyElement.classList.add('tutorial-keyboard-guide-key');
-        }
         keyboard.guideOn();
         tutorialFingersElement.classList.add('tutorial-show');
     });
 
     tutorialFingersButtonElement.addEventListener('click', () => {
         tutorialFingersElement.classList.remove('tutorial-show');
-        for (const keyboardGuideKeyElement of keyboardGuideKeyElements) {
-            keyboardGuideKeyElement.classList.remove('tutorial-keyboard-guide-key');
-        }
         keyboard.guideOff();
 
         tutorialSettingsElement.style.top =
