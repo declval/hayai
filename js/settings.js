@@ -267,6 +267,10 @@ class Settings {
         });
     }
 
+    close = () => {
+        this.settingsElement.classList.remove('settings-show');
+    }
+
     shown = () => {
         return this.settingsElement.classList.contains('settings-show');
     }

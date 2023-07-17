@@ -832,7 +832,7 @@ div.keyboard-home-key {
     line-height: 1.4;
     padding: var(--alt-padding);
     position: fixed;
-    transform: translate(-50%, calc(-100% - var(--alt-padding)));
+    transform: translate(-50%, calc(-100% - var(--padding)));
     width: 500px;
 }
 

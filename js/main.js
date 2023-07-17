@@ -4,13 +4,14 @@ import { Course } from './course.js';
 import { Keyboard } from './keyboard.js';
 import { Settings } from './settings.js';
 import { Text } from './text.js';
+import { Tutorial } from './tutorial.js';
 import { darkMode } from './helpers.js';
-import { tutorialToggle } from './tutorial.js';
 
 const text = new Text();
 const course = new Course(text);
 const keyboard = new Keyboard();
 const settings = new Settings();
+const tutorial = new Tutorial(keyboard, settings);
 
 const main = () => {
     text.render();
@@ -43,7 +44,7 @@ const main = () => {
     const tutorialButtonElement = document.getElementById('tutorial-button');
 
     tutorialButtonElement.addEventListener('click', () => {
-        tutorialToggle();
+        tutorial.open();
     });
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
