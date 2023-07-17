@@ -27,7 +27,6 @@
     --rindex-color: rgb(214, 214, 214);
 
     --alt-animation-duration: 800ms;
-    --alt-color: rgb(255, 255, 255);
     --alt-padding: 10px;
 }
 
@@ -46,8 +45,6 @@
     --middle-color: rgb(153, 153, 153);
     --lindex-color: rgb(122, 122, 122);
     --rindex-color: rgb(101, 101, 101);
-
-    --alt-color: rgb(255, 255, 255);
 }
 
 body {
