@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&family=Roboto+Mono&display=swap");
+
 :root {
     --animation-duration: 200ms;
     --background-color: rgb(255, 255, 255);
@@ -75,6 +76,7 @@ button:hover {
 header {
     box-sizing: border-box;
     display: flex;
+    font-size: 0.8rem;
     justify-content: space-between;
     padding: var(--alt-padding);
     width: 1100px;
@@ -86,23 +88,13 @@ header {
     }
 }
 
-.buttons {
-    display: flex;
-    font-family: "Roboto Mono", sans-serif;
-    font-size: 0.8rem;
-    gap: var(--alt-padding);
+@keyframes show-tooltip {
+    100% {
+        opacity: 1;
+    }
 }
 
-.speed-container,
-.accuracy-container {
-    align-items: center;
-    display: flex;
-    gap: var(--padding);
-    position: relative;
-}
-
-.speed-container:hover::after,
-.accuracy-container:hover::after {
+.tooltip:hover::after {
     align-items: center;
     animation: show-tooltip var(--animation-duration) forwards;
     background-color: var(--background-color);
@@ -116,16 +108,29 @@ header {
     left: 0;
     opacity: 0;
     padding: var(--padding);
+    pointer-events: none;
     position: absolute;
     top: 120%;
     white-space: nowrap;
     z-index: 1;
 }
 
+.buttons {
+    display: flex;
+    font-family: "Roboto Mono", sans-serif;
+    gap: var(--alt-padding);
+}
+
+.indicator-container {
+    align-items: center;
+    display: flex;
+    gap: var(--padding);
+    position: relative;
+}
+
 .sublesson {
     align-items: center;
     display: flex;
-    font-size: 0.8rem;
     gap: var(--padding);
 }
 
@@ -133,45 +138,12 @@ header {
     filter: opacity(50%);
 }
 
-#tutorial-button,
-#dark-mode-button,
-#settings-button {
+.button {
     cursor: pointer;
-}
-
-#tutorial-button,
-#dark-mode-button {
     position: relative;
 }
 
-#tutorial-button:hover::after,
-#dark-mode-button:hover::after {
-    align-items: center;
-    animation: show-tooltip var(--animation-duration) forwards;
-    background-color: var(--background-color);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    content: attr(data-tooltip);
-    display: flex;
-    font-family: "Roboto", sans-serif;
-    font-size: 0.7rem;
-    height: 16px;
-    left: 0;
-    opacity: 0;
-    padding: var(--padding);
-    position: absolute;
-    text-shadow: none;
-    top: 120%;
-    white-space: nowrap;
-}
-
-@keyframes show-tooltip {
-    100% {
-        opacity: 1;
-    }
-}
-
-#dark-mode-button.dark-mode-button-enabled:hover::after {
+.dark-mode-button.dark-mode-button-enabled:hover::after {
     content: attr(data-tooltip-alt);
 }
 
@@ -231,27 +203,6 @@ header {
     position: relative;
 }
 
-.lesson:not(:first-child):hover::after {
-    align-items: center;
-    animation: show-chars var(--animation-duration) forwards;
-    background-color: var(--background-color);
-    border-radius: var(--border-radius);
-    border: var(--border);
-    content: attr(data-chars);
-    display: flex;
-    font-family: "Roboto", sans-serif;
-    font-size: 0.7rem;
-    left: 100%;
-    opacity: 0;
-    padding: var(--padding);
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    transform: translate(var(--padding), -50%);
-    white-space: nowrap;
-    z-index: 1;
-}
-
 @keyframes show-chars {
     100% {
         font-size: 0.8rem;
@@ -259,8 +210,16 @@ header {
     }
 }
 
+.lesson:hover::after {
+    animation: show-chars var(--animation-duration) forwards;
+    content: attr(data-chars);
+    left: 100%;
+    top: 50%;
+    transform: translate(var(--padding), -50%);
+}
+
 @media (max-width: 1100px) {
-    .lesson:not(:first-child):hover::after {
+    .lesson:hover::after {
         left: 50%;
         top: 100%;
         transform: translate(-50%, var(--padding));
@@ -279,19 +238,7 @@ header {
     width: 100%;
 }
 
-@media (max-width: 1100px) {
-    .center {
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 700px) {
-    .center {
-        gap: 0;
-    }
-}
-
-#text {
+.text {
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -304,20 +251,10 @@ header {
 }
 
 @media (max-width: 1100px) {
-    #text {
+    .text {
         font-size: 1.1em;
         width: 100%;
     }
-}
-
-@media (max-width: 700px) {
-    #text {
-        font-size: 1em;
-    }
-}
-
-.text-rotate {
-    animation: text-rotate var(--alt-animation-duration) linear;
 }
 
 @keyframes text-rotate {
@@ -325,6 +262,10 @@ header {
         opacity: 0;
         transform: perspective(400px) rotateY(180deg);
     }
+}
+
+.text-rotate {
+    animation: text-rotate var(--alt-animation-duration) linear;
 }
 
 .text-character {
@@ -337,14 +278,20 @@ header {
     width: 1rem;
 }
 
+@keyframes blink-cursor {
+    50% {
+        background-color: var(--gray);
+    }
+}
+
 .text-character-cursor {
     animation: blink-cursor 1s infinite;
     border-radius: 1px;
 }
 
-@keyframes blink-cursor {
-    50% {
-        background-color: var(--gray);
+@keyframes move-right {
+    100% {
+        right: 0;
     }
 }
 
@@ -359,19 +306,14 @@ header {
     width: 2px;
 }
 
-@keyframes move-right {
-    100% {
-        right: 0;
-    }
-}
-
 .text-character-space::before {
     border: 1px solid var(--space-color);
     border-radius: 1px;
+    box-sizing: border-box;
     content: "";
     position: absolute;
     top: 100%;
-    width: 50%;
+    width: 70%;
 }
 
 .text-character-correct {
@@ -390,7 +332,7 @@ header {
     border-color: var(--red);
 }
 
-#keyboard {
+.keyboard {
     background-color: var(--gray);
     border-radius: var(--border-radius);
     box-sizing: border-box;
@@ -400,13 +342,13 @@ header {
 }
 
 @media (max-width: 1100px) {
-    #keyboard {
+    .keyboard {
         transform: scale(0.8);
     }
 }
 
 @media (max-width: 700px) {
-    #keyboard {
+    .keyboard {
         transform: scale(0.6);
     }
 }
@@ -456,7 +398,6 @@ header {
     align-items: center;
     display: flex;
     font-size: 0.7rem;
-    font-weight: normal;
     height: 50%;
     justify-content: center;
     left: 0;
@@ -465,7 +406,7 @@ header {
     width: 50%;
 }
 
-div.keyboard-home-key {
+.keyboard-home-key {
     color: var(--fingerprint-color);
     font-size: 2.4rem;
     left: 50%;
@@ -482,18 +423,18 @@ div.keyboard-home-key {
     width: 100%;
 }
 
-#keyboard-key-caps-indicator {
+.keyboard-key-caps-indicator {
     background-color: rgb(181, 181, 181);
     border-radius: var(--border-radius);
-    height: 4px;
+    height: 5px;
     position: absolute;
     right: var(--alt-padding);
     top: 50%;
     transform: translateY(-50%);
-    width: 4px;
+    width: 5px;
 }
 
-#keyboard-key-caps-indicator.keyboard-key-caps-indicator-active {
+.keyboard-key-caps-indicator.keyboard-key-caps-indicator-active {
     background-color: rgb(150, 255, 70);
     box-shadow: 0 0 4px 0 rgb(150, 255, 70);
 }
@@ -604,7 +545,7 @@ div.keyboard-home-key {
     background-color: var(--scrollbar-thumb-color);
 }
 
-#settings {
+.settings {
     background-color: var(--gray);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -621,7 +562,7 @@ div.keyboard-home-key {
 }
 
 @media (max-width: 1100px) {
-    #settings {
+    .settings {
         border: none;
         border-radius: 0;
         height: 100vh;
@@ -633,16 +574,16 @@ div.keyboard-home-key {
     }
 }
 
-#settings::-webkit-scrollbar {
+.settings::-webkit-scrollbar {
     width: 0;
 }
 
-#settings.settings-show {
+.settings.settings-show {
     display: flex;
     flex-direction: column;
 }
 
-#settings-title-bar {
+.settings-title-bar {
     align-items: center;
     background-color: var(--title-bar-background-color);
     color: var(--title-bar-color);
@@ -651,17 +592,17 @@ div.keyboard-home-key {
     padding: var(--alt-padding);
 }
 
-#settings-close {
+.settings-close {
     cursor: pointer;
     margin-left: auto;
     transition: transform var(--animation-duration);
 }
 
-#settings-close:hover {
+.settings-close:hover {
     transform: scale(var(--scale));
 }
 
-#settings-form {
+.settings-form {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -717,24 +658,21 @@ div.keyboard-home-key {
     margin-bottom: var(--alt-padding);
 }
 
-#settings-custom-text {
+.settings-custom-text {
     background-color: var(--background-color);
-    border: var(--border);
     border-radius: var(--border-radius);
+    border: var(--border);
     color: var(--color);
     font-family: "Roboto", sans-serif;
     font-size: 0.8rem;
+    height: 180px;
     outline: none;
     padding: var(--alt-padding);
-}
-
-#settings-custom-text::placeholder {
-    color: var(--placeholder-color);
-}
-
-#settings-custom-text {
-    height: 220px;
     resize: none;
+}
+
+.settings-custom-text::placeholder {
+    color: var(--placeholder-color);
 }
 
 .settings-custom-text-fetch-container {
@@ -748,24 +686,24 @@ div.keyboard-home-key {
     }
 }
 
-#settings-news-list-toggle-container,
-#settings-custom-text-fetch-button {
+.settings-news-list-toggle-container,
+.settings-custom-text-fetch-button {
     width: 50%;
 }
 
 @media (max-width: 1100px) {
-    #settings-news-list-toggle-container,
-    #settings-custom-text-fetch-button {
+    .settings-news-list-toggle-container,
+    .settings-custom-text-fetch-button {
         width: 100%;
     }
 }
 
-#settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting {
+.settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting {
     color: var(--gray);
     position: relative;
 }
 
-#settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting::after {
+.settings-custom-text-fetch-button.settings-custom-text-fetch-button-waiting::after {
     animation: waiting 1s linear infinite;
     border: 2px solid;
     border-color: var(--color) transparent var(--color) transparent;
@@ -785,16 +723,16 @@ div.keyboard-home-key {
     }
 }
 
-#settings-chunk-size-list-toggle-container {
+.settings-chunk-size-list-toggle-container {
     margin-bottom: var(--alt-padding);
 }
 
-#settings-save {
+.settings-save {
     margin-left: auto;
 }
 
 @media (max-width: 1100px) {
-    #settings-save {
+    .settings-save {
         margin-top: auto;
     }
 }

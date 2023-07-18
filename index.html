@@ -18,11 +18,11 @@
     <body>
         <header>
             <div class="buttons">
-                <div class="speed-container" data-tooltip="Typing speed (words per minute)">
+                <div class="indicator-container tooltip" data-tooltip="Typing speed (words per minute)">
                     <div class="material-symbols-outlined">speed</div>
                     <div id="speed">N/A</div>
                 </div>
-                <div class="accuracy-container" data-tooltip="Accuracy">
+                <div class="indicator-container tooltip" data-tooltip="Accuracy">
                     <div class="material-symbols-outlined">check</div>
                     <div id="accuracy">N/A</div>
                 </div>
@@ -32,37 +32,37 @@
                 <div id="sublesson-name"></div>
             </div>
             <div class="buttons">
-                <div class="material-symbols-outlined" data-tooltip="Tutorial" id="tutorial-button">help</div>
-                <div class="material-symbols-outlined" data-tooltip="Dark mode" data-tooltip-alt="Light mode" id="dark-mode-button">dark_mode</div>
-                <div class="material-symbols-outlined settings-button" id="settings-button">settings</div>
+                <div class="button material-symbols-outlined tooltip" data-tooltip="Tutorial" id="tutorial-button">help</div>
+                <div class="button dark-mode-button material-symbols-outlined tooltip" data-tooltip="Dark mode" data-tooltip-alt="Light mode" id="dark-mode-button">dark_mode</div>
+                <div class="button material-symbols-outlined settings-button" id="settings-button">settings</div>
             </div>
         </header>
         <div class="main">
             <div class="left">
                 <div class="lessons">
                     <div class="lesson lesson-current" data-index="-1">Practice</div>
-                    <div class="lesson" data-index="0">Lesson 1</div>
-                    <div class="lesson" data-index="1">Lesson 2</div>
-                    <div class="lesson" data-index="2">Lesson 3</div>
-                    <div class="lesson" data-index="3">Lesson 4</div>
-                    <div class="lesson" data-index="4">Lesson 5</div>
-                    <div class="lesson" data-index="5">Lesson 6</div>
-                    <div class="lesson" data-index="6">Lesson 7</div>
-                    <div class="lesson" data-index="7">Lesson 8</div>
-                    <div class="lesson" data-index="8">Lesson 9</div>
-                    <div class="lesson" data-index="9">Lesson 10</div>
-                    <div class="lesson" data-index="10">Lesson 11</div>
-                    <div class="lesson" data-index="11">Lesson 12</div>
-                    <div class="lesson" data-index="12">Lesson 13</div>
-                    <div class="lesson" data-index="13">Lesson 14</div>
-                    <div class="lesson" data-index="14">Lesson 15</div>
-                    <div class="lesson" data-index="15">Lesson 16</div>
-                    <div class="lesson" data-index="16">Lesson 17</div>
+                    <div class="lesson tooltip" data-index="0">Lesson 1</div>
+                    <div class="lesson tooltip" data-index="1">Lesson 2</div>
+                    <div class="lesson tooltip" data-index="2">Lesson 3</div>
+                    <div class="lesson tooltip" data-index="3">Lesson 4</div>
+                    <div class="lesson tooltip" data-index="4">Lesson 5</div>
+                    <div class="lesson tooltip" data-index="5">Lesson 6</div>
+                    <div class="lesson tooltip" data-index="6">Lesson 7</div>
+                    <div class="lesson tooltip" data-index="7">Lesson 8</div>
+                    <div class="lesson tooltip" data-index="8">Lesson 9</div>
+                    <div class="lesson tooltip" data-index="9">Lesson 10</div>
+                    <div class="lesson tooltip" data-index="10">Lesson 11</div>
+                    <div class="lesson tooltip" data-index="11">Lesson 12</div>
+                    <div class="lesson tooltip" data-index="12">Lesson 13</div>
+                    <div class="lesson tooltip" data-index="13">Lesson 14</div>
+                    <div class="lesson tooltip" data-index="14">Lesson 15</div>
+                    <div class="lesson tooltip" data-index="15">Lesson 16</div>
+                    <div class="lesson tooltip" data-index="16">Lesson 17</div>
                 </div>
             </div>
             <div class="center">
-                <div id="text"></div>
-                <div id="keyboard">
+                <div class="text" id="text"></div>
+                <div class="keyboard" id="keyboard">
                     <div class="keyboard-row">
                         <div class="keyboard-key keyboard-key-lpinkie" data-value="`" data-value-alt="~">`<div class="keyboard-key-alt">~</div></div>
                         <div class="keyboard-key keyboard-key-lpinkie" data-value="1" data-value-alt="!">1<div class="keyboard-key-alt">!</div></div>
@@ -96,7 +96,7 @@
                         <div class="keyboard-key keyboard-key-rpinkie" data-value="\" data-value-alt="|">\<div class="keyboard-key-alt">|</div></div>
                     </div>
                     <div class="keyboard-row">
-                        <div class="keyboard-key keyboard-key-caps keyboard-key-lpinkie" data-value="CapsLock">Caps Lock<div id="keyboard-key-caps-indicator"></div></div>
+                        <div class="keyboard-key keyboard-key-caps keyboard-key-lpinkie" data-value="CapsLock">Caps Lock<div class="keyboard-key-caps-indicator" id="keyboard-key-caps-indicator"></div></div>
                         <div class="keyboard-key keyboard-key-lpinkie" data-value="a" data-value-alt="A"><div class="keyboard-home-key-text">A</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
                         <div class="keyboard-key keyboard-key-lring" data-value="s" data-value-alt="S"><div class="keyboard-home-key-text">S</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
                         <div class="keyboard-key keyboard-key-lmiddle" data-value="d" data-value-alt="D"><div class="keyboard-home-key-text">D</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
@@ -136,13 +136,13 @@
             </div>
             <div class="right"></div>
         </div>
-        <div id="settings">
-            <div id="settings-title-bar">
+        <div class="settings" id="settings">
+            <div class="settings-title-bar" id="settings-title-bar">
                 <div class="material-symbols-outlined">settings</div>
                 Settings
-                <div class="material-symbols-outlined" id="settings-close">close</div>
+                <div class="material-symbols-outlined settings-close" id="settings-close">close</div>
             </div>
-            <form id="settings-form">
+            <form class="settings-form" id="settings-form">
                 <div class="settings-checkbox-container">
                     <label for="settings-guide">Keyboard color guide</label>
                     <input class="settings-checkbox" id="settings-guide" type="checkbox">
@@ -153,9 +153,9 @@
                 </div>
                 <label class="settings-label" for="settings-custom-text">Custom text</label>
                 <div class="settings-custom-text-container">
-                    <textarea id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
+                    <textarea class="settings-custom-text" id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
                     <div class="settings-custom-text-fetch-container">
-                        <div class="settings-list-toggle-container" id="settings-news-list-toggle-container">
+                        <div class="settings-list-toggle-container settings-news-list-toggle-container" id="settings-news-list-toggle-container">
                             <button class="settings-list-toggle" id="settings-news-list-toggle" type="button">1</button>
                             <div class="material-symbols-outlined settings-list-toggle-icon" id="settings-news-list-toggle-icon">keyboard_arrow_up</div>
                             <div class="settings-list-container" id="settings-news-list-container">
@@ -163,11 +163,11 @@
                                 <div class="settings-list" id="settings-news-list"></div>
                             </div>
                         </div>
-                        <button id="settings-custom-text-fetch-button" type="button">Get Space News</button>
+                        <button class="settings-custom-text-fetch-button" id="settings-custom-text-fetch-button" type="button">Get Space News</button>
                     </div>
                 </div>
                 <label class="settings-label">Number of characters per screen</label>
-                <div class="settings-list-toggle-container" id="settings-chunk-size-list-toggle-container">
+                <div class="settings-chunk-size-list-toggle-container settings-list-toggle-container" id="settings-chunk-size-list-toggle-container">
                     <button class="settings-list-toggle" id="settings-chunk-size-list-toggle" type="button">32</button>
                     <div class="material-symbols-outlined settings-list-toggle-icon" id="settings-chunk-size-list-toggle-icon">keyboard_arrow_up</div>
                     <div class="settings-list-container" id="settings-chunk-size-list-container">
@@ -175,7 +175,7 @@
                         <div class="settings-list" id="settings-chunk-size-list"></div>
                     </div>
                 </div>
-                <button id="settings-save" type="button">Save</button>
+                <button class="settings-save" id="settings-save" type="button">Save</button>
             </form>
         </div>
         <div class="tutorial-background" id="tutorial-background"></div>
