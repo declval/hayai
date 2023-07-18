@@ -85,7 +85,6 @@ class Keyboard {
                     keyElement.classList.remove('keyboard-key-keydown');
                 }, 100);
             }
-            break;
         }
     }
 }
