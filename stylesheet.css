@@ -86,7 +86,7 @@ header {
     }
 }
 
-.statistics {
+.buttons {
     display: flex;
     font-family: "Roboto Mono", sans-serif;
     font-size: 0.8rem;
@@ -131,11 +131,6 @@ header {
 
 .sublesson-number {
     filter: opacity(50%);
-}
-
-.buttons {
-    display: flex;
-    gap: var(--alt-padding);
 }
 
 #tutorial-button,
