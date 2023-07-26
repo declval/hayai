@@ -8,12 +8,14 @@ class Course {
     constructor(text) {
         this.text = text;
 
-        this.reset();
-
         this.lessonElements = document.getElementsByClassName('lesson');
+        this.sublessonNumberElement = document.getElementById('sublesson-number');
+        this.sublessonNameElement = document.getElementById('sublesson-name');
+        this.reset();
 
         for (const lessonElement of this.lessonElements) {
             const index = parseInt(lessonElement.dataset.index);
+
             if (index !== -1) {
                 lessonElement.dataset.chars = [...Course.english[index].newChars].join(' ');
             }
@@ -60,8 +62,9 @@ class Course {
     }
 
     clearSublessonName = () => {
-        document.getElementById('sublesson-number').textContent = '';
-        document.getElementById('sublesson-name').textContent = '';
+        this.sublesson = '';
+        this.sublessonNumberElement.textContent = '';
+        this.sublessonNameElement.textContent = '';
     }
 
     currentLesson = () => {
@@ -131,8 +134,7 @@ class Course {
 
     renderSublessonName = sublesson => {
         const index = this.currentLessonIndex();
-        const sublessonDescription =
-            Course.sublessonPropertyNameToDescription[sublesson];
+        const sublessonDescription = Course.sublessonPropertyNameToDescription[sublesson];
 
         let sublessonDescriptionIndex = 1;
 
@@ -142,14 +144,11 @@ class Course {
             }
         }
 
-        document.getElementById('sublesson-number').textContent =
-            `Lesson ${index + 1}.${sublessonDescription[0]}`;
-        document.getElementById('sublesson-name').textContent =
-            `${sublessonDescription[sublessonDescriptionIndex]}`;
+        this.sublessonNumberElement.textContent = `Lesson ${index + 1}.${sublessonDescription[0]}`;
+        this.sublessonNameElement.textContent = `${sublessonDescription[sublessonDescriptionIndex]}`;
     }
 
     reset = () => {
-        this.sublesson = '';
         this.clearSublessonName();
     }
 
