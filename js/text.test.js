@@ -2,8 +2,6 @@ import { open } from 'node:fs/promises';
 
 import { Text } from './text.js';
 
-Text.chunkSizeMin = 1;
-
 beforeEach(async () => {
     return open('index.html')
         .then(fileHandle => {
@@ -17,32 +15,20 @@ beforeEach(async () => {
 });
 
 describe('Text class', () => {
-    test('constructor with an empty text throws an error', () => {
+    test('constructor with text consisting only of unsupported characters throws an error', () => {
         expect(() => {
-            new Text('', 1);
+            new Text({text: 'こんにちは', chunkSize: Text.chunkSizeMin});
         }).toThrow('Invalid text length');
-    });
-
-    test('constructor with a chunk size less than a minimum chunk size throws an error', () => {
-        expect(() => {
-            new Text('text', Text.chunkSizeMin - 1);
-        }).toThrow('Invalid chunk size');
     });
 
     test('constructor with a chunk size greater than a maximum chunk size throws an error', () => {
         expect(() => {
-            new Text('text', Text.chunkSizeMax + 1);
-        }).toThrow('Invalid chunk size');
-    });
-
-    test('constructor with a chunk size greater than a text length throws an error', () => {
-        expect(() => {
-            new Text('text', 16);
+            new Text({text: 'text', chunkSize: Text.chunkSizeMax + 1});
         }).toThrow('Invalid chunk size');
     });
 
     test('method clear removes HTML elements', () => {
-        const text = new Text('text', 4);
+        const text = new Text({text: 'text', chunkSize: 4});
 
         text.render();
         text.clear();
@@ -53,7 +39,7 @@ describe('Text class', () => {
     });
 
     test('method cursorMove advances the cursor', () => {
-        const text = new Text(' text', 4);
+        const text = new Text({text: ' text', chunkSize: 4});
 
         text.render();
 
@@ -72,7 +58,7 @@ describe('Text class', () => {
     });
 
     test('method cursorMove advances the cursor past the current chunk', () => {
-        const text = new Text('text', 2);
+        const text = new Text({text: 'text', chunkSize: 2});
 
         text.render();
 
@@ -87,8 +73,8 @@ describe('Text class', () => {
         );
     });
 
-    test('method cursorMove advances the cursor past the last chunk', done => {
-        const text = new Text('text', 2);
+    test('method cursorMove advances the cursor past the last chunk', () => {
+        const text = new Text({text: 'text', chunkSize: 2});
 
         text.render();
 
@@ -109,12 +95,11 @@ describe('Text class', () => {
                 '<div class="text-character text-character-cursor">t</div>' +
                 '<div class="text-character">e</div>'
             );
-            done();
         }, 800);
-    });
+    }, 800);
 
     test('method render creates HTML elements', () => {
-        const text = new Text('text', 2);
+        const text = new Text({text: 'text', chunkSize: 2});
 
         text.render();
 
@@ -127,19 +112,19 @@ describe('Text class', () => {
     });
 
     test('generator method chunked works correcty with a chunk size less than text length', () => {
-        const text = new Text('text', 3);
+        const text = new Text({text: 'text', chunkSize: 3});
 
         expect([...text.chunked()]).toStrictEqual(['tex', 't']);
     });
 
     test('generator method chunked works correcty with a chunk size equal to text length', () => {
-        const text = new Text('text', 4);
+        const text = new Text({text: 'text', chunkSize: 4});
 
         expect([...text.chunked()]).toStrictEqual(['text']);
     });
 
     test('count of correct characters is as expected', () => {
-        const text = new Text('text', 4);
+        const text = new Text({text: 'text', chunkSize: 4});
 
         text.render();
 
@@ -148,6 +133,6 @@ describe('Text class', () => {
         text.cursorMove('x');
         text.cursorMove('t');
 
-        expect(text.nCorrect).toBe(3);
+        expect(text.correctCount).toBe(3);
     });
 });

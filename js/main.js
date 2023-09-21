@@ -7,9 +7,9 @@ import { Text } from './text.js';
 import { Tutorial } from './tutorial.js';
 import { darkMode } from './helpers.js';
 
-const text = new Text();
-const course = new Course(text);
 const keyboard = new Keyboard();
+const text = new Text({keyboard});
+const course = new Course(text);
 const settings = new Settings();
 const tutorial = new Tutorial(keyboard, settings);
 

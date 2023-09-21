@@ -1,10 +1,14 @@
 export { Text };
 
 import { createElement } from './helpers.js';
-import { keyboard } from './main.js';
 
 class Text {
-    constructor(text = Text.initialText, chunkSize = Text.initialChunkSize) {
+    constructor({
+        text = Text.initialText,
+        chunkSize = Text.initialChunkSize,
+        keyboard = null
+    }) {
+        this.keyboard = keyboard;
         this.reset(text, chunkSize);
 
         this.accuracyElement = document.getElementById('accuracy');
@@ -44,7 +48,9 @@ class Text {
 
         try {
             cursorElement.nextSibling.classList.add('text-character-cursor');
-            keyboard.highlightKeysToPressFor(cursorElement.nextSibling.textContent);
+            if (this.keyboard) {
+                this.keyboard.highlightKeysToPressFor(cursorElement.nextSibling.textContent);
+            }
         } catch (e) {
             this.chunk = this.chunks.next().value;
 
@@ -98,7 +104,9 @@ class Text {
         }
 
         this.textElement.firstChild.classList.add('text-character-cursor');
-        keyboard.highlightKeysToPressFor(this.textElement.firstChild.textContent);
+        if (this.keyboard) {
+            this.keyboard.highlightKeysToPressFor(this.textElement.firstChild.textContent);
+        }
     }
 
     reset = (text, chunkSize) => {
