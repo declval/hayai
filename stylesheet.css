@@ -607,11 +607,9 @@ header {
     box-sizing: border-box;
     display: none;
     font-size: 0.85rem;
-    left: 50%;
     overflow: hidden;
     position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: var(--alt-padding);
     width: 520px;
     z-index: 2;
 }
@@ -624,7 +622,6 @@ header {
         left: 0 !important;
         overflow-y: scroll;
         top: 0 !important;
-        transform: none;
         width: 100vw;
     }
 }
