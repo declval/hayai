@@ -17,6 +17,7 @@
     --scale: 1.3;
     --scrollbar-color: rgb(246, 246, 246);
     --scrollbar-thumb-color: rgb(226, 226, 226);
+    --snowflake-color: rgb(186, 202, 255);
     --space-color: rgba(0, 0, 0, 0.3);
     --title-bar-background-color: rgb(64, 64, 64);
     --title-bar-color: rgb(255, 255, 255);
@@ -39,6 +40,7 @@
     --gray: rgb(79, 79, 79);
     --scrollbar-color: rgb(69, 69, 69);
     --scrollbar-thumb-color: rgb(89, 89, 89);
+    --snowflake-color: rgb(212, 223, 255);
     --space-color: rgba(255, 255, 255, 0.4);
 
     --pinkie-color: rgb(88, 88, 88);
@@ -476,6 +478,59 @@ header {
 
 .right {
     width: 100px;
+}
+
+.snowflake {
+    background-color: var(--snowflake-color);
+    border-radius: 1px;
+    height: var(--snowflake-size);
+    left: var(--snowflake-left);
+    opacity: 0.5;
+    pointer-events: none;
+    position: absolute;
+    top: calc(-2 * var(--snowflake-size));
+    width: var(--snowflake-size);
+    z-index: -1;
+}
+
+.snowflake::after {
+    background-color: inherit;
+    border-radius: inherit;
+    content: "";
+    height: inherit;
+    position: inherit;
+    transform: rotate(45deg);
+    width: inherit;
+}
+
+@keyframes fall {
+    100% {
+        top: 100%;
+    }
+}
+
+@keyframes offset-left {
+    50% {
+        left: calc(var(--snowflake-left) - var(--snowflake-offset));
+    }
+}
+
+@keyframes offset-right {
+    50% {
+        left: calc(var(--snowflake-left) + var(--snowflake-offset));
+    }
+}
+
+@keyframes rotate-left {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes rotate-right {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .settings-list-toggle-container {

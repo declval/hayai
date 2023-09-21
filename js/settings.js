@@ -4,6 +4,7 @@ import { Draggable } from './draggable.js';
 import { Text } from './text.js';
 import { createElement } from './helpers.js';
 import { keyboard } from './main.js';
+import { makeItNotSnow, makeItSnow } from './snow.js';
 
 class Settings {
     constructor() {
@@ -100,6 +101,39 @@ class Settings {
             }
             const cursorElement = document.getElementsByClassName('text-character-cursor')[0];
             keyboard.highlightKeysToPressFor(cursorElement.textContent);
+        });
+
+        const snow = localStorage.getItem('snow');
+
+        if (snow === null) {
+            const currentMonth = (new Date()).getMonth();
+    
+            if ([0, 1, 11].includes(currentMonth)) {
+                Settings.snow = true;
+                makeItSnow({element: document.body, sizeRange: [4, 8]});
+            }
+        } else if (snow) {
+            Settings.snow = true;
+            makeItSnow({element: document.body, sizeRange: [4, 8]});
+        } else {
+            Settings.snow = false;
+            makeItNotSnow(document.body);
+        }
+
+        const settingsSnowElement = document.getElementById('settings-snow');
+
+        if (Settings.snow) {
+            settingsSnowElement.checked = true;
+        }
+
+        settingsSnowElement.addEventListener('input', event => {
+            if (event.target.checked) {
+                localStorage.setItem('snow', 'on');
+                makeItSnow({element: document.body, sizeRange: [4, 8]});
+            } else {
+                localStorage.setItem('snow', '');
+                makeItNotSnow(document.body);
+            }
         });
 
         const settingsNewsListToggleIconElement =

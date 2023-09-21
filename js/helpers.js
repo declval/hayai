@@ -1,4 +1,7 @@
-export { createElement, darkMode, lessonGenerate, permutations, randomNWordsContaining, shuffle };
+export {
+    createElement, darkMode, lessonGenerate, permutations, randomIntWithUnit,
+    randomNWordsContaining, shuffle
+};
 
 const createElement = ({ name, text, attributes, classNames, eventHandlers }) => {
     if (!name) {
@@ -42,6 +45,10 @@ const darkMode = on => {
 
 const randomInt = (min, max) => {
     return Math.floor(min + Math.random() * (max - min));
+};
+
+const randomIntWithUnit = (min, max, unit) => {
+    return `${randomInt(min, max)}${unit}`;
 };
 
 const shuffle = array => {
