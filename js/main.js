@@ -6,6 +6,7 @@ import { Settings } from './settings.js';
 import { Text } from './text.js';
 import { Tutorial } from './tutorial.js';
 import { darkMode } from './helpers.js';
+import { makeItNotSnow, makeItSnow } from './snow.js';
 
 const keyboard = new Keyboard();
 const text = new Text({keyboard});
@@ -85,6 +86,11 @@ const main = () => {
 
     settingsButtonElement.addEventListener('click', () => {
         settings.toggle();
+    });
+
+    window.addEventListener('resize', () => {
+        makeItNotSnow(document.body);
+        makeItSnow({element: document.body, sizeRange: [4, 8]});
     });
 }
 

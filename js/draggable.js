@@ -19,16 +19,16 @@ class Draggable {
                 let left = event.clientX - offsetX;
                 if (left < 0) {
                     left = 0;
-                } else if (left > innerWidth - element.offsetWidth) {
-                    left = innerWidth - element.offsetWidth;
+                } else if (left > window.innerWidth - element.offsetWidth) {
+                    left = window.innerWidth - element.offsetWidth;
                 }
                 element.style.left = `${left}px`;
 
                 let top = event.clientY - offsetY;
                 if (top < 0) {
                     top = 0;
-                } else if (top > innerHeight - element.offsetHeight) {
-                    top = innerHeight - element.offsetHeight;
+                } else if (top > window.innerHeight - element.offsetHeight) {
+                    top = window.innerHeight - element.offsetHeight;
                 }
                 element.style.top = `${top}px`;
             }
