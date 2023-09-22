@@ -618,11 +618,11 @@ header {
     .settings {
         border: none;
         border-radius: 0;
-        height: 100vh;
+        height: 100%;
         left: 0 !important;
         overflow-y: scroll;
         top: 0 !important;
-        width: 100vw;
+        width: 100%;
     }
 }
 
@@ -635,6 +635,15 @@ header {
     flex-direction: column;
 }
 
+.settings.settings-fullscreen {
+    border: none;
+    border-radius: 0;
+    height: 100%;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100%;
+}
+
 .settings-title-bar {
     align-items: center;
     background-color: var(--title-bar-background-color);
@@ -644,13 +653,24 @@ header {
     padding: var(--alt-padding);
 }
 
-.settings-close {
+.settings-fullscreen-button,
+.settings-close-button {
     cursor: pointer;
-    margin-left: auto;
     transition: transform var(--animation-duration);
 }
 
-.settings-close:hover {
+.settings-fullscreen-button {
+    margin-left: auto;
+}
+
+@media (max-width: 1100px) {
+    .settings-fullscreen-button {
+        visibility: hidden;
+    }
+}
+
+.settings-fullscreen-button:hover,
+.settings-close-button:hover {
     transform: scale(var(--scale));
 }
 
@@ -781,12 +801,7 @@ header {
 
 .settings-save {
     margin-left: auto;
-}
-
-@media (max-width: 1100px) {
-    .settings-save {
-        margin-top: auto;
-    }
+    margin-top: auto;
 }
 
 .tutorial-background {

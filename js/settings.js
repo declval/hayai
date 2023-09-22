@@ -8,18 +8,20 @@ import { makeItNotSnow, makeItSnow } from './snow.js';
 
 class Settings {
     constructor() {
-        this.mediaQuery = window.matchMedia('(max-width: 900px)');
+        this.mediaQuery = window.matchMedia('(max-width: 1100px)');
         this.settingsElement = document.getElementById('settings');
 
         const settingsTitleBarElement = document.getElementById('settings-title-bar');
 
-        const draggable = new Draggable(settingsTitleBarElement, this.settingsElement);
+        this.draggable = new Draggable(settingsTitleBarElement, this.settingsElement);
 
         const mediaQueryHandler = event => {
             if (event.matches) {
-                draggable.deactivate();
+                this.draggable.deactivate();
             } else {
-                draggable.activate();
+                if (!this.settingsElement.classList.contains('settings-fullscreen')) {
+                    this.draggable.activate();
+                }
             }
         };
 
@@ -27,7 +29,13 @@ class Settings {
 
         mediaQueryHandler(this.mediaQuery);
 
-        const settingsCloseElement = document.getElementById('settings-close');
+        const settingsFullscreenElement = document.getElementById('settings-fullscreen-button');
+
+        settingsFullscreenElement.addEventListener('click', () => {
+            this.toggleFullscreen();
+        });
+
+        const settingsCloseElement = document.getElementById('settings-close-button');
 
         settingsCloseElement.addEventListener('click', () => {
             this.toggle();
@@ -311,6 +319,19 @@ class Settings {
 
     toggle = () => {
         this.settingsElement.classList.toggle('settings-show');
+    }
+
+    toggleFullscreen = () => {
+        const settingsFullscreenButton = document.getElementById('settings-fullscreen-button');
+        if (this.settingsElement.classList.contains('settings-fullscreen')) {
+            this.settingsElement.classList.remove('settings-fullscreen');
+            settingsFullscreenButton.textContent = 'fullscreen';
+            this.draggable.activate();
+        } else {
+            this.settingsElement.classList.add('settings-fullscreen');
+            settingsFullscreenButton.textContent = 'fullscreen_exit';
+            this.draggable.deactivate();
+        }
     }
 
     static chunkSize = null;
