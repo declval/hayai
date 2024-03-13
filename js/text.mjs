@@ -1,6 +1,6 @@
 export { Text };
 
-import { createElement } from './helpers.js';
+import { createElement } from './helpers.mjs';
 
 class Text {
     constructor({

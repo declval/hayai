@@ -1,10 +1,10 @@
 export { Settings };
 
-import { Draggable } from './draggable.js';
-import { Text } from './text.js';
-import { createElement } from './helpers.js';
-import { keyboard } from './main.js';
-import { makeItNotSnow, makeItSnow } from './snow.js';
+import { Draggable } from './draggable.mjs';
+import { Text } from './text.mjs';
+import { createElement } from './helpers.mjs';
+import { keyboard } from './main.mjs';
+import { makeItNotSnow, makeItSnow } from './snow.mjs';
 
 class Settings {
     constructor() {

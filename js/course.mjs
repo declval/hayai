@@ -1,8 +1,8 @@
 export { Course };
 
-import { Settings } from './settings.js';
-import { lessonGenerate, permutations, randomNWordsContaining, shuffle } from './helpers.js';
-import { words } from './words.js';
+import { Settings } from './settings.mjs';
+import { lessonGenerate, permutations, randomNWordsContaining, shuffle } from './helpers.mjs';
+import { words } from './words.mjs';
 
 class Course {
     constructor(text) {

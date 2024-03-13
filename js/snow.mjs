@@ -1,6 +1,6 @@
 export { makeItNotSnow, makeItSnow };
 
-import { createElement, randomIntWithUnit } from "./helpers.js";
+import { createElement, randomIntWithUnit } from "./helpers.mjs";
 
 const makeItNotSnow = element => {
     const snowflakes = [...element.getElementsByClassName('snowflake')];

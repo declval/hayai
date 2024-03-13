@@ -1,12 +1,12 @@
 export { keyboard };
 
-import { Course } from './course.js';
-import { Keyboard } from './keyboard.js';
-import { Settings } from './settings.js';
-import { Text } from './text.js';
-import { Tutorial } from './tutorial.js';
-import { darkMode } from './helpers.js';
-import { makeItNotSnow, makeItSnow } from './snow.js';
+import { Course } from './course.mjs';
+import { Keyboard } from './keyboard.mjs';
+import { Settings } from './settings.mjs';
+import { Text } from './text.mjs';
+import { Tutorial } from './tutorial.mjs';
+import { darkMode } from './helpers.mjs';
+import { makeItNotSnow, makeItSnow } from './snow.mjs';
 
 const keyboard = new Keyboard();
 const text = new Text({keyboard});

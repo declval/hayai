@@ -1,6 +1,6 @@
 export { Keyboard };
 
-import { Settings } from './settings.js';
+import { Settings } from './settings.mjs';
 
 class Keyboard {
     constructor() {

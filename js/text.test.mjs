@@ -1,6 +1,6 @@
 import { open } from 'node:fs/promises';
 
-import { Text } from './text.js';
+import { Text } from './text.mjs';
 
 beforeEach(async () => {
     return open('index.html')
