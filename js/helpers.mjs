@@ -1,11 +1,22 @@
 export {
-    createElement, darkMode, lessonGenerate, permutations, randomIntWithUnit,
-    randomNWordsContaining, shuffle
+    createElement,
+    darkMode,
+    lessonGenerate,
+    permutations,
+    randomIntWithUnit,
+    randomNWordsContaining,
+    shuffle,
 };
 
-const createElement = ({ name, text, attributes, classNames, eventHandlers }) => {
+const createElement = ({
+    name,
+    text,
+    attributes,
+    classNames,
+    eventHandlers,
+}) => {
     if (!name) {
-        throw new Error('name property is required');
+        throw new Error("name property is required");
     }
     const element = document.createElement(name);
     if (text) {
@@ -30,16 +41,16 @@ const createElement = ({ name, text, attributes, classNames, eventHandlers }) =>
 };
 
 const darkMode = on => {
-    const darkModeButtonElement = document.getElementById('dark-mode-button');
+    const darkModeButtonElement = document.getElementById("dark-mode-button");
 
     if (on) {
-        document.documentElement.classList.add('dark-mode');
-        darkModeButtonElement.classList.add('dark-mode-button-enabled');
-        darkModeButtonElement.textContent = 'light_mode';
+        document.documentElement.classList.add("dark-mode");
+        darkModeButtonElement.classList.add("dark-mode-button-enabled");
+        darkModeButtonElement.textContent = "light_mode";
     } else {
-        document.documentElement.classList.remove('dark-mode');
-        darkModeButtonElement.classList.remove('dark-mode-button-enabled');
-        darkModeButtonElement.textContent = 'dark_mode';
+        document.documentElement.classList.remove("dark-mode");
+        darkModeButtonElement.classList.remove("dark-mode-button-enabled");
+        darkModeButtonElement.textContent = "dark_mode";
     }
 };
 
@@ -64,7 +75,7 @@ const shuffle = array => {
 
 const lessonGenerate = string => {
     string = string.repeat(4);
-    string = shuffle(string).join('');
+    string = shuffle(string).join("");
     const result = [];
     let n = 0;
     for (let i = 0; i < string.length; i += n) {
@@ -74,14 +85,14 @@ const lessonGenerate = string => {
         }
         result.push(string.slice(i, i + n));
     }
-    return result.join(' ');
+    return result.join(" ");
 };
 
 const permutations = string => {
     const result = [];
     const permutationsHelper = (k, array) => {
         if (k === 1) {
-            result.push(array.join(''));
+            result.push(array.join(""));
         } else {
             permutationsHelper(k - 1, array);
             for (let i = 0; i < k - 1; ++i) {
@@ -106,5 +117,5 @@ const randomNWordsContaining = (n, words, string) => {
     const re = new RegExp(`^[${string}]+$`);
     let result = words.filter(elem => elem.match(re));
     result = shuffle(result);
-    return result.slice(-n).join(' ');
+    return result.slice(-n).join(" ");
 };

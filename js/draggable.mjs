@@ -9,12 +9,12 @@ class Draggable {
         let offsetY = 0;
 
         for (const childElement of handle.children) {
-            childElement.addEventListener('mousedown', event => {
+            childElement.addEventListener("mousedown", event => {
                 event.stopPropagation();
             });
         }
 
-        document.addEventListener('mousemove', event => {
+        document.addEventListener("mousemove", event => {
             if (this.activated && this.moving) {
                 let left = event.clientX - offsetX;
                 if (left < 0) {
@@ -34,11 +34,11 @@ class Draggable {
             }
         });
 
-        document.addEventListener('mouseup', () => {
+        document.addEventListener("mouseup", () => {
             this.moving = false;
         });
 
-        handle.addEventListener('mousedown', event => {
+        handle.addEventListener("mousedown", event => {
             offsetX = event.clientX - element.offsetLeft;
             offsetY = event.clientY - element.offsetTop;
             this.moving = true;
@@ -47,9 +47,9 @@ class Draggable {
 
     activate = () => {
         this.activated = true;
-    }
+    };
 
     deactivate = () => {
         this.activated = false;
-    }
+    };
 }

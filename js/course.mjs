@@ -1,36 +1,44 @@
 export { Course };
 
-import { Settings } from './settings.mjs';
-import { lessonGenerate, permutations, randomNWordsContaining, shuffle } from './helpers.mjs';
-import { words } from './words.mjs';
+import { Settings } from "./settings.mjs";
+import {
+    lessonGenerate,
+    permutations,
+    randomNWordsContaining,
+    shuffle,
+} from "./helpers.mjs";
+import { words } from "./words.mjs";
 
 class Course {
     constructor(text) {
         this.text = text;
 
-        this.lessonElements = document.getElementsByClassName('lesson');
-        this.sublessonNumberElement = document.getElementById('sublesson-number');
-        this.sublessonNameElement = document.getElementById('sublesson-name');
+        this.lessonElements = document.getElementsByClassName("lesson");
+        this.sublessonNumberElement =
+            document.getElementById("sublesson-number");
+        this.sublessonNameElement = document.getElementById("sublesson-name");
         this.reset();
 
         for (const lessonElement of this.lessonElements) {
             const index = parseInt(lessonElement.dataset.index);
 
             if (index !== -1) {
-                lessonElement.dataset.chars = [...Course.english[index].newChars].join(' ');
+                lessonElement.dataset.chars = [
+                    ...Course.english[index].newChars,
+                ].join(" ");
             }
 
-            lessonElement.addEventListener('click', event => {
-                this.currentLesson().classList.remove('lesson-current');
-                event.target.classList.add('lesson-current');
+            lessonElement.addEventListener("click", event => {
+                this.currentLesson().classList.remove("lesson-current");
+                event.target.classList.add("lesson-current");
 
                 const index = parseInt(event.target.dataset.index);
 
                 if (index === -1) {
                     this.reset();
-                    this.text.reset(Settings.text, Settings.chunkSize)
+                    this.text.reset(Settings.text, Settings.chunkSize);
                 } else {
-                    this.sublesson = 'newChars';
+                    this.sublesson = "newChars";
 
                     this.renderSublessonName(this.sublesson);
 
@@ -46,40 +54,48 @@ class Course {
 
         for (let i = 0; i < Course.english.length; ++i) {
             Course.english[i].newAndPreviousChars = lessonGenerate(
-                Course.english.slice(0, i + 1).map(elem => elem.newChars).join('')
+                Course.english
+                    .slice(0, i + 1)
+                    .map(elem => elem.newChars)
+                    .join("")
             );
         }
 
         for (let i = 0; i < 7; ++i) {
             Course.english[i].wordsContainingNewAndPreviousChars =
-                randomNWordsContaining(20, words, Course.english[i].newAndPreviousChars);
+                randomNWordsContaining(
+                    20,
+                    words,
+                    Course.english[i].newAndPreviousChars
+                );
         }
 
         for (let i = 0; i < Course.english.length; ++i) {
-            Course.english[i].newChars =
-                shuffle(permutations(Course.english[i].newChars)).join(' ');
+            Course.english[i].newChars = shuffle(
+                permutations(Course.english[i].newChars)
+            ).join(" ");
         }
     }
 
     clearSublessonName = () => {
-        this.sublesson = '';
-        this.sublessonNumberElement.textContent = '';
-        this.sublessonNameElement.textContent = '';
-    }
+        this.sublesson = "";
+        this.sublessonNumberElement.textContent = "";
+        this.sublessonNameElement.textContent = "";
+    };
 
     currentLesson = () => {
-        return document.getElementsByClassName('lesson-current')[0];
-    }
+        return document.getElementsByClassName("lesson-current")[0];
+    };
 
     currentLessonIndex = () => {
         return parseInt(this.currentLesson().dataset.index);
-    }
+    };
 
     nextLesson = () => {
         const index = this.currentLessonIndex();
 
-        if (this.sublesson === 'newChars') {
-            this.sublesson = 'newAndPreviousChars';
+        if (this.sublesson === "newChars") {
+            this.sublesson = "newAndPreviousChars";
 
             setTimeout(() => {
                 this.renderSublessonName(this.sublesson);
@@ -87,7 +103,10 @@ class Course {
 
             this.text.reset(
                 Course.english[index].newAndPreviousChars,
-                Math.min(Course.chunkSize, Course.english[index].newAndPreviousChars.length)
+                Math.min(
+                    Course.chunkSize,
+                    Course.english[index].newAndPreviousChars.length
+                )
             );
 
             setTimeout(() => {
@@ -95,8 +114,8 @@ class Course {
             }, 800);
 
             return;
-        } else if (this.sublesson === 'newAndPreviousChars') {
-            this.sublesson = 'wordsContainingNewAndPreviousChars';
+        } else if (this.sublesson === "newAndPreviousChars") {
+            this.sublesson = "wordsContainingNewAndPreviousChars";
 
             if (!Course.english[index].wordsContainingNewAndPreviousChars) {
                 this.nextLesson();
@@ -130,11 +149,12 @@ class Course {
         setTimeout(() => {
             nextLessonElement.click();
         }, 800);
-    }
+    };
 
     renderSublessonName = sublesson => {
         const index = this.currentLessonIndex();
-        const sublessonDescription = Course.sublessonPropertyNameToDescription[sublesson];
+        const sublessonDescription =
+            Course.sublessonPropertyNameToDescription[sublesson];
 
         let sublessonDescriptionIndex = 1;
 
@@ -146,46 +166,43 @@ class Course {
 
         this.sublessonNumberElement.textContent = `Lesson ${index + 1}.${sublessonDescription[0]}`;
         this.sublessonNameElement.textContent = `${sublessonDescription[sublessonDescriptionIndex]}`;
-    }
+    };
 
     reset = () => {
         this.clearSublessonName();
-    }
+    };
 
     static chunkSize = 34;
     static english = [
-        { newChars: 'etao' },
-        { newChars: 'insh' },
-        { newChars: 'rdlc' },
-        { newChars: 'umwf' },
-        { newChars: 'gypb' },
-        { newChars: 'vkjx' },
-        { newChars: 'qz49' },
-        { newChars: '1527' },
-        { newChars: '3860' },
-        { newChars: '([.+' },
-        { newChars: ':><`' },
-        { newChars: '\',/"' },
-        { newChars: ';{?-' },
-        { newChars: '~@_}' },
-        { newChars: ')$^!' },
-        { newChars: '|#=&' },
-        { newChars: ']%*\\'}
+        { newChars: "etao" },
+        { newChars: "insh" },
+        { newChars: "rdlc" },
+        { newChars: "umwf" },
+        { newChars: "gypb" },
+        { newChars: "vkjx" },
+        { newChars: "qz49" },
+        { newChars: "1527" },
+        { newChars: "3860" },
+        { newChars: "([.+" },
+        { newChars: ":><`" },
+        { newChars: "',/\"" },
+        { newChars: ";{?-" },
+        { newChars: "~@_}" },
+        { newChars: ")$^!" },
+        { newChars: "|#=&" },
+        { newChars: "]%*\\" },
     ];
     static sublessonPropertyNameToDescription = {
-        newChars: [
-            'A',
-            'New characters'
-        ],
+        newChars: ["A", "New characters"],
         newAndPreviousChars: [
-            'B',
-            'Randomized new and previous characters',
-            'Randomized new characters'
+            "B",
+            "Randomized new and previous characters",
+            "Randomized new characters",
         ],
         wordsContainingNewAndPreviousChars: [
-            'C',
-            'Words containing new and previous characters',
-            'Words containing new characters'
-        ]
+            "C",
+            "Words containing new and previous characters",
+            "Words containing new characters",
+        ],
     };
 }

@@ -1,16 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
-        <link href="stylesheet.css" rel="stylesheet">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+            rel="stylesheet"
+        />
+        <link href="stylesheet.css" rel="stylesheet" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="./js/main.mjs" type="module"></script>
         <script>
-            const darkMode = localStorage.getItem('darkMode');
+            const darkMode = localStorage.getItem("darkMode");
 
-            if (darkMode === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : darkMode) {
-                document.documentElement.classList.toggle('dark-mode');
+            if (
+                darkMode === null
+                    ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                    : darkMode
+            ) {
+                document.documentElement.classList.toggle("dark-mode");
             }
         </script>
         <title>Hayai</title>
@@ -18,11 +25,17 @@
     <body>
         <header>
             <div class="buttons">
-                <div class="indicator-container tooltip" data-tooltip="Typing speed (words per minute)">
+                <div
+                    class="indicator-container tooltip"
+                    data-tooltip="Typing speed (words per minute)"
+                >
                     <div class="material-symbols-outlined">speed</div>
                     <div id="speed">N/A</div>
                 </div>
-                <div class="indicator-container tooltip" data-tooltip="Accuracy">
+                <div
+                    class="indicator-container tooltip"
+                    data-tooltip="Accuracy"
+                >
                     <div class="material-symbols-outlined">check</div>
                     <div id="accuracy">N/A</div>
                 </div>
@@ -32,15 +45,35 @@
                 <div id="sublesson-name"></div>
             </div>
             <div class="buttons">
-                <div class="button material-symbols-outlined tooltip" data-tooltip="Tutorial" id="tutorial-button">help</div>
-                <div class="button dark-mode-button material-symbols-outlined tooltip" data-tooltip="Dark mode" data-tooltip-alt="Light mode" id="dark-mode-button">dark_mode</div>
-                <div class="button material-symbols-outlined settings-button" id="settings-button">settings</div>
+                <div
+                    class="button material-symbols-outlined tooltip"
+                    data-tooltip="Tutorial"
+                    id="tutorial-button"
+                >
+                    help
+                </div>
+                <div
+                    class="button dark-mode-button material-symbols-outlined tooltip"
+                    data-tooltip="Dark mode"
+                    data-tooltip-alt="Light mode"
+                    id="dark-mode-button"
+                >
+                    dark_mode
+                </div>
+                <div
+                    class="button material-symbols-outlined settings-button"
+                    id="settings-button"
+                >
+                    settings
+                </div>
             </div>
         </header>
         <div class="main">
             <div class="left">
                 <div class="lessons">
-                    <div class="lesson lesson-current" data-index="-1">Practice</div>
+                    <div class="lesson lesson-current" data-index="-1">
+                        Practice
+                    </div>
                     <div class="lesson tooltip" data-index="0">Lesson 1</div>
                     <div class="lesson tooltip" data-index="1">Lesson 2</div>
                     <div class="lesson tooltip" data-index="2">Lesson 3</div>
@@ -64,73 +97,480 @@
                 <div class="text" id="text"></div>
                 <div class="keyboard" id="keyboard">
                     <div class="keyboard-row">
-                        <div class="keyboard-key keyboard-key-lpinkie" data-value="`" data-value-alt="~">`<div class="keyboard-key-alt">~</div></div>
-                        <div class="keyboard-key keyboard-key-lpinkie" data-value="1" data-value-alt="!">1<div class="keyboard-key-alt">!</div></div>
-                        <div class="keyboard-key keyboard-key-lring" data-value="2" data-value-alt="@">2<div class="keyboard-key-alt">@</div></div>
-                        <div class="keyboard-key keyboard-key-lmiddle" data-value="3" data-value-alt="#">3<div class="keyboard-key-alt">#</div></div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="4" data-value-alt="$">4<div class="keyboard-key-alt">$</div></div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="5" data-value-alt="%">5<div class="keyboard-key-alt">%</div></div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="6" data-value-alt="^">6<div class="keyboard-key-alt">^</div></div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="7" data-value-alt="&">7<div class="keyboard-key-alt">&</div></div>
-                        <div class="keyboard-key keyboard-key-rmiddle" data-value="8" data-value-alt="*">8<div class="keyboard-key-alt">*</div></div>
-                        <div class="keyboard-key keyboard-key-rring" data-value="9" data-value-alt="(">9<div class="keyboard-key-alt">(</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="0" data-value-alt=")">0<div class="keyboard-key-alt">)</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="-" data-value-alt="_">-<div class="keyboard-key-alt">_</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="=" data-value-alt="+">=<div class="keyboard-key-alt">+</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="Backspace">Backspace</div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie"
+                            data-value="`"
+                            data-value-alt="~"
+                        >
+                            `
+                            <div class="keyboard-key-alt">~</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie"
+                            data-value="1"
+                            data-value-alt="!"
+                        >
+                            1
+                            <div class="keyboard-key-alt">!</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lring"
+                            data-value="2"
+                            data-value-alt="@"
+                        >
+                            2
+                            <div class="keyboard-key-alt">@</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lmiddle"
+                            data-value="3"
+                            data-value-alt="#"
+                        >
+                            3
+                            <div class="keyboard-key-alt">#</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="4"
+                            data-value-alt="$"
+                        >
+                            4
+                            <div class="keyboard-key-alt">$</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="5"
+                            data-value-alt="%"
+                        >
+                            5
+                            <div class="keyboard-key-alt">%</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="6"
+                            data-value-alt="^"
+                        >
+                            6
+                            <div class="keyboard-key-alt">^</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="7"
+                            data-value-alt="&"
+                        >
+                            7
+                            <div class="keyboard-key-alt">&</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rmiddle"
+                            data-value="8"
+                            data-value-alt="*"
+                        >
+                            8
+                            <div class="keyboard-key-alt">*</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rring"
+                            data-value="9"
+                            data-value-alt="("
+                        >
+                            9
+                            <div class="keyboard-key-alt">(</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="0"
+                            data-value-alt=")"
+                        >
+                            0
+                            <div class="keyboard-key-alt">)</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="-"
+                            data-value-alt="_"
+                        >
+                            -
+                            <div class="keyboard-key-alt">_</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="="
+                            data-value-alt="+"
+                        >
+                            =
+                            <div class="keyboard-key-alt">+</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="Backspace"
+                        >
+                            Backspace
+                        </div>
                     </div>
                     <div class="keyboard-row">
-                        <div class="keyboard-key keyboard-key-lpinkie keyboard-key-tab" data-value="Tab">Tab</div>
-                        <div class="keyboard-key keyboard-key-lpinkie" data-value="q" data-value-alt="Q">Q</div>
-                        <div class="keyboard-key keyboard-key-lring" data-value="w" data-value-alt="W">W</div>
-                        <div class="keyboard-key keyboard-key-lmiddle" data-value="e" data-value-alt="E">E</div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="r" data-value-alt="R">R</div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="t" data-value-alt="T">T</div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="y" data-value-alt="Y">Y</div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="u" data-value-alt="U">U</div>
-                        <div class="keyboard-key keyboard-key-rmiddle" data-value="i" data-value-alt="I">I</div>
-                        <div class="keyboard-key keyboard-key-rring" data-value="o" data-value-alt="O">O</div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="p" data-value-alt="P">P</div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="[" data-value-alt="{">[<div class="keyboard-key-alt">{</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="]" data-value-alt="}">]<div class="keyboard-key-alt">}</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="\" data-value-alt="|">\<div class="keyboard-key-alt">|</div></div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie keyboard-key-tab"
+                            data-value="Tab"
+                        >
+                            Tab
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie"
+                            data-value="q"
+                            data-value-alt="Q"
+                        >
+                            Q
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lring"
+                            data-value="w"
+                            data-value-alt="W"
+                        >
+                            W
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lmiddle"
+                            data-value="e"
+                            data-value-alt="E"
+                        >
+                            E
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="r"
+                            data-value-alt="R"
+                        >
+                            R
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="t"
+                            data-value-alt="T"
+                        >
+                            T
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="y"
+                            data-value-alt="Y"
+                        >
+                            Y
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="u"
+                            data-value-alt="U"
+                        >
+                            U
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rmiddle"
+                            data-value="i"
+                            data-value-alt="I"
+                        >
+                            I
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rring"
+                            data-value="o"
+                            data-value-alt="O"
+                        >
+                            O
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="p"
+                            data-value-alt="P"
+                        >
+                            P
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="["
+                            data-value-alt="{"
+                        >
+                            [
+                            <div class="keyboard-key-alt">{</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="]"
+                            data-value-alt="}"
+                        >
+                            ]
+                            <div class="keyboard-key-alt">}</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="\"
+                            data-value-alt="|"
+                        >
+                            \
+                            <div class="keyboard-key-alt">|</div>
+                        </div>
                     </div>
                     <div class="keyboard-row">
-                        <div class="keyboard-key keyboard-key-caps keyboard-key-lpinkie" data-value="CapsLock">Caps Lock<div class="keyboard-key-caps-indicator" id="keyboard-key-caps-indicator"></div></div>
-                        <div class="keyboard-key keyboard-key-lpinkie" data-value="a" data-value-alt="A"><div class="keyboard-home-key-text">A</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-lring" data-value="s" data-value-alt="S"><div class="keyboard-home-key-text">S</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-lmiddle" data-value="d" data-value-alt="D"><div class="keyboard-home-key-text">D</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="f" data-value-alt="F"><div class="keyboard-home-key-text">F</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="g" data-value-alt="G">G</div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="h" data-value-alt="H">H</div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="j" data-value-alt="J"><div class="keyboard-home-key-text">J</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-rmiddle" data-value="k" data-value-alt="K"><div class="keyboard-home-key-text">K</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-rring" data-value="l" data-value-alt="L"><div class="keyboard-home-key-text">L</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value=";" data-value-alt=":"><div class="keyboard-home-key-text">;</div><div class="keyboard-home-key material-symbols-outlined">fingerprint</div><div class="keyboard-key-alt">:</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="'" data-value-alt="&quot;">'<div class="keyboard-key-alt">"</div></div>
-                        <div class="keyboard-key keyboard-key-enter keyboard-key-rpinkie" data-value="Enter">Enter</div>
+                        <div
+                            class="keyboard-key keyboard-key-caps keyboard-key-lpinkie"
+                            data-value="CapsLock"
+                        >
+                            Caps Lock
+                            <div
+                                class="keyboard-key-caps-indicator"
+                                id="keyboard-key-caps-indicator"
+                            ></div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie"
+                            data-value="a"
+                            data-value-alt="A"
+                        >
+                            <div class="keyboard-home-key-text">A</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lring"
+                            data-value="s"
+                            data-value-alt="S"
+                        >
+                            <div class="keyboard-home-key-text">S</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lmiddle"
+                            data-value="d"
+                            data-value-alt="D"
+                        >
+                            <div class="keyboard-home-key-text">D</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="f"
+                            data-value-alt="F"
+                        >
+                            <div class="keyboard-home-key-text">F</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="g"
+                            data-value-alt="G"
+                        >
+                            G
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="h"
+                            data-value-alt="H"
+                        >
+                            H
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="j"
+                            data-value-alt="J"
+                        >
+                            <div class="keyboard-home-key-text">J</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rmiddle"
+                            data-value="k"
+                            data-value-alt="K"
+                        >
+                            <div class="keyboard-home-key-text">K</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rring"
+                            data-value="l"
+                            data-value-alt="L"
+                        >
+                            <div class="keyboard-home-key-text">L</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value=";"
+                            data-value-alt=":"
+                        >
+                            <div class="keyboard-home-key-text">;</div>
+                            <div
+                                class="keyboard-home-key material-symbols-outlined"
+                            >
+                                fingerprint
+                            </div>
+                            <div class="keyboard-key-alt">:</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="'"
+                            data-value-alt='"'
+                        >
+                            '
+                            <div class="keyboard-key-alt">"</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-enter keyboard-key-rpinkie"
+                            data-value="Enter"
+                        >
+                            Enter
+                        </div>
                     </div>
                     <div class="keyboard-row">
-                        <div class="keyboard-key keyboard-key-lpinkie keyboard-key-shift" data-value="Shift">Shift</div>
-                        <div class="keyboard-key keyboard-key-lpinkie" data-value="z" data-value-alt="Z">Z</div>
-                        <div class="keyboard-key keyboard-key-lring" data-value="x" data-value-alt="X">X</div>
-                        <div class="keyboard-key keyboard-key-lmiddle" data-value="c" data-value-alt="C">C</div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="v" data-value-alt="V">V</div>
-                        <div class="keyboard-key keyboard-key-lindex" data-value="b" data-value-alt="B">B</div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="n" data-value-alt="N">N</div>
-                        <div class="keyboard-key keyboard-key-rindex" data-value="m" data-value-alt="M">M</div>
-                        <div class="keyboard-key keyboard-key-rmiddle" data-value="," data-value-alt="&lt;">,<div class="keyboard-key-alt">&lt;</div></div>
-                        <div class="keyboard-key keyboard-key-rring" data-value="." data-value-alt="&gt;">.<div class="keyboard-key-alt">&gt;</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie" data-value="/" data-value-alt="?">/<div class="keyboard-key-alt">?</div></div>
-                        <div class="keyboard-key keyboard-key-rpinkie keyboard-key-shift" data-value="Shift">Shift</div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie keyboard-key-shift"
+                            data-value="Shift"
+                        >
+                            Shift
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lpinkie"
+                            data-value="z"
+                            data-value-alt="Z"
+                        >
+                            Z
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lring"
+                            data-value="x"
+                            data-value-alt="X"
+                        >
+                            X
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lmiddle"
+                            data-value="c"
+                            data-value-alt="C"
+                        >
+                            C
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="v"
+                            data-value-alt="V"
+                        >
+                            V
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-lindex"
+                            data-value="b"
+                            data-value-alt="B"
+                        >
+                            B
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="n"
+                            data-value-alt="N"
+                        >
+                            N
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rindex"
+                            data-value="m"
+                            data-value-alt="M"
+                        >
+                            M
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rmiddle"
+                            data-value=","
+                            data-value-alt="&lt;"
+                        >
+                            ,
+                            <div class="keyboard-key-alt">&lt;</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rring"
+                            data-value="."
+                            data-value-alt="&gt;"
+                        >
+                            .
+                            <div class="keyboard-key-alt">&gt;</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie"
+                            data-value="/"
+                            data-value-alt="?"
+                        >
+                            /
+                            <div class="keyboard-key-alt">?</div>
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-rpinkie keyboard-key-shift"
+                            data-value="Shift"
+                        >
+                            Shift
+                        </div>
                     </div>
                     <div class="keyboard-row">
-                        <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Control">Ctrl</div>
-                        <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Meta">Win</div>
-                        <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Alt">Alt</div>
-                        <div class="keyboard-key keyboard-key-space" data-value=" ">Space</div>
-                        <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Alt">Alt</div>
-                        <div class="keyboard-key keyboard-key-ctrl-win-alt" data-value="Control">Ctrl</div>
+                        <div
+                            class="keyboard-key keyboard-key-ctrl-win-alt"
+                            data-value="Control"
+                        >
+                            Ctrl
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-ctrl-win-alt"
+                            data-value="Meta"
+                        >
+                            Win
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-ctrl-win-alt"
+                            data-value="Alt"
+                        >
+                            Alt
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-space"
+                            data-value=" "
+                        >
+                            Space
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-ctrl-win-alt"
+                            data-value="Alt"
+                        >
+                            Alt
+                        </div>
+                        <div
+                            class="keyboard-key keyboard-key-ctrl-win-alt"
+                            data-value="Control"
+                        >
+                            Ctrl
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,56 +580,141 @@
             <div class="settings-title-bar" id="settings-title-bar">
                 <div class="material-symbols-outlined">settings</div>
                 Settings
-                <div class="material-symbols-outlined settings-fullscreen-button" id="settings-fullscreen-button">fullscreen</div>
-                <div class="material-symbols-outlined settings-close-button" id="settings-close-button">close</div>
+                <div
+                    class="material-symbols-outlined settings-fullscreen-button"
+                    id="settings-fullscreen-button"
+                >
+                    fullscreen
+                </div>
+                <div
+                    class="material-symbols-outlined settings-close-button"
+                    id="settings-close-button"
+                >
+                    close
+                </div>
             </div>
             <form class="settings-form" id="settings-form">
                 <div class="settings-checkbox-container">
                     <label for="settings-guide">Keyboard color guide</label>
-                    <input class="settings-checkbox" id="settings-guide" type="checkbox">
+                    <input
+                        class="settings-checkbox"
+                        id="settings-guide"
+                        type="checkbox"
+                    />
                 </div>
                 <div class="settings-checkbox-container">
-                    <label for="settings-highlight">Highlight keys to press in Practice</label>
-                    <input class="settings-checkbox" id="settings-highlight" type="checkbox">
+                    <label for="settings-highlight">
+                        Highlight keys to press in Practice
+                    </label>
+                    <input
+                        class="settings-checkbox"
+                        id="settings-highlight"
+                        type="checkbox"
+                    />
                 </div>
                 <div class="settings-checkbox-container">
                     <label for="settings-snow">Add winter mood</label>
-                    <input class="settings-checkbox" id="settings-snow" type="checkbox">
+                    <input
+                        class="settings-checkbox"
+                        id="settings-snow"
+                        type="checkbox"
+                    />
                 </div>
-                <label class="settings-label" for="settings-custom-text">Custom text</label>
+                <label class="settings-label" for="settings-custom-text">
+                    Custom text
+                </label>
                 <div class="settings-custom-text-container">
-                    <textarea class="settings-custom-text" id="settings-custom-text" placeholder="Enter your text here" spellcheck="false"></textarea>
+                    <textarea
+                        class="settings-custom-text"
+                        id="settings-custom-text"
+                        placeholder="Enter your text here"
+                        spellcheck="false"
+                    ></textarea>
                     <div class="settings-custom-text-fetch-container">
-                        <div class="settings-list-toggle-container settings-news-list-toggle-container" id="settings-news-list-toggle-container">
-                            <button class="settings-list-toggle" id="settings-news-list-toggle" type="button">1</button>
-                            <div class="material-symbols-outlined settings-list-toggle-icon" id="settings-news-list-toggle-icon">keyboard_arrow_up</div>
-                            <div class="settings-list-container" id="settings-news-list-container">
-                                <div class="settings-list-title">Number of news items</div>
-                                <div class="settings-list" id="settings-news-list"></div>
+                        <div
+                            class="settings-list-toggle-container settings-news-list-toggle-container"
+                            id="settings-news-list-toggle-container"
+                        >
+                            <button
+                                class="settings-list-toggle"
+                                id="settings-news-list-toggle"
+                                type="button"
+                            >
+                                1
+                            </button>
+                            <div
+                                class="material-symbols-outlined settings-list-toggle-icon"
+                                id="settings-news-list-toggle-icon"
+                            >
+                                keyboard_arrow_up
+                            </div>
+                            <div
+                                class="settings-list-container"
+                                id="settings-news-list-container"
+                            >
+                                <div class="settings-list-title">
+                                    Number of news items
+                                </div>
+                                <div
+                                    class="settings-list"
+                                    id="settings-news-list"
+                                ></div>
                             </div>
                         </div>
-                        <button class="settings-custom-text-fetch-button" id="settings-custom-text-fetch-button" type="button">Get Space News</button>
+                        <button
+                            class="settings-custom-text-fetch-button"
+                            id="settings-custom-text-fetch-button"
+                            type="button"
+                        >
+                            Get Space News
+                        </button>
                     </div>
                 </div>
-                <label class="settings-label">Number of characters per screen</label>
-                <div class="settings-chunk-size-list-toggle-container settings-list-toggle-container" id="settings-chunk-size-list-toggle-container">
-                    <button class="settings-list-toggle" id="settings-chunk-size-list-toggle" type="button">32</button>
-                    <div class="material-symbols-outlined settings-list-toggle-icon" id="settings-chunk-size-list-toggle-icon">keyboard_arrow_up</div>
-                    <div class="settings-list-container" id="settings-chunk-size-list-container">
-                        <div class="settings-list-title">Number of characters per screen</div>
-                        <div class="settings-list" id="settings-chunk-size-list"></div>
+                <label class="settings-label">
+                    Number of characters per screen
+                </label>
+                <div
+                    class="settings-chunk-size-list-toggle-container settings-list-toggle-container"
+                    id="settings-chunk-size-list-toggle-container"
+                >
+                    <button
+                        class="settings-list-toggle"
+                        id="settings-chunk-size-list-toggle"
+                        type="button"
+                    >
+                        32
+                    </button>
+                    <div
+                        class="material-symbols-outlined settings-list-toggle-icon"
+                        id="settings-chunk-size-list-toggle-icon"
+                    >
+                        keyboard_arrow_up
+                    </div>
+                    <div
+                        class="settings-list-container"
+                        id="settings-chunk-size-list-container"
+                    >
+                        <div class="settings-list-title">
+                            Number of characters per screen
+                        </div>
+                        <div
+                            class="settings-list"
+                            id="settings-chunk-size-list"
+                        ></div>
                     </div>
                 </div>
-                <button class="settings-save" id="settings-save" type="button">Save</button>
+                <button class="settings-save" id="settings-save" type="button">
+                    Save
+                </button>
             </form>
         </div>
         <div class="tutorial-background" id="tutorial-background"></div>
         <div class="tutorial" id="tutorial-home-row">
             <h2 class="tutorial-title">Placing Fingers</h2>
             Place your fingertips on the home row (the middle row of the
-            keyboard) keys highlighted below.
-            You can easily find them by the fingerprint icons on top of them.
-            Your thumbs should rest on the space bar.
+            keyboard) keys highlighted below. You can easily find them by the
+            fingerprint icons on top of them. Your thumbs should rest on the
+            space bar.
             <div class="tutorial-buttons">
                 <button class="tutorial-close-button">Close</button>
                 <button id="tutorial-home-row-button">Next</button>
@@ -197,10 +722,10 @@
         </div>
         <div class="tutorial" id="tutorial-fingers">
             <h2 class="tutorial-title">Pressing keys</h2>
-            Press keys according to the colors below.
-            For example use your left index finger to press the keys 4, 5, R, T,
-            F, G, V, B, your left middle finger to press 3, E, D, C and so on...
-            After each key press return the finger back to the home row.
+            Press keys according to the colors below. For example use your left
+            index finger to press the keys 4, 5, R, T, F, G, V, B, your left
+            middle finger to press 3, E, D, C and so on... After each key press
+            return the finger back to the home row.
             <div class="tutorial-buttons">
                 <button class="tutorial-close-button">Close</button>
                 <button id="tutorial-fingers-button">Next</button>
@@ -209,9 +734,8 @@
         <div class="tutorial" id="tutorial-settings">
             <h2 class="tutorial-title">Settings</h2>
             If you want to leave the color guide on while practicing enable it
-            in settings.
-            There you can also add a text of your choice, choose how
-            many characters to display per screen and more.
+            in settings. There you can also add a text of your choice, choose
+            how many characters to display per screen and more.
             <div class="tutorial-buttons">
                 <button id="tutorial-settings-button">Finish</button>
             </div>

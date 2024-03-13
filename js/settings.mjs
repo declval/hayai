@@ -1,52 +1,66 @@
 export { Settings };
 
-import { Draggable } from './draggable.mjs';
-import { Text } from './text.mjs';
-import { createElement } from './helpers.mjs';
-import { keyboard } from './main.mjs';
-import { makeItNotSnow, makeItSnow } from './snow.mjs';
+import { Draggable } from "./draggable.mjs";
+import { Text } from "./text.mjs";
+import { createElement } from "./helpers.mjs";
+import { keyboard } from "./main.mjs";
+import { makeItNotSnow, makeItSnow } from "./snow.mjs";
 
 class Settings {
     constructor() {
-        this.mediaQuery = window.matchMedia('(max-width: 1100px)');
-        this.settingsElement = document.getElementById('settings');
+        this.mediaQuery = window.matchMedia("(max-width: 1100px)");
+        this.settingsElement = document.getElementById("settings");
 
-        const settingsTitleBarElement = document.getElementById('settings-title-bar');
+        const settingsTitleBarElement =
+            document.getElementById("settings-title-bar");
 
-        this.draggable = new Draggable(settingsTitleBarElement, this.settingsElement);
+        this.draggable = new Draggable(
+            settingsTitleBarElement,
+            this.settingsElement
+        );
 
         const mediaQueryHandler = event => {
             if (event.matches) {
                 this.draggable.deactivate();
             } else {
-                if (!this.settingsElement.classList.contains('settings-fullscreen')) {
+                if (
+                    !this.settingsElement.classList.contains(
+                        "settings-fullscreen"
+                    )
+                ) {
                     this.draggable.activate();
                 }
             }
         };
 
-        this.mediaQuery.addEventListener('change', mediaQueryHandler);
+        this.mediaQuery.addEventListener("change", mediaQueryHandler);
 
         mediaQueryHandler(this.mediaQuery);
 
-        const settingsFullscreenElement = document.getElementById('settings-fullscreen-button');
+        const settingsFullscreenElement = document.getElementById(
+            "settings-fullscreen-button"
+        );
 
-        settingsFullscreenElement.addEventListener('click', () => {
+        settingsFullscreenElement.addEventListener("click", () => {
             this.toggleFullscreen();
         });
 
-        const settingsCloseElement = document.getElementById('settings-close-button');
+        const settingsCloseElement = document.getElementById(
+            "settings-close-button"
+        );
 
-        settingsCloseElement.addEventListener('click', () => {
+        settingsCloseElement.addEventListener("click", () => {
             this.toggle();
         });
 
-        const settingsFormElement = document.getElementById('settings-form');
+        const settingsFormElement = document.getElementById("settings-form");
 
-        settingsFormElement.addEventListener('submit', event => {
+        settingsFormElement.addEventListener("submit", event => {
             event.preventDefault();
 
-            const chunkSizeElement = document.getElementById('settings-chunk-size-list-toggle');
+            const chunkSizeElement = document.getElementById(
+                "settings-chunk-size-list-toggle"
+            );
 
             if (!chunkSizeElement.textContent.length) {
                 return;
@@ -54,285 +68,356 @@ class Settings {
 
             const newChunkSize = parseInt(chunkSizeElement.textContent, 10);
 
-            if (!(Number.isFinite(newChunkSize) &&
+            if (
+                !(
+                    Number.isFinite(newChunkSize) &&
                     newChunkSize >= Text.chunkSizeMin &&
-                    newChunkSize <= Text.chunkSizeMax)) {
+                    newChunkSize <= Text.chunkSizeMax
+                )
+            ) {
                 return;
             }
 
-            const customTextElement = document.getElementById('settings-custom-text');
-            const newCustomText = customTextElement.value.replace(/\n/g, ' ');
+            const customTextElement = document.getElementById(
+                "settings-custom-text"
+            );
+            const newCustomText = customTextElement.value.replace(/\n/g, " ");
 
             Settings.chunkSize = newChunkSize;
             Settings.text = newCustomText;
 
-            document.getElementsByClassName('lesson')[0].click();
+            document.getElementsByClassName("lesson")[0].click();
 
             this.toggle();
         });
 
-        const settingsGuideElement = document.getElementById('settings-guide');
+        const settingsGuideElement = document.getElementById("settings-guide");
 
-        const guide = localStorage.getItem('guide');
+        const guide = localStorage.getItem("guide");
 
-        if (guide === 'on') {
+        if (guide === "on") {
             keyboard.guideOn();
             settingsGuideElement.checked = true;
         }
 
-        settingsGuideElement.addEventListener('input', event => {
+        settingsGuideElement.addEventListener("input", event => {
             if (event.target.checked) {
                 keyboard.guideOn();
-                localStorage.setItem('guide', 'on');
+                localStorage.setItem("guide", "on");
             } else {
                 keyboard.guideOff();
-                localStorage.setItem('guide', '');
+                localStorage.setItem("guide", "");
             }
         });
 
-        const settingsHighlightElement = document.getElementById('settings-highlight');
+        const settingsHighlightElement =
+            document.getElementById("settings-highlight");
 
-        const highlight = localStorage.getItem('highlight');
+        const highlight = localStorage.getItem("highlight");
 
-        if (highlight === 'on') {
+        if (highlight === "on") {
             Settings.highlight = true;
             settingsHighlightElement.checked = true;
         }
 
-        settingsHighlightElement.addEventListener('input', event => {
+        settingsHighlightElement.addEventListener("input", event => {
             if (event.target.checked) {
                 Settings.highlight = true;
-                localStorage.setItem('highlight', 'on');
+                localStorage.setItem("highlight", "on");
             } else {
                 Settings.highlight = false;
-                localStorage.setItem('highlight', '');
+                localStorage.setItem("highlight", "");
             }
-            const cursorElement = document.getElementsByClassName('text-character-cursor')[0];
+            const cursorElement = document.getElementsByClassName(
+                "text-character-cursor"
+            )[0];
             keyboard.highlightKeysToPressFor(cursorElement.textContent);
         });
 
-        const snow = localStorage.getItem('snow');
+        const snow = localStorage.getItem("snow");
 
         if (snow === null) {
-            const currentMonth = (new Date()).getMonth();
-    
+            const currentMonth = new Date().getMonth();
+
             if ([0, 1, 11].includes(currentMonth)) {
                 Settings.snow = true;
-                makeItSnow({element: document.body, sizeRange: [4, 8]});
+                makeItSnow({ element: document.body, sizeRange: [4, 8] });
             }
         } else if (snow) {
             Settings.snow = true;
-            makeItSnow({element: document.body, sizeRange: [4, 8]});
+            makeItSnow({ element: document.body, sizeRange: [4, 8] });
         } else {
             Settings.snow = false;
             makeItNotSnow(document.body);
         }
 
-        const settingsSnowElement = document.getElementById('settings-snow');
+        const settingsSnowElement = document.getElementById("settings-snow");
 
         if (Settings.snow) {
             settingsSnowElement.checked = true;
         }
 
-        settingsSnowElement.addEventListener('input', event => {
+        settingsSnowElement.addEventListener("input", event => {
             if (event.target.checked) {
-                localStorage.setItem('snow', 'on');
-                makeItSnow({element: document.body, sizeRange: [4, 8]});
+                localStorage.setItem("snow", "on");
+                makeItSnow({ element: document.body, sizeRange: [4, 8] });
             } else {
-                localStorage.setItem('snow', '');
+                localStorage.setItem("snow", "");
                 makeItNotSnow(document.body);
             }
         });
 
-        const settingsNewsListToggleIconElement =
-            document.getElementById('settings-news-list-toggle-icon');
-        const settingsNewsListToggleElement =
-            document.getElementById('settings-news-list-toggle');
-        const settingsNewsListContainerElement =
-            document.getElementById('settings-news-list-container');
+        const settingsNewsListToggleIconElement = document.getElementById(
+            "settings-news-list-toggle-icon"
+        );
+        const settingsNewsListToggleElement = document.getElementById(
+            "settings-news-list-toggle"
+        );
+        const settingsNewsListContainerElement = document.getElementById(
+            "settings-news-list-container"
+        );
         const settingsNewsListElement =
-            document.getElementById('settings-news-list');
+            document.getElementById("settings-news-list");
 
-        settingsNewsListToggleElement.addEventListener('click', event => {
+        settingsNewsListToggleElement.addEventListener("click", event => {
             event.stopPropagation();
 
             const close = event => {
                 if (event.target !== settingsNewsListContainerElement) {
-                    document.removeEventListener('click', close);
-                    settingsNewsListContainerElement.classList.remove('open');
-                    settingsNewsListToggleIconElement.textContent = 'keyboard_arrow_up';
+                    document.removeEventListener("click", close);
+                    settingsNewsListContainerElement.classList.remove("open");
+                    settingsNewsListToggleIconElement.textContent =
+                        "keyboard_arrow_up";
                 }
             };
 
-            if (settingsNewsListContainerElement.classList.contains('open')) {
-                document.removeEventListener('click', close);
-                settingsNewsListContainerElement.classList.remove('open');
-                settingsNewsListToggleIconElement.textContent = 'keyboard_arrow_up';
+            if (settingsNewsListContainerElement.classList.contains("open")) {
+                document.removeEventListener("click", close);
+                settingsNewsListContainerElement.classList.remove("open");
+                settingsNewsListToggleIconElement.textContent =
+                    "keyboard_arrow_up";
             } else {
-                for (const settingsListContainer of
-                        document.getElementsByClassName('settings-list-container')) {
-                    settingsListContainer.classList.remove('open');
+                for (const settingsListContainer of document.getElementsByClassName(
+                    "settings-list-container"
+                )) {
+                    settingsListContainer.classList.remove("open");
                 }
-                for (const settingsListToggleIcon of
-                        document.getElementsByClassName('settings-list-toggle-icon')) {
-                    settingsListToggleIcon.textContent = 'keyboard_arrow_up';
+                for (const settingsListToggleIcon of document.getElementsByClassName(
+                    "settings-list-toggle-icon"
+                )) {
+                    settingsListToggleIcon.textContent = "keyboard_arrow_up";
                 }
-                document.addEventListener('click', close);
-                settingsNewsListContainerElement.classList.add('open');
+                document.addEventListener("click", close);
+                settingsNewsListContainerElement.classList.add("open");
                 settingsNewsListElement.scrollTop = 0;
-                settingsNewsListToggleIconElement.textContent = 'keyboard_arrow_down';
+                settingsNewsListToggleIconElement.textContent =
+                    "keyboard_arrow_down";
             }
         });
 
         const customTextFetchNumberMax = 128;
         const customTextFetchNumberMin = 1;
 
-        for (let i = customTextFetchNumberMin; i <= customTextFetchNumberMax; ++i) {
+        for (
+            let i = customTextFetchNumberMin;
+            i <= customTextFetchNumberMax;
+            ++i
+        ) {
             const buttonElement = createElement({
-                name: 'button',
+                name: "button",
                 text: i.toString(),
-                attributes: [['type', 'button']],
-                eventHandlers: [['click', () => {
-                    settingsNewsListContainerElement.classList.remove('open');
-                    settingsNewsListToggleElement.textContent = i.toString();
-                }]]
+                attributes: [["type", "button"]],
+                eventHandlers: [
+                    [
+                        "click",
+                        () => {
+                            settingsNewsListContainerElement.classList.remove(
+                                "open"
+                            );
+                            settingsNewsListToggleElement.textContent =
+                                i.toString();
+                        },
+                    ],
+                ],
             });
             settingsNewsListElement.appendChild(buttonElement);
         }
 
-        const settingsCustomTextFetchButtonElement =
-            document.getElementById('settings-custom-text-fetch-button');
+        const settingsCustomTextFetchButtonElement = document.getElementById(
+            "settings-custom-text-fetch-button"
+        );
 
-        settingsCustomTextFetchButtonElement.addEventListener('click', async event => {
-            event.preventDefault();
+        settingsCustomTextFetchButtonElement.addEventListener(
+            "click",
+            async event => {
+                event.preventDefault();
 
-            if (!settingsNewsListToggleElement.textContent.length) {
-                return;
-            }
-
-            const customTextFetchNumber = parseInt(settingsNewsListToggleElement.textContent, 10);
-
-            if (!(Number.isFinite(customTextFetchNumber) &&
-                    customTextFetchNumber >= customTextFetchNumberMin &&
-                    customTextFetchNumber <= customTextFetchNumberMax)) {
-                return;
-            }
-
-            event.target.classList.add('settings-custom-text-fetch-button-waiting');
-
-            let articles = null;
-
-            try {
-                const url = `https://api.spaceflightnewsapi.net/v4/articles?limit=${customTextFetchNumber}`;
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Failed fetching data from ${url}`);
+                if (!settingsNewsListToggleElement.textContent.length) {
+                    return;
                 }
-                articles = await response.json();
-            } catch (e) {
-                console.log(e);
-                event.target.classList.remove('settings-custom-text-fetch-button-waiting');
-                return;
+
+                const customTextFetchNumber = parseInt(
+                    settingsNewsListToggleElement.textContent,
+                    10
+                );
+
+                if (
+                    !(
+                        Number.isFinite(customTextFetchNumber) &&
+                        customTextFetchNumber >= customTextFetchNumberMin &&
+                        customTextFetchNumber <= customTextFetchNumberMax
+                    )
+                ) {
+                    return;
+                }
+
+                event.target.classList.add(
+                    "settings-custom-text-fetch-button-waiting"
+                );
+
+                let articles = null;
+
+                try {
+                    const url = `https://api.spaceflightnewsapi.net/v4/articles?limit=${customTextFetchNumber}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`Failed fetching data from ${url}`);
+                    }
+                    articles = await response.json();
+                } catch (e) {
+                    console.log(e);
+                    event.target.classList.remove(
+                        "settings-custom-text-fetch-button-waiting"
+                    );
+                    return;
+                }
+
+                event.target.classList.remove(
+                    "settings-custom-text-fetch-button-waiting"
+                );
+
+                let customText = "";
+
+                for (const [i, article] of articles.results.entries()) {
+                    customText += article.summary.trim();
+                    customText += i < articles.results.length - 1 ? "\n" : "";
+                }
+
+                const settingsCustomTextElement = document.getElementById(
+                    "settings-custom-text"
+                );
+
+                settingsCustomTextElement.value = customText;
             }
+        );
 
-            event.target.classList.remove('settings-custom-text-fetch-button-waiting');
+        const settingsChunkSizeListToggleIconElement = document.getElementById(
+            "settings-chunk-size-list-toggle-icon"
+        );
+        const settingsChunkSizeListToggleElement = document.getElementById(
+            "settings-chunk-size-list-toggle"
+        );
+        const settingsChunkSizeListContainerElement = document.getElementById(
+            "settings-chunk-size-list-container"
+        );
+        const settingsChunkSizeListElement = document.getElementById(
+            "settings-chunk-size-list"
+        );
 
-            let customText = '';
-
-            for (const [i, article] of articles.results.entries()) {
-                customText += article.summary.trim();
-                customText += i < articles.results.length - 1 ? '\n' : '';
-            }
-
-            const settingsCustomTextElement = document.getElementById('settings-custom-text');
-
-            settingsCustomTextElement.value = customText;
-        });
-
-        const settingsChunkSizeListToggleIconElement =
-            document.getElementById('settings-chunk-size-list-toggle-icon');
-        const settingsChunkSizeListToggleElement =
-            document.getElementById('settings-chunk-size-list-toggle');
-        const settingsChunkSizeListContainerElement =
-            document.getElementById('settings-chunk-size-list-container');
-        const settingsChunkSizeListElement =
-            document.getElementById('settings-chunk-size-list');
-
-        settingsChunkSizeListToggleElement.addEventListener('click', event => {
+        settingsChunkSizeListToggleElement.addEventListener("click", event => {
             event.stopPropagation();
 
             const close = event => {
                 if (event.target !== settingsChunkSizeListContainerElement) {
-                    document.removeEventListener('click', close);
-                    settingsChunkSizeListContainerElement.classList.remove('open');
-                    settingsChunkSizeListToggleIconElement.textContent = 'keyboard_arrow_up';
+                    document.removeEventListener("click", close);
+                    settingsChunkSizeListContainerElement.classList.remove(
+                        "open"
+                    );
+                    settingsChunkSizeListToggleIconElement.textContent =
+                        "keyboard_arrow_up";
                 }
             };
 
-            if (settingsChunkSizeListContainerElement.classList.contains('open')) {
-                document.removeEventListener('click', close);
-                settingsChunkSizeListContainerElement.classList.remove('open');
-                settingsChunkSizeListToggleIconElement.textContent = 'keyboard_arrow_up';
+            if (
+                settingsChunkSizeListContainerElement.classList.contains("open")
+            ) {
+                document.removeEventListener("click", close);
+                settingsChunkSizeListContainerElement.classList.remove("open");
+                settingsChunkSizeListToggleIconElement.textContent =
+                    "keyboard_arrow_up";
             } else {
-                for (const settingsListContainer of
-                        document.getElementsByClassName('settings-list-container')) {
-                    settingsListContainer.classList.remove('open');
+                for (const settingsListContainer of document.getElementsByClassName(
+                    "settings-list-container"
+                )) {
+                    settingsListContainer.classList.remove("open");
                 }
-                for (const settingsListToggleIcon of
-                        document.getElementsByClassName('settings-list-toggle-icon')) {
-                    settingsListToggleIcon.textContent = 'keyboard_arrow_up';
+                for (const settingsListToggleIcon of document.getElementsByClassName(
+                    "settings-list-toggle-icon"
+                )) {
+                    settingsListToggleIcon.textContent = "keyboard_arrow_up";
                 }
-                document.addEventListener('click', close);
-                settingsChunkSizeListContainerElement.classList.add('open');
+                document.addEventListener("click", close);
+                settingsChunkSizeListContainerElement.classList.add("open");
                 settingsChunkSizeListElement.scrollTop = 0;
-                settingsChunkSizeListToggleIconElement.textContent = 'keyboard_arrow_down';
+                settingsChunkSizeListToggleIconElement.textContent =
+                    "keyboard_arrow_down";
             }
         });
 
         for (let i = Text.chunkSizeMin; i <= Text.chunkSizeMax; ++i) {
             const buttonElement = createElement({
-                name: 'button',
+                name: "button",
                 text: i.toString(),
-                attributes: [['type', 'button']],
-                eventHandlers: [['click', () => {
-                    settingsChunkSizeListContainerElement.classList.remove('open');
-                    settingsChunkSizeListToggleElement.textContent = i.toString();
-                }]]
+                attributes: [["type", "button"]],
+                eventHandlers: [
+                    [
+                        "click",
+                        () => {
+                            settingsChunkSizeListContainerElement.classList.remove(
+                                "open"
+                            );
+                            settingsChunkSizeListToggleElement.textContent =
+                                i.toString();
+                        },
+                    ],
+                ],
             });
             settingsChunkSizeListElement.appendChild(buttonElement);
         }
 
-        const settingsSaveElement = document.getElementById('settings-save');
+        const settingsSaveElement = document.getElementById("settings-save");
 
-        settingsSaveElement.addEventListener('click', () => {
+        settingsSaveElement.addEventListener("click", () => {
             settingsFormElement.requestSubmit();
         });
     }
 
     close = () => {
-        this.settingsElement.classList.remove('settings-show');
-    }
+        this.settingsElement.classList.remove("settings-show");
+    };
 
     shown = () => {
-        return this.settingsElement.classList.contains('settings-show');
-    }
+        return this.settingsElement.classList.contains("settings-show");
+    };
 
     toggle = () => {
-        this.settingsElement.classList.toggle('settings-show');
-    }
+        this.settingsElement.classList.toggle("settings-show");
+    };
 
     toggleFullscreen = () => {
-        const settingsFullscreenButton = document.getElementById('settings-fullscreen-button');
-        if (this.settingsElement.classList.contains('settings-fullscreen')) {
-            this.settingsElement.classList.remove('settings-fullscreen');
-            settingsFullscreenButton.textContent = 'fullscreen';
+        const settingsFullscreenButton = document.getElementById(
+            "settings-fullscreen-button"
+        );
+        if (this.settingsElement.classList.contains("settings-fullscreen")) {
+            this.settingsElement.classList.remove("settings-fullscreen");
+            settingsFullscreenButton.textContent = "fullscreen";
             this.draggable.activate();
         } else {
-            this.settingsElement.classList.add('settings-fullscreen');
-            settingsFullscreenButton.textContent = 'fullscreen_exit';
+            this.settingsElement.classList.add("settings-fullscreen");
+            settingsFullscreenButton.textContent = "fullscreen_exit";
             this.draggable.deactivate();
         }
-    }
+    };
 
     static chunkSize = null;
     static highlight = false;
