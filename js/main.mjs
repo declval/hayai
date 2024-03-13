@@ -89,8 +89,19 @@ const main = () => {
     });
 
     window.addEventListener('resize', () => {
-        makeItNotSnow(document.body);
-        makeItSnow({element: document.body, sizeRange: [4, 8]});
+        const snow = localStorage.getItem('snow');
+
+        if (snow === null) {
+            const currentMonth = (new Date()).getMonth();
+
+            if ([0, 1, 11].includes(currentMonth)) {
+                makeItSnow({element: document.body, sizeRange: [4, 8]});
+            }
+        } else if (snow) {
+            makeItSnow({element: document.body, sizeRange: [4, 8]});
+        } else {
+            makeItNotSnow(document.body);
+        }
     });
 }
 
