@@ -466,6 +466,27 @@ header {
     box-shadow: inset var(--box-shadow);
 }
 
+.keyboard-key.keyboard-key-keydown::after {
+    animation: spread var(--animation-duration) linear;
+    background: rgb(126, 221, 255);
+    content: "";
+    position: absolute;
+    z-index: 1;
+}
+
+@keyframes spread {
+    0% {
+        height: 0;
+        width: 0;
+    }
+    100% {
+        border-radius: 128px;
+        height: 256px;
+        opacity: 0;
+        width: 256px;
+    }
+}
+
 .keyboard-key-highlight {
     background-color: rgb(126, 221, 255) !important;
     color: rgb(79, 79, 79);
