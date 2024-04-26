@@ -22,10 +22,13 @@ const main = () => {
             return;
         }
 
-        if (event.getModifierState("CapsLock")) {
-            keyboard.capsOn();
-        } else {
-            keyboard.capsOff();
+        if (event.key === "CapsLock") {
+            if (event.getModifierState("CapsLock")) {
+                keyboard.capsOff();
+            } else {
+                keyboard.capsOn();
+            }
+            return;
         }
 
         keyboard.press(event.key);
